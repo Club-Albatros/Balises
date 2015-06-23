@@ -1,0 +1,59 @@
+<dotnetnuke type="Package" version="5.0">
+ <packages>
+  <package name="Balises" type="Module" version="01.00.00">
+   <friendlyName>Balises</friendlyName>
+   <description>Albatros Balises module</description>
+   <iconFile>DesktopModules/Albatros/Balises/img/Balises.png</iconFile>
+   <owner>
+    <name>Albatros</name>
+    <organization>Albatros</organization>
+    <url>http://www.Albatros.net</url>
+    <email>info@Albatros.net</email>
+   </owner>
+   <license src="License.txt"></license>
+   <releaseNotes src="ReleaseNotes.txt"></releaseNotes>
+   <dependencies>
+    <dependency type="CoreVersion">07.02.00</dependency>
+   </dependencies>
+   <components>
+    <component type="Module">
+     <desktopModule>
+      <moduleName>Albatros_Balises</moduleName>
+      <foldername>Albatros/Balises</foldername>
+      <moduleDefinitions>
+       <moduleDefinition>
+        <friendlyName>Balises</friendlyName>
+        <defaultCacheTime>0</defaultCacheTime>
+        <moduleControls>
+         <moduleControl>
+          <controlKey />
+          <controlSrc>Albatros.DNN.Modules.Balises.ModuleHome, Albatros.DNN.MODULES.Balises</controlSrc>
+          <supportsPartialRendering>False</supportsPartialRendering>
+          <controlTitle />
+          <controlType>View</controlType>
+          <iconFile />
+          <helpUrl />
+          <viewOrder>0</viewOrder>
+         </moduleControl>
+         <moduleControl>
+          <controlKey>Settings</controlKey>
+          <controlSrc>DesktopModules/Albatros/Balises/Settings.ascx</controlSrc>
+          <supportsPartialRendering>False</supportsPartialRendering>
+          <controlTitle>Balises Settings</controlTitle>
+          <controlType>Edit</controlType>
+          <iconFile />
+          <helpUrl />
+          <viewOrder>0</viewOrder>
+         </moduleControl>
+        </moduleControls>
+	   <permissions>
+		<permission code="Albatros_Balises_MODULE" key="ADDER" name="Add Stuff"/>
+88888888888888	   </permissions>
+       </moduleDefinition>
+      </moduleDefinitions>
+     </desktopModule>
+    </component>
+   </components>
+  </package>
+ </packages>
+</dotnetnuke>
