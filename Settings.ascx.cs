@@ -1,5 +1,7 @@
 
 using System;
+using System.IO;
+using System.Web.UI.WebControls;
 using DotNetNuke.Entities.Modules;
 using DotNetNuke.Services.Exceptions;
 
@@ -22,6 +24,22 @@ namespace Albatros.DNN.Modules.Balises
             {
                 if (Page.IsPostBack == false)
                 {
+                    ddView.Items.Clear();
+                    ddView.Items.Add(new ListItem("Home", "Home"));
+                    System.IO.DirectoryInfo viewDir = new DirectoryInfo(Server.MapPath("~/DesktopModules/Albatros/Balises/Views"));
+                    foreach (var f in viewDir.GetFiles("*.cshtml"))
+                    {
+                        string vwName = Path.GetFileNameWithoutExtension(f.Name);
+                        if (vwName.ToLower() != "home")
+                        {
+                            ddView.Items.Add(new ListItem(vwName, vwName));
+                        }
+                    }
+                    try
+                    {
+                        ddView.Items.FindByValue(ModSettings.View).Selected = true;
+                    }
+                    catch { }
                 }
             }
             catch (Exception exc) //Module failed to load
@@ -34,6 +52,7 @@ namespace Albatros.DNN.Modules.Balises
         {
             try
             {
+                ModSettings.View = ddView.SelectedValue;
                 ModSettings.SaveSettings();
             }
             catch (Exception exc) //Module failed to load

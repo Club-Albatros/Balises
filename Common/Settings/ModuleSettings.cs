@@ -11,9 +11,9 @@ namespace Albatros.DNN.Modules.Balises.Common.Settings
         #region Properties
         internal ISettingsStore Store;
 
-        public string MySetting
+        public string View
         {
-            get { return Store.Get("Default"); }
+            get { return Store.Get("Home"); }
             set { Store.Set(value); }
         }
         public string Version = typeof(ModuleSettings).Assembly.GetName().Version.ToString();

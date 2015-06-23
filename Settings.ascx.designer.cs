@@ -7,13 +7,27 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-using System.Web.UI;
-using System.Web.UI.WebControls;
-
 namespace Albatros.DNN.Modules.Balises {
     
     
     public partial class Settings {
         
+        /// <summary>
+        /// lblView control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.UserControl lblView;
+        
+        /// <summary>
+        /// ddView control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList ddView;
     }
 }

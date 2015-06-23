@@ -3,8 +3,8 @@
 
 <fieldset>
  <div class="dnnFormItem">
-  <dnn:Label ID="lblMySetting" runat="server" controlname="txtMySetting" suffix=":" />
-  <asp:TextBox ID="txtMySetting" runat="server" />
+  <dnn:label id="lblView" runat="server" controlname="ddView" suffix=":" />
+  <asp:DropDownList runat="server" ID="ddView" />
  </div>
 </fieldset>
 
