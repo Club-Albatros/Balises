@@ -18,7 +18,7 @@ namespace Albatros.DNN.Modules.Balises.Models.Flights
         {
             FillAuditFields(dr);
    FlightId = Convert.ToInt32(Null.SetNull(dr["FlightId"], FlightId));
-   ModuleId = Convert.ToInt32(Null.SetNull(dr["ModuleId"], ModuleId));
+   PortalId = Convert.ToInt32(Null.SetNull(dr["PortalId"], PortalId));
    FlightStart = (DateTime)(Null.SetNull(dr["FlightStart"], FlightStart));
    Category = Convert.ToInt32(Null.SetNull(dr["Category"], Category));
    Comments = Convert.ToString(Null.SetNull(dr["Comments"], Comments));
@@ -53,8 +53,8 @@ namespace Albatros.DNN.Modules.Balises.Models.Flights
             {
     case "flightid": // Int
      return FlightId.ToString(strFormat, formatProvider);
-    case "moduleid": // Int
-     return ModuleId.ToString(strFormat, formatProvider);
+    case "portalid": // Int
+     return PortalId.ToString(strFormat, formatProvider);
     case "flightstart": // DateTime
      return FlightStart.ToString(strFormat, formatProvider);
     case "category": // Int

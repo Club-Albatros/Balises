@@ -10,7 +10,7 @@ namespace Albatros.DNN.Modules.Balises.Models.Flights
     [TableName("Albatros_Balises_Flights")]
     [PrimaryKey("FlightId", AutoIncrement = true)]
     [DataContract]
-     [Scope("ModuleId")]
+     [Scope("PortalId")]
     public partial class FlightBase  : AuditableEntity 
     {
 
@@ -18,7 +18,7 @@ namespace Albatros.DNN.Modules.Balises.Models.Flights
         [DataMember()]
         public int FlightId { get; set; }
         [DataMember()]
-        public int ModuleId { get; set; }
+        public int PortalId { get; set; }
         [DataMember()]
         public DateTime FlightStart { get; set; }
         [DataMember()]
@@ -61,8 +61,8 @@ namespace Albatros.DNN.Modules.Balises.Models.Flights
             if (flight.FlightId > -1)
                 FlightId = flight.FlightId;
 
-            if (flight.ModuleId > -1)
-                ModuleId = flight.ModuleId;
+            if (flight.PortalId > -1)
+                PortalId = flight.PortalId;
 
             FlightStart = flight.FlightStart;
 

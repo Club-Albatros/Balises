@@ -8,7 +8,7 @@ namespace Albatros.DNN.Modules.Balises.Models.Beacons
     [TableName("vw_Albatros_Balises_Beacons")]
     [PrimaryKey("BeaconId", AutoIncrement = true)]
     [DataContract]
-    [Scope("ModuleId")]                
+    [Scope("PortalId")]                
     public partial class Beacon  : BeaconBase 
     {
 
@@ -33,7 +33,7 @@ namespace Albatros.DNN.Modules.Balises.Models.Beacons
         {
             BeaconBase res = new BeaconBase();
              res.BeaconId = BeaconId;
-             res.ModuleId = ModuleId;
+             res.PortalId = PortalId;
              res.Code = Code;
              res.Name = Name;
              res.Description = Description;

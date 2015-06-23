@@ -18,7 +18,7 @@ namespace Albatros.DNN.Modules.Balises.Models.Beacons
         {
             FillAuditFields(dr);
    BeaconId = Convert.ToInt32(Null.SetNull(dr["BeaconId"], BeaconId));
-   ModuleId = Convert.ToInt32(Null.SetNull(dr["ModuleId"], ModuleId));
+   PortalId = Convert.ToInt32(Null.SetNull(dr["PortalId"], PortalId));
    Code = Convert.ToString(Null.SetNull(dr["Code"], Code));
    Name = Convert.ToString(Null.SetNull(dr["Name"], Name));
    Description = Convert.ToString(Null.SetNull(dr["Description"], Description));
@@ -45,8 +45,8 @@ namespace Albatros.DNN.Modules.Balises.Models.Beacons
             {
     case "beaconid": // Int
      return BeaconId.ToString(strFormat, formatProvider);
-    case "moduleid": // Int
-     return ModuleId.ToString(strFormat, formatProvider);
+    case "portalid": // Int
+     return PortalId.ToString(strFormat, formatProvider);
     case "code": // NVarChar
      return PropertyAccess.FormatString(Code, strFormat);
     case "name": // NVarChar

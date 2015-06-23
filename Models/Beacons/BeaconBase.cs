@@ -10,7 +10,7 @@ namespace Albatros.DNN.Modules.Balises.Models.Beacons
     [TableName("Albatros_Balises_Beacons")]
     [PrimaryKey("BeaconId", AutoIncrement = true)]
     [DataContract]
-     [Scope("ModuleId")]
+     [Scope("PortalId")]
     public partial class BeaconBase  : AuditableEntity 
     {
 
@@ -18,7 +18,7 @@ namespace Albatros.DNN.Modules.Balises.Models.Beacons
         [DataMember()]
         public int BeaconId { get; set; }
         [DataMember()]
-        public int ModuleId { get; set; }
+        public int PortalId { get; set; }
         [DataMember()]
         public string Code { get; set; }
         [DataMember()]
@@ -45,8 +45,8 @@ namespace Albatros.DNN.Modules.Balises.Models.Beacons
             if (beacon.BeaconId > -1)
                 BeaconId = beacon.BeaconId;
 
-            if (beacon.ModuleId > -1)
-                ModuleId = beacon.ModuleId;
+            if (beacon.PortalId > -1)
+                PortalId = beacon.PortalId;
 
             if (!String.IsNullOrEmpty(beacon.Code))
                 Code = beacon.Code;

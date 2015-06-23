@@ -8,7 +8,7 @@ namespace Albatros.DNN.Modules.Balises.Models.Flights
     [TableName("vw_Albatros_Balises_Flights")]
     [PrimaryKey("FlightId", AutoIncrement = true)]
     [DataContract]
-    [Scope("ModuleId")]                
+    [Scope("PortalId")]                
     public partial class Flight  : FlightBase 
     {
 
@@ -35,7 +35,7 @@ namespace Albatros.DNN.Modules.Balises.Models.Flights
         {
             FlightBase res = new FlightBase();
              res.FlightId = FlightId;
-             res.ModuleId = ModuleId;
+             res.PortalId = PortalId;
              res.FlightStart = FlightStart;
              res.Category = Category;
              res.Comments = Comments;
