@@ -6,6 +6,26 @@ function ModuleBalisesService($, settings, mid) {
 
 	this.ServicePath = baseServicepath;
 
+	this.ajaxCall = function (type, controller, action, id, data, success, fail) {
+		showLoading();
+		$.ajax({
+			type: type,
+			url: baseServicepath + controller + '/' + action + (id != null ? '/' + id : ''),
+			beforeSend: $.dnnSF(moduleId).setModuleHeaders,
+			data: data
+		}).done(function (retdata) {
+			hideLoading();
+			if (success != undefined) {
+				success(retdata);
+			}
+		}).fail(function (xhr, status) {
+			showError(xhr.responseText);
+			if (fail != undefined) {
+				fail(xhr.responseText);
+			}
+		});
+	}
+
 	this.viewCall = function (controller, action, view, id, success, fail) {
 		showLoading();
 		var path = baseServicepath + controller + '/' + action;
@@ -68,8 +88,8 @@ function ModuleBalisesService($, settings, mid) {
 		});
 	}
 	
-	this.myMethod = function (id, success, fail) {
-		this.viewCall('Widget', 'List', null, id, success, fail);
+	this.getBeacons = function (success) {
+		this.ajaxCall('GET', 'Beacons', 'List', null, null, success);
 	}
 }
 

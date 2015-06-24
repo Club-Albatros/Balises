@@ -27,13 +27,27 @@
         <moduleControls>
          <moduleControl>
           <controlKey />
-          <controlSrc>Albatros.DNN.Modules.Balises.ModuleHome, Albatros.DNN.MODULES.Balises</controlSrc>
+          <controlSrc>Albatros.DNN.Modules.Balises.ModuleHome, ALBATROS.DNN.MODULES.BALISES</controlSrc>
           <supportsPartialRendering>False</supportsPartialRendering>
           <controlTitle />
           <controlType>View</controlType>
           <iconFile />
           <helpUrl />
           <viewOrder>0</viewOrder>
+         </moduleControl>
+         <moduleControl>
+          <controlKey>Detail</controlKey>
+          <controlSrc>Albatros.DNN.Modules.Balises.ModuleHome, ALBATROS.DNN.MODULES.BALISES</controlSrc>
+          <supportsPartialRendering>False</supportsPartialRendering>
+          <controlTitle>Detail</controlTitle>
+          <controlType>View</controlType>
+         </moduleControl>
+         <moduleControl>
+          <controlKey>EditFlight</controlKey>
+          <controlSrc>DesktopModules/Albatros/Balises/EditFlight.ascx</controlSrc>
+          <supportsPartialRendering>False</supportsPartialRendering>
+          <controlTitle>Edit Flight</controlTitle>
+          <controlType>Edit</controlType>
          </moduleControl>
          <moduleControl>
           <controlKey>Settings</controlKey>
@@ -46,9 +60,9 @@
           <viewOrder>0</viewOrder>
          </moduleControl>
         </moduleControls>
-	   <permissions>
-		<permission code="Albatros_Balises_MODULE" key="ADDER" name="Add Stuff"/>
-88888888888888	   </permissions>
+        <permissions>
+         <permission code="Albatros_Balises_MODULE" key="PILOT" name="Pilot"/>
+        </permissions>
        </moduleDefinition>
       </moduleDefinitions>
      </desktopModule>

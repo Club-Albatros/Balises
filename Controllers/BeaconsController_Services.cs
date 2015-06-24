@@ -14,10 +14,9 @@ namespace Albatros.DNN.Modules.Balises.Controllers
 		#region " Service Methods "
 		[HttpGet()]
 		[DnnModuleAuthorize(AccessLevel = DotNetNuke.Security.SecurityAccessLevel.View)]
-		public HttpResponseMessage MyMethod(int id)
+		public HttpResponseMessage List()
 		{
-			bool res = true;
-			return Request.CreateResponse(HttpStatusCode.OK, res);
+			return Request.CreateResponse(HttpStatusCode.OK, GetBeacons(ActiveModule.PortalID));
 		}
 		#endregion
 

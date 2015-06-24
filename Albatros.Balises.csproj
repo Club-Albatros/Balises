@@ -128,6 +128,13 @@
     <Compile Include="Controllers\FlightsController_Services.cs" />
     <Compile Include="Data\AuditableEntity.cs" />
     <Compile Include="Data\RepositoryImpl.cs" />
+    <Compile Include="EditFlight.ascx.cs">
+      <DependentUpon>EditFlight.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="EditFlight.ascx.designer.cs">
+      <DependentUpon>EditFlight.ascx</DependentUpon>
+    </Compile>
     <Compile Include="ICG\ARecord.cs" />
     <Compile Include="ICG\BRecord.cs" />
     <Compile Include="ICG\CRecord.cs" />
@@ -174,6 +181,7 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="EditFlight.ascx" />
     <Content Include="js\Albatros.Balises.js" />
     <Content Include="module.css" />
     <Content Include="Settings.ascx" />

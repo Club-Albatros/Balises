@@ -27,6 +27,7 @@ namespace Albatros.DNN.Modules.Balises
             ModuleControl = Request.QueryString.GetValueOrDefault("ctl", ModuleControl);
             View = Request.QueryString.GetValueOrDefault("View", View);
             AddService();
+            AddGoogleMaps();
             LocalResourceFile = Globals.SharedResourceFileName;
         }
 

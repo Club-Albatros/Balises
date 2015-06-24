@@ -39,6 +39,16 @@ namespace Albatros.DNN.Modules.Balises.Common
 
         }
 
+        public void AddGoogleMaps()
+        {
+            if (Context.Items["GoogleMapsAdded"] == null)
+            {
+                ClientResourceManager.RegisterScript(Page, "http://maps.googleapis.com/maps/api/js", 70);
+                Context.Items["GoogleMapsAdded"] = true;
+            }
+
+        }
+
         public void AddJavascriptFile(string jsFilename, int priority)
         {
             ClientResourceManager.RegisterScript(Page, ResolveUrl("~/DesktopModules/Albatros/Balises/js/" + jsFilename) + "?_=" + Settings.Version, priority);
