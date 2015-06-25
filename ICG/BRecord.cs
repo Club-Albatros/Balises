@@ -38,14 +38,14 @@ namespace Albatros.DNN.Modules.Balises.ICG
             Distance = 0;
 
             Latitude = Convert.ToInt32(rec.Substring(7, 2));
-            Latitude = Latitude + ((Convert.ToDouble(rec.Substring(9, 2)) + Convert.ToDouble(rec.Substring(11, 3)) / 100) / 60);
+            Latitude = Latitude + ((Convert.ToDouble(rec.Substring(9, 2)) + Convert.ToDouble(rec.Substring(11, 3)) / 1000) / 60);
             if (rec.Substring(14, 1) == "S")
             {
                 Latitude = Latitude * -1;
             }
 
             Longitude = Convert.ToInt32(rec.Substring(15, 3));
-            Longitude = Longitude + ((Convert.ToDouble(rec.Substring(18, 2)) + Convert.ToDouble(rec.Substring(20, 3)) / 100) / 60);
+            Longitude = Longitude + ((Convert.ToDouble(rec.Substring(18, 2)) + Convert.ToDouble(rec.Substring(20, 3)) / 1000) / 60);
             if (rec.Substring(23, 1) == "W")
             {
                 Longitude = Longitude * -1;

@@ -1,3 +1,5 @@
+using System.Collections;
+using System.Linq;
 using System.Web.WebPages;
 using Albatros.DNN.Modules.Balises.Common.Settings;
 using DotNetNuke.Web.Razor;
@@ -39,6 +41,28 @@ namespace Albatros.DNN.Modules.Balises.Common
             {
                 return base.Url;
             }
+        }
+
+        public string ModuleUrl(string relativeUrl)
+        {
+            return DotNetNuke.Common.Globals.ResolveUrl("~/DesktopModules/Albatros/Balises/" + relativeUrl);
+        }
+
+        public string EditUrl(string controlKey, params string[] additionParameters)
+        {
+            var par = additionParameters.ToList();
+            par.Add("mid=" + Dnn.Module.ModuleID);
+            return DotNetNuke.Common.Globals.NavigateURL(Dnn.Tab.TabID, controlKey, par.ToArray());
+        }
+
+        public string DetailView(string view, string objectName, int id)
+        {
+            return DotNetNuke.Common.Globals.NavigateURL(Dnn.Tab.TabID, "Detail", "View=" + view, "mid=" + Dnn.Module.ModuleID.ToString(), objectName + "=" + id.ToString());
+        }
+
+        public string LocalizeSafeJsString(string key)
+        {
+            return DotNetNuke.Services.Localization.Localization.GetSafeJSString(key, Globals.SharedResourceFileName);
         }
     }
     public abstract class BalisesWebPage<T> : DotNetNukeWebPage<T>
@@ -110,6 +134,28 @@ namespace Albatros.DNN.Modules.Balises.Common
                     return base.Url;
                 }
             }
+        }
+
+        public string ModuleUrl(string relativeUrl)
+        {
+            return DotNetNuke.Common.Globals.ResolveUrl("~/DesktopModules/Albatros/Balises/" + relativeUrl);
+        }
+
+        public string EditUrl(string controlKey, params string[] additionParameters)
+        {
+            var par = additionParameters.ToList();
+            par.Add("mid=" + Dnn.Module.ModuleID);
+            return DotNetNuke.Common.Globals.NavigateURL(Dnn.Tab.TabID, controlKey, additionParameters);
+        }
+
+        public string DetailView(string view, string objectName, int id)
+        {
+            return DotNetNuke.Common.Globals.NavigateURL(Dnn.Tab.TabID, "Detail", "View=" + view, "mid=" + Dnn.Module.ModuleID.ToString(), objectName + "=" + id.ToString());
+        }
+
+        public string LocalizeSafeJsString(string key)
+        {
+            return DotNetNuke.Services.Localization.Localization.GetSafeJSString(key, Globals.SharedResourceFileName);
         }
 
     }

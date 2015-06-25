@@ -105,6 +105,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Common\BalisesApiController.cs" />
+    <Compile Include="Common\BalisesPath.cs" />
     <Compile Include="Common\BalisesService.cs" />
     <Compile Include="Common\BalisesWebPage.cs" />
     <Compile Include="Common\ContextSecurity.cs" />
@@ -122,6 +123,7 @@
     <Compile Include="Common\Settings\StringBasedSettings.cs" />
     <Compile Include="Controllers\BeaconsController.cs" />
     <Compile Include="Controllers\BeaconsController_Services.cs" />
+    <Compile Include="Controllers\DocumentsController.cs" />
     <Compile Include="Controllers\FlightBeaconsController.cs" />
     <Compile Include="Controllers\FlightBeaconsController_Services.cs" />
     <Compile Include="Controllers\FlightsController.cs" />
@@ -197,6 +199,12 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="_Installation\Albatros.Balises.dnn" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Detail\EditFlight.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Detail\Flight.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

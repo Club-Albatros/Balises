@@ -1,0 +1,44 @@
+﻿@using DotNetNuke.Collections;
+@inherits Albatros.DNN.Modules.Balises.Common.BalisesWebPage
+@{
+ int FlightId = -1;
+ FlightId = Context.Request.QueryString.GetValueOrDefault("FlightId", FlightId);
+
+}
+<h1>Edit Flight</h1>
+
+<div class="row">
+ <div class="col-xs-12">
+  <input type="file" class="form-control" data-action="upload" data-flight-id="@(FlightId)" data-uploading="uploading" data-finished="uploadFinished" />
+ </div>
+</div>
+
+<script type="text/javascript">
+ (function ($, Sys) {
+  $(document).ready(function () {
+
+   $('input[data-action="upload"]').on('change', handleFileSelect);
+
+  });
+ }(jQuery, window.Sys));
+
+ var uploadInProgress = false;
+
+ function uploading() {
+  uploadInProgress = true;
+ }
+
+ function uploadFinished(data) {
+  uploadInProgress = false;
+ }
+
+ function handleFileSelect(evt) {
+  window[$(this).attr('data-uploading')]();
+  var files = evt.target.files;
+  var that = this;
+  moduleBalisesService.postFiles(files, function (data) {
+   window[$(that).attr('data-finished')](data);
+  });
+ }
+
+</script>

@@ -87,6 +87,34 @@ function ModuleBalisesService($, settings, mid) {
 			}
 		});
 	}
+
+	this.postFiles = function (files, success, fail) {
+		var data = new FormData();
+		$.each(files, function (key, value) {
+			data.append(key, value);
+		});
+		showLoading();
+		$.ajax({
+			type: "POST",
+			url: baseServicepath + 'Documents/Upload',
+			beforeSend: $.dnnSF(moduleId).setModuleHeaders,
+			data: data,
+			cache: false,
+			dataType: 'json',
+			processData: false,
+			contentType: false
+		}).done(function (retdata) {
+			hideLoading();
+			if (success != undefined) {
+				success(retdata);
+			}
+		}).fail(function (xhr, status) {
+			showError(xhr.responseText);
+			if (fail != undefined) {
+				fail(xhr.responseText);
+			}
+		});
+	}
 	
 	this.getBeacons = function (success) {
 		this.ajaxCall('GET', 'Beacons', 'List', null, null, success);

@@ -16,6 +16,12 @@ namespace Albatros.DNN.Modules.Balises.Common.Settings
             get { return Store.Get("Home"); }
             set { Store.Set(value); }
         }
+
+        public int BeaconPassDistanceMeters
+        {
+            get { return Store.Get(200); }
+            set { Store.Set(value); }
+        }
         public string Version = typeof(ModuleSettings).Assembly.GetName().Version.ToString();
         #endregion
 

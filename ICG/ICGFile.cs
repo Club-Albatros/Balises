@@ -2,20 +2,28 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Text;
+using Albatros.DNN.Modules.Balises.Common;
 
 namespace Albatros.DNN.Modules.Balises.ICG
 {
     public class ICGFile
     {
         public string Contents { get; set; }
+
+        public ARecord ARecord { get; private set; }
+        public SortedDictionary<DateTime, BRecord> BRecords { get; private set; }
+        public List<ERecord> ERecords { get; private set; }
+        public string GRecord { get; set; }
+        public Dictionary<string, HRecord> HRecords { get; set; }
+        public ExtensionRecord IRecord { get; private set; }
+        public ExtensionRecord JRecord { get; private set; }
+
         public DateTime FlightDate { get; private set; }
-        private ARecord _aRecord;
-        private SortedDictionary<DateTime, BRecord> _bRecords = new SortedDictionary<DateTime, BRecord>();
-        private List<ERecord> _eRecords = new List<ERecord>();
-        private ExtensionRecord _iRecord;
-        private ExtensionRecord _jRecord;
-        private string _gRecord = "";
-        private Dictionary<string, HRecord> _hRecords = new Dictionary<string, HRecord>();
+        public string PilotName { get; private set; }
+        public string GliderType { get; private set; }
+        public string GliderRegistration { get; private set; }
+        public string GliderClass { get; private set; }
+
         public DateTime DetectedStart { get; private set; }
         public TimeSpan FlightTime { get; private set; }
         public Common.Point Takeoff { get; private set; }
@@ -30,6 +38,10 @@ namespace Albatros.DNN.Modules.Balises.ICG
 
         public ICGFile(string contents)
         {
+            BRecords = new SortedDictionary<DateTime, BRecord>();
+            ERecords = new List<ERecord>();
+            GRecord = "";
+            HRecords = new Dictionary<string, HRecord>();
             Takeoff = null;
             Landing = null;
             MaxAltitude = 0;
@@ -44,6 +56,10 @@ namespace Albatros.DNN.Modules.Balises.ICG
         }
         public ICGFile(Stream contents)
         {
+            BRecords = new SortedDictionary<DateTime, BRecord>();
+            ERecords = new List<ERecord>();
+            GRecord = "";
+            HRecords = new Dictionary<string, HRecord>();
             Takeoff = null;
             Landing = null;
             MaxAltitude = 0;
@@ -60,7 +76,6 @@ namespace Albatros.DNN.Modules.Balises.ICG
             ReadContents();
         }
 
-
         private void ReadContents()
         {
             using (StringReader sr = new StringReader(Contents))
@@ -71,13 +86,13 @@ namespace Albatros.DNN.Modules.Balises.ICG
                     switch (l.Substring(0, 1))
                     {
                         case "A":
-                            _aRecord = new ARecord(l);
+                            ARecord = new ARecord(l);
                             break;
                         case "B":
-                            BRecord b = new BRecord(l, FlightDate, _iRecord);
-                            if (!_bRecords.ContainsKey(b.Time))
+                            BRecord b = new BRecord(l, FlightDate, IRecord);
+                            if (!BRecords.ContainsKey(b.Time))
                             {
-                                _bRecords.Add(b.Time, b);
+                                BRecords.Add(b.Time, b);
                             }
                             break;
                         case "C":
@@ -86,7 +101,7 @@ namespace Albatros.DNN.Modules.Balises.ICG
                             break;
                         case "E":
                             ERecord e = new ERecord(l, FlightDate);
-                            _eRecords.Add(e);
+                            ERecords.Add(e);
                             if (e.Code == "STA")
                             {
                                 DetectedStart = e.Time;
@@ -95,25 +110,47 @@ namespace Albatros.DNN.Modules.Balises.ICG
                         case "F":
                             break;
                         case "G":
-                            _gRecord = _gRecord + l.Substring(1);
+                            GRecord = GRecord + l.Substring(1);
                             break;
                         case "H":
                             HRecord h = new HRecord(l);
-                            _hRecords.Add(h.Code, h);
+                            HRecords.Add(h.Code, h);
+                            if (HRecords.ContainsKey("DTE"))
+                            {
+                                FlightDate = new DateTime(2000 + int.Parse(HRecords["DTE"].Value.Substring(4, 2)), int.Parse(HRecords["DTE"].Value.Substring(2, 2)), int.Parse(HRecords["DTE"].Value.Substring(0, 2)));
+                            }
                             break;
                         case "I":
-                            _iRecord = new ExtensionRecord(l);
+                            IRecord = new ExtensionRecord(l);
                             break;
                         case "J":
-                            _jRecord = new ExtensionRecord(l);
+                            JRecord = new ExtensionRecord(l);
                             break;
                     }
                 }
             }
 
+            // Process other H records
+            if (HRecords.ContainsKey("PLT"))
+            {
+                PilotName = HRecords["PLT"].Value.CutOffUntilCharacter(":").Trim();
+            }
+            if (HRecords.ContainsKey("GTY"))
+            {
+                GliderType = HRecords["GTY"].Value.CutOffUntilCharacter(":").Trim();
+            }
+            if (HRecords.ContainsKey("GID"))
+            {
+                GliderRegistration = HRecords["GID"].Value.CutOffUntilCharacter(":").Trim();
+            }
+            if (HRecords.ContainsKey("CCL"))
+            {
+                GliderClass = HRecords["CCL"].Value.CutOffUntilCharacter(":").Trim();
+            }
+
             // Process B records
             BRecord currentRecord = null;
-            foreach (DateTime k in _bRecords.Keys)
+            foreach (DateTime k in BRecords.Keys)
             {
                 if (k > DetectedStart & currentRecord != null)
                 {
@@ -121,30 +158,30 @@ namespace Albatros.DNN.Modules.Balises.ICG
                     {
                         Takeoff = new Common.Point(currentRecord);
                     }
-                    _bRecords[k].CompareWith(currentRecord);
-                    if (_bRecords[k].GnssAltitude > MaxAltitude)
+                    BRecords[k].CompareWith(currentRecord);
+                    if (BRecords[k].GnssAltitude > MaxAltitude)
                     {
-                        MaxAltitude = _bRecords[k].GnssAltitude;
+                        MaxAltitude = BRecords[k].GnssAltitude;
                     }
-                    if (_bRecords[k].GnssAltitude < MinAltitude)
+                    if (BRecords[k].GnssAltitude < MinAltitude)
                     {
-                        MinAltitude = _bRecords[k].GnssAltitude;
+                        MinAltitude = BRecords[k].GnssAltitude;
                     }
-                    if (_bRecords[k].Vario > MaxVario)
+                    if (BRecords[k].Vario > MaxVario)
                     {
-                        MaxVario = _bRecords[k].Vario;
+                        MaxVario = BRecords[k].Vario;
                     }
-                    if (_bRecords[k].Vario < MinVario)
+                    if (BRecords[k].Vario < MinVario)
                     {
-                        MinVario = _bRecords[k].Vario;
+                        MinVario = BRecords[k].Vario;
                     }
-                    if (_bRecords[k].Speed > MaxSpeed)
+                    if (BRecords[k].Speed > MaxSpeed)
                     {
-                        MaxSpeed = _bRecords[k].Speed;
+                        MaxSpeed = BRecords[k].Speed;
                     }
-                    Distance = Distance + _bRecords[k].Distance;
+                    Distance = Distance + BRecords[k].Distance;
                 }
-                currentRecord = _bRecords[k];
+                currentRecord = BRecords[k];
             }
             FlightTime = currentRecord.Time.Subtract(DetectedStart);
             Landing = new Common.Point(currentRecord);

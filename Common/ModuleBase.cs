@@ -1,12 +1,12 @@
 using Albatros.DNN.Modules.Balises.Common.Settings;
+using DotNetNuke.Entities.Modules;
 using DotNetNuke.Framework;
 using DotNetNuke.Framework.JavaScriptLibraries;
 using DotNetNuke.Web.Client.ClientResourceManagement;
-using DotNetNuke.Web.Razor;
 
 namespace Albatros.DNN.Modules.Balises.Common
 {
-    public class ModuleBase : RazorModuleBase
+    public class ModuleBase : PortalModuleBase
     {
 
         #region Properties
@@ -17,7 +17,7 @@ namespace Albatros.DNN.Modules.Balises.Common
         }
 
         private ModuleSettings _settings;
-        public ModuleSettings Settings
+        public new ModuleSettings Settings
         {
             get { return _settings ?? (_settings = ModuleSettings.GetSettings(ModuleContext.Configuration)); }
         }
