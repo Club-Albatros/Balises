@@ -8,7 +8,7 @@
 <h1>Edit Flight</h1>
 <div class="row">
  <div class="col-xs-12">
-  <input type="file" class="form-control" data-action="upload" data-flight-id="@(FlightId)" data-uploading="uploading" data-finished="uploadFinished" />
+  <input type="file" class="form-control" data-action="upload" data-flight-id="@(FlightId)" />
  </div>
 </div>
 
@@ -47,7 +47,21 @@
     });
    });
 
-   $('input[data-action="upload"]').on('change', handleFileSelect);
+   $('input[data-action="upload"]').on('change', function(evt) {
+    uploadInProgress = true;
+    var files = evt.target.files;
+    var that = this;
+    moduleBalisesService.postFiles(files, function (data) {
+     uploadInProgress = false;
+     uploadedFile = data.FilePath;
+     flightBeacons = data.PassedBeacons;
+     $('#beaconList').empty();
+     $.each(flightBeacons, function (index, item) {
+      $('#beaconList').append('<tr><td>' + item.Name + '</td></tr>');
+     });
+     $(that).val('');
+    });
+   });
 
    function addPointToMap(map, lat, lng, msg, id) {
     var infowindow = new google.maps.InfoWindow({
@@ -66,30 +80,6 @@
     });
    }
 
-   function handleFileSelect(evt) {
-    window[$(this).attr('data-uploading')]();
-    var files = evt.target.files;
-    var that = this;
-    moduleBalisesService.postFiles(files, function (data) {
-     window[$(that).attr('data-finished')](data);
-    });
-   }
-
   });
  }(jQuery, window.Sys));
-
- function uploading() {
-  uploadInProgress = true;
- }
-
- function uploadFinished(data) {
-  uploadInProgress = false;
-  uploadedFile = data.FilePath;
-  flightBeacons = data.PassedBeacons;
-  $('#beaconList').empty();
-  $.each(flightBeacons, function (index, item) {
-   $('#beaconList').append('<tr><td>' + item.Name + '</td></tr>');
-  });
- }
-
 </script>
