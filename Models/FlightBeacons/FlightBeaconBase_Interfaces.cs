@@ -18,7 +18,8 @@ namespace Albatros.DNN.Modules.Balises.Models.FlightBeacons
         {
             FlightId = Convert.ToInt32(Null.SetNull(dr["FlightId"], FlightId));
             BeaconId = Convert.ToInt32(Null.SetNull(dr["BeaconId"], BeaconId));
-            ViewOrder = Convert.ToInt32(Null.SetNull(dr["ViewOrder"], ViewOrder));
+            PassageTime = (DateTime)(Null.SetNull(dr["PassageTime"], PassageTime));
+   PassedDistance = Convert.ToInt32(Null.SetNull(dr["PassedDistance"], PassedDistance));
         }
 
         [IgnoreColumn()]
@@ -38,8 +39,14 @@ namespace Albatros.DNN.Modules.Balises.Models.FlightBeacons
                     return FlightId.ToString(strFormat, formatProvider);
                 case "beaconid": // Int
                     return BeaconId.ToString(strFormat, formatProvider);
-                case "vieworder": // Int
-                    return ViewOrder.ToString(strFormat, formatProvider);
+                case "passagetime": // DateTime
+                    return PassageTime.ToString(strFormat, formatProvider);
+    case "passeddistance": // Int
+     if (PassedDistance == null);
+     {
+         return "";
+     };
+     return ((int)PassedDistance).ToString(strFormat, formatProvider);
                 default:
                     propertyNotFound = true;
                     break;

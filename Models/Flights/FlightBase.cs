@@ -15,43 +15,43 @@ namespace Albatros.DNN.Modules.Balises.Models.Flights
     {
 
         #region " Public Properties "
-        [DataMember()]
+        [DataMember]
         public int FlightId { get; set; }
-        [DataMember()]
+        [DataMember]
         public int PortalId { get; set; }
-        [DataMember()]
+        [DataMember]
         public DateTime FlightStart { get; set; }
-        [DataMember()]
+        [DataMember]
         public int Category { get; set; }
-        [DataMember()]
+        [DataMember]
         public string Comments { get; set; }
-        [DataMember()]
+        [DataMember]
         public string StartDescription { get; set; }
-        [DataMember()]
+        [DataMember]
         public string StartCoords { get; set; }
-        [DataMember()]
+        [DataMember]
         public double StartLatitude { get; set; }
-        [DataMember()]
+        [DataMember]
         public double StartLongitude { get; set; }
-        [DataMember()]
+        [DataMember]
         public string LandingDescription { get; set; }
-        [DataMember()]
+        [DataMember]
         public DateTime LandingTime { get; set; }
-        [DataMember()]
+        [DataMember]
         public string LandingCoords { get; set; }
-        [DataMember()]
+        [DataMember]
         public double LandingLatitude { get; set; }
-        [DataMember()]
+        [DataMember]
         public double LandingLongitude { get; set; }
-        [DataMember()]
+        [DataMember]
         public string Summary { get; set; }
-        [DataMember()]
+        [DataMember]
         public bool Validated { get; set; }
-        [DataMember()]
+        [DataMember]
         public int? ValidatedByUserID { get; set; }
-        [DataMember()]
+        [DataMember]
         public DateTime? ValidatedOnDate { get; set; }
-        [DataMember()]
+        [DataMember]
         public bool Rejected { get; set; }
         #endregion
 

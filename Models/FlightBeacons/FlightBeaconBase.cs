@@ -11,12 +11,14 @@ namespace Albatros.DNN.Modules.Balises.Models.FlightBeacons
     {
 
         #region " Public Properties "
-        [DataMember()]
+        [DataMember]
         public int FlightId { get; set; }
-        [DataMember()]
+        [DataMember]
         public int BeaconId { get; set; }
-        [DataMember()]
-        public int ViewOrder { get; set; }
+        [DataMember]
+        public System.DateTime PassageTime { get; set; }
+        [DataMember]
+        public int? PassedDistance { get; set; }
         #endregion
 
         #region " Methods "
@@ -28,8 +30,10 @@ namespace Albatros.DNN.Modules.Balises.Models.FlightBeacons
             if (flightBeacon.BeaconId > -1)
                 BeaconId = flightBeacon.BeaconId;
 
-            if (flightBeacon.ViewOrder > -1)
-                ViewOrder = flightBeacon.ViewOrder;
+            PassageTime = flightBeacon.PassageTime;
+
+            if (flightBeacon.PassedDistance > -1)
+                PassedDistance = flightBeacon.PassedDistance;
 
         }
         #endregion

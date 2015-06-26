@@ -22,11 +22,11 @@ namespace Albatros.DNN.Modules.Balises.Models.Flights
         #endregion
 
         #region " Public Properties "
-        [DataMember()]
+        [DataMember]
         public string CreatedByUser { get; set; }
-        [DataMember()]
+        [DataMember]
         public string LastModifiedByUser { get; set; }
-        [DataMember()]
+        [DataMember]
         public string ValidatedByUser { get; set; }
         #endregion
 

@@ -1,5 +1,6 @@
 
 using System.Runtime.Serialization;
+using Albatros.DNN.Modules.Balises.Models.Beacons;
 using DotNetNuke.ComponentModel.DataAnnotations;
 
 namespace Albatros.DNN.Modules.Balises.Models.FlightBeacons
@@ -7,37 +8,38 @@ namespace Albatros.DNN.Modules.Balises.Models.FlightBeacons
 
     [TableName("vw_Albatros_Balises_FlightBeacons")]
     [DataContract]
-    [Scope("FlightId")]                
-    public partial class FlightBeacon  : FlightBeaconBase 
+    [Scope("FlightId")]
+    public partial class FlightBeacon : FlightBeaconBase
     {
 
         #region " Private Members "
         #endregion
 
         #region " Constructors "
-        public FlightBeacon()  : base() 
+        public FlightBeacon()
+            : base()
         {
         }
         #endregion
 
         #region " Public Properties "
-        [DataMember()]
+        [DataMember]
         public string Code { get; set; }
-        [DataMember()]
+        [DataMember]
         public string Name { get; set; }
-        [DataMember()]
+        [DataMember]
         public string Description { get; set; }
-        [DataMember()]
+        [DataMember]
         public string Coords { get; set; }
-        [DataMember()]
+        [DataMember]
         public double Latitude { get; set; }
-        [DataMember()]
+        [DataMember]
         public double Longitude { get; set; }
-        [DataMember()]
+        [DataMember]
         public int Altitude { get; set; }
-        [DataMember()]
+        [DataMember]
         public int Region { get; set; }
-        [DataMember()]
+        [DataMember]
         public int Points { get; set; }
         #endregion
 
@@ -45,10 +47,16 @@ namespace Albatros.DNN.Modules.Balises.Models.FlightBeacons
         public FlightBeaconBase GetFlightBeaconBase()
         {
             FlightBeaconBase res = new FlightBeaconBase();
-             res.FlightId = FlightId;
-             res.BeaconId = BeaconId;
-             res.ViewOrder = ViewOrder;
+            res.FlightId = FlightId;
+            res.BeaconId = BeaconId;
+            res.PassageTime = PassageTime;
+            res.PassedDistance = PassedDistance;
             return res;
+        }
+
+        public static FlightBeacon FromBeacon(Beacon beacon)
+        {
+            return new FlightBeacon() { Altitude = beacon.Altitude, BeaconId = beacon.BeaconId, Code = beacon.Code, Coords = beacon.Coords, Description = beacon.Description, Latitude = beacon.Latitude, Longitude = beacon.Longitude, Name = beacon.Name, Region = beacon.Region, Points = beacon.Points };
         }
         #endregion
 

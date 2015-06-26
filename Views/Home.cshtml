@@ -1,7 +1,5 @@
 @inherits Albatros.DNN.Modules.Balises.Common.BalisesWebPage
 
-<div id="googleMap" style="width: 100%; height: 500px;"></div>
-
 <div>
  <a href="@EditUrl("EditFlight")" class="btn btn-primary">Add Flight</a>
  <a href="@DetailView("EditFlight", "FlightId", -1)" class="btn btn-primary">Add Flight 2</a>
@@ -11,33 +9,7 @@
  (function ($) {
   $(document).ready(function () {
 
-   var map = new google.maps.Map(document.getElementById("googleMap"), {
-    center: new google.maps.LatLng(47.05, 6.85),
-    zoom: 10,
-    mapTypeId: google.maps.MapTypeId.ROADMAP,
-    draggableCursor: 'grabbing'
-   });
-
-   moduleBalisesService.getBeacons(function (data) {
-    $.each(data, function (index, item) {
-     addPointToMap(map, item.Latitude, item.Longitude, item.Name);
-    });
-   });
 
   });
-
-  function addPointToMap(map, lat, lng, msg) {
-   var infowindow = new google.maps.InfoWindow({
-    content: msg
-   });
-   var marker = new google.maps.Marker({
-    position: new google.maps.LatLng(lat, lng),
-    map: map
-   });
-   google.maps.event.addListener(marker, 'click', function () {
-    infowindow.open(map, marker);
-   });
-  }
-
  }(jQuery, window.Sys));
 </script>

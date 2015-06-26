@@ -15,27 +15,27 @@ namespace Albatros.DNN.Modules.Balises.Models.Beacons
     {
 
         #region " Public Properties "
-        [DataMember()]
+        [DataMember]
         public int BeaconId { get; set; }
-        [DataMember()]
+        [DataMember]
         public int PortalId { get; set; }
-        [DataMember()]
+        [DataMember]
         public string Code { get; set; }
-        [DataMember()]
+        [DataMember]
         public string Name { get; set; }
-        [DataMember()]
+        [DataMember]
         public string Description { get; set; }
-        [DataMember()]
+        [DataMember]
         public string Coords { get; set; }
-        [DataMember()]
+        [DataMember]
         public double Latitude { get; set; }
-        [DataMember()]
+        [DataMember]
         public double Longitude { get; set; }
-        [DataMember()]
+        [DataMember]
         public int Altitude { get; set; }
-        [DataMember()]
+        [DataMember]
         public int Region { get; set; }
-        [DataMember()]
+        [DataMember]
         public int Points { get; set; }
         #endregion
 
