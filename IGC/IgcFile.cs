@@ -4,9 +4,9 @@ using System.IO;
 using System.Text;
 using Albatros.DNN.Modules.Balises.Common;
 
-namespace Albatros.DNN.Modules.Balises.ICG
+namespace Albatros.DNN.Modules.Balises.IGC
 {
-    public class ICGFile
+    public class IgcFile
     {
         public string Contents { get; set; }
 
@@ -36,7 +36,7 @@ namespace Albatros.DNN.Modules.Balises.ICG
         public float Distance { get; private set; }
         public float AverageSpeed { get; private set; }
 
-        public ICGFile(string contents)
+        public IgcFile(string contents)
         {
             BRecords = new SortedDictionary<DateTime, BRecord>();
             ERecords = new List<ERecord>();
@@ -54,7 +54,7 @@ namespace Albatros.DNN.Modules.Balises.ICG
             Contents = contents;
             ReadContents();
         }
-        public ICGFile(Stream contents)
+        public IgcFile(Stream contents)
         {
             BRecords = new SortedDictionary<DateTime, BRecord>();
             ERecords = new List<ERecord>();

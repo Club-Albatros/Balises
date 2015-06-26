@@ -137,21 +137,21 @@
     <Compile Include="EditFlight.ascx.designer.cs">
       <DependentUpon>EditFlight.ascx</DependentUpon>
     </Compile>
-    <Compile Include="ICG\ARecord.cs" />
-    <Compile Include="ICG\BRecord.cs" />
-    <Compile Include="ICG\CRecord.cs" />
-    <Compile Include="ICG\DRecord.cs" />
-    <Compile Include="ICG\ERecord.cs" />
-    <Compile Include="ICG\ExtendedRecord.cs" />
-    <Compile Include="ICG\ExtensionPlace.cs" />
-    <Compile Include="ICG\ExtensionRecord.cs" />
-    <Compile Include="ICG\FRecord.cs" />
-    <Compile Include="ICG\GRecord.cs" />
-    <Compile Include="ICG\HRecord.cs" />
-    <Compile Include="ICG\ICGFile.cs" />
-    <Compile Include="ICG\KRecord.cs" />
-    <Compile Include="ICG\Record.cs" />
-    <Compile Include="ICG\TimeStampRecord.cs" />
+    <Compile Include="IGC\ARecord.cs" />
+    <Compile Include="IGC\BRecord.cs" />
+    <Compile Include="IGC\CRecord.cs" />
+    <Compile Include="IGC\DRecord.cs" />
+    <Compile Include="IGC\ERecord.cs" />
+    <Compile Include="IGC\ExtendedRecord.cs" />
+    <Compile Include="IGC\ExtensionPlace.cs" />
+    <Compile Include="IGC\ExtensionRecord.cs" />
+    <Compile Include="IGC\FRecord.cs" />
+    <Compile Include="IGC\GRecord.cs" />
+    <Compile Include="IGC\HRecord.cs" />
+    <Compile Include="IGC\IgcFile.cs" />
+    <Compile Include="IGC\KRecord.cs" />
+    <Compile Include="IGC\Record.cs" />
+    <Compile Include="IGC\TimeStampRecord.cs" />
     <Compile Include="Models\Beacons\Beacon.cs" />
     <Compile Include="Models\Beacons\BeaconBase.cs" />
     <Compile Include="Models\Beacons\BeaconBase_Interfaces.cs" />

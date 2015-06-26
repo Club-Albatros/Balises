@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace Albatros.DNN.Modules.Balises.ICG
+namespace Albatros.DNN.Modules.Balises.IGC
 {
     /// <summary>
     /// Base for B and K records

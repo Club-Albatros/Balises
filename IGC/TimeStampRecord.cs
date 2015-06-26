@@ -1,6 +1,6 @@
 using System;
 
-namespace Albatros.DNN.Modules.Balises.ICG
+namespace Albatros.DNN.Modules.Balises.IGC
 {
     public class TimeStampRecord : Record
     {

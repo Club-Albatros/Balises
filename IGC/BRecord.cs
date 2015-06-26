@@ -1,7 +1,7 @@
 using System;
 using Albatros.DNN.Modules.Balises.Common;
 
-namespace Albatros.DNN.Modules.Balises.ICG
+namespace Albatros.DNN.Modules.Balises.IGC
 {
     /// <summary>
     /// Fix rec

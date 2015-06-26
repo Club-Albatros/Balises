@@ -1,3 +1,5 @@
+using Albatros.DNN.Modules.Balises.IGC;
+
 namespace Albatros.DNN.Modules.Balises.Common
 {
 	public class Point
@@ -7,7 +9,7 @@ namespace Albatros.DNN.Modules.Balises.Common
 		public double Longitude;
 
 		public int Altitude;
-		public Point(ICG.BRecord brec)
+		public Point(BRecord brec)
 		{
 			Latitude = brec.Latitude;
 			Longitude = brec.Longitude;
