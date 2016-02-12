@@ -20,7 +20,6 @@ var ViewMap = React.createClass({
       googleScript += '&key=' + apiKey;
     }
     window.loadScript(googleScript, function() {
-      console.log(this.props.flight);
       var mapDiv = $(this.refs.mapDiv.getDOMNode());
       mapDiv.width(mapDiv.parent().width());
       mapDiv.height(mapDiv.parent().height());
@@ -33,7 +32,6 @@ var ViewMap = React.createClass({
         lat: this.props.flight.Start.Latitude, 
         lng: this.props.flight.Start.Longitude
       });
-        console.log(this.props.track);
       for (var i=0;i<this.props.track.length;i++)
       {
         linePath.push({
@@ -45,7 +43,6 @@ var ViewMap = React.createClass({
         lat: this.props.flight.Landing.Latitude, 
         lng: this.props.flight.Landing.Longitude
       });
-      console.log(linePath);
       var line = new google.maps.Polyline({
         path: linePath,
         geodesic: true,
@@ -54,7 +51,22 @@ var ViewMap = React.createClass({
         strokeWeight: 3
       });
       line.setMap(this._map);
+      this.addPointToMap(this.props.flight.Start, 'D');
+      this.addPointToMap(this.props.flight.Landing, 'A');
+      for (var i=0;i<this.props.track.length;i++)
+      {
+        this.addPointToMap(this.props.track[i], '');
+      }
     }.bind(this));
+  },
+
+  addPointToMap: function(point, label) {
+    var marker = new google.maps.Marker({
+      position: new google.maps.LatLng(point.Latitude, point.Longitude),
+      map: this._map,
+      label: label,
+      title: point.Name
+    });
   },
 
   getBounds: function() {
