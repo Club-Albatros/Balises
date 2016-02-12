@@ -5,11 +5,9 @@
     BalisesModuleContext.AddCss("jquery.bootgrid.min.css", "bootgrid", "1.3.1");
     BalisesModuleContext.AddScript("jquery.bootgrid.min.js", "bootgrid", "1.3.1");
     BalisesModuleContext.AddScript("moment-with-locales.min.js", "moment", "2.11.2");
+    BalisesModuleContext.AddModuleScript();
+    BalisesModuleContext.AddScript("SimpleAjaxUploader.min.js", "SimpleAjaxUploader", "2.4");
 }
-<div class="albatrosBalises" data-moduleid="@Dnn.ModuleContext.ModuleId"
-     data-resources="@SerializedResources()"
-     data-security="@(Newtonsoft.Json.JsonConvert.SerializeObject(BalisesModuleContext.Security))">
-</div>
 
 <h3>@Dnn.LocalizeString("MyFlights")</h3>
 
@@ -17,17 +15,24 @@
  <thead>
   <tr>
    <th data-column-id="FlightId" data-type="numeric" data-identifier="true" data-visible="false">ID</th>
-   <th data-column-id="FlightStart" data-order="asc" data-formatter="datime">@Dnn.LocalizeString("Start")</th>
+   <th data-column-id="FlightStart" data-header-css-class="bg_medcol" data-order="asc" data-formatter="datime">@Dnn.LocalizeString("Start")</th>
    <th data-column-id="StartDescription">@Dnn.LocalizeString("Start")</th>
-   <th data-column-id="DurationMins" data-formatter="duration">@Dnn.LocalizeString("Duration")</th>
+   <th data-column-id="LandingDescription">@Dnn.LocalizeString("Landing")</th>
+   <th data-column-id="DurationMins" data-header-css-class="bg_smallcol colTime" data-formatter="duration"></th>
    <th data-column-id="Distance" data-header-css-class="bg_smallcol colDistance" data-formatter="distance"></th>
    <th data-column-id="NrBeacons" data-header-css-class="bg_iconcol colNrBeacons"></th>
+   <th data-column-id="TotalPoints" data-header-css-class="bg_iconcol colTotalPoints"></th>
    <th data-column-id="NrComments" data-header-css-class="bg_iconcol colNrComments"></th>
    <th data-formatter="editor" data-header-css-class="bg_iconcol"></th>
    <th data-formatter="viewer" data-header-css-class="bg_iconcol"></th>
   </tr>
  </thead>
 </table>
+
+<div class="albatrosBalises" data-moduleid="@Dnn.ModuleContext.ModuleId"
+     data-resources="@SerializedResources()"
+     data-security="@(Newtonsoft.Json.JsonConvert.SerializeObject(BalisesModuleContext.Security))">
+</div>
 
 <div class="row">
  <div class="col-xs-12">
@@ -78,8 +83,10 @@
    })
     .on("loaded.rs.jquery.bootgrid", function (e)
     {
+     $('th.colTime a span.text').html('<span class="glyphicon glyphicon-time"></span>').attr('title', '@Dnn.LocalizeString("Duration")');
      $('th.colDistance a span.text').html('<span class="glyphicon glyphicon-resize-horizontal"></span>').attr('title', '@Dnn.LocalizeString("Distance")');
-     $('th.colNrBeacons a span.text').html('<span class="glyphicon glyphicon-flag"></span>').attr('title', '@Dnn.LocalizeString("NrBeacons")');
+     $('th.colNrBeacons a span.text').html('<span class="glyphicon glyphicon-map-marker"></span>').attr('title', '@Dnn.LocalizeString("NrBeacons")');
+     $('th.colTotalPoints a span.text').html('<span class="glyphicon glyphicon-dashboard"></span>').attr('title', '@Dnn.LocalizeString("TotalPoints")');
      $('th.colNrComments a span.text').html('<span class="glyphicon glyphicon-comment"></span>').attr('title', '@Dnn.LocalizeString("NrComments")');
     });
   });
