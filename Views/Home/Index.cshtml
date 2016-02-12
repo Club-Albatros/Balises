@@ -1,0 +1,24 @@
+﻿@inherits BalisesWebPage
+@using Albatros.DNN.Modules.Balises.Common
+@{
+    BalisesModuleContext.AddModuleScript();
+    BalisesModuleContext.AddScript("SimpleAjaxUploader.min.js", "SimpleAjaxUploader", "2.4");
+}
+
+<div class="albatrosBalises" data-moduleid="@Dnn.ModuleContext.ModuleId"
+     data-resources="@SerializedResources()"
+     data-security="@(Newtonsoft.Json.JsonConvert.SerializeObject(BalisesModuleContext.Security))">
+</div>
+
+<h3>Latest Flights</h3>
+
+<div class="row">
+ <div class="col-xs-12">
+  <div class="uploadComponent" data-moduleid="@Dnn.ModuleContext.ModuleId" data-tabid="@Dnn.ModuleContext.TabId">
+  </div>
+ </div>
+</div>
+
+<div>
+ <a href="@Url.Action("MyFlights", "Pilot")" class="btn btn-default">@Dnn.LocalizeString("MyFlights")</a>
+</div>

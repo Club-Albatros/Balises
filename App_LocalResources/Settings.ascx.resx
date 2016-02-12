@@ -117,11 +117,11 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="ControlTitle_settings.Text" xml:space="preserve">
-    <value>Balises Settings</value>
+  <data name="Default.Text" xml:space="preserve">
+    <value>&lt; Default ... &gt;</value>
   </data>
   <data name="lblView.Help" xml:space="preserve">
-    <value>Select view for this module instance</value>
+    <value>Select view control for this module instance</value>
   </data>
   <data name="lblView.Text" xml:space="preserve">
     <value>View</value>

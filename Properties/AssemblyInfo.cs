@@ -1,19 +1,17 @@
-using System;
 using System.Reflection;
 using System.Runtime.InteropServices;
 
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("Balises")]
+[assembly: AssemblyTitle("Balises Module")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Albatros")]
 [assembly: AssemblyProduct("Balises")]
-[assembly: AssemblyCopyright("Copyright © 2015")]
+[assembly: AssemblyCopyright("Copyright 2015 by Albatros")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
-[assembly: CLSCompliant(false)]
 
 // Setting ComVisible to false makes the types in this assembly not visible 
 // to COM components.  If you need to access a type in this assembly from 
@@ -21,7 +19,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("b102e945-0312-4a92-bf4a-82977eaf2aa0")]
+[assembly: Guid("5ef01dd5-84a1-49f3-9232-067440288455")]
 
 // Version information for an assembly consists of the following four values:
 //
@@ -34,4 +32,3 @@ using System.Runtime.InteropServices;
 // by using the '*' as shown below:
 [assembly: AssemblyVersion("01.00.00")]
 [assembly: AssemblyFileVersion("01.00.00")]
-[assembly: AssemblyInformationalVersion("01.00.00")]

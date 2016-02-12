@@ -1,4 +1,4 @@
-<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="Settings.ascx.cs" Inherits="Albatros.DNN.Modules.Balises.Settings" %>
+﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="Settings.ascx.cs" Inherits="Albatros.DNN.Modules.Balises.Settings" %>
 <%@ Register TagName="label" TagPrefix="dnn" Src="~/controls/labelcontrol.ascx" %>
 
 <fieldset>
@@ -7,4 +7,3 @@
   <asp:DropDownList runat="server" ID="ddView" />
  </div>
 </fieldset>
-

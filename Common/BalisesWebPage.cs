@@ -1,161 +1,49 @@
-using System.Collections;
-using System.Linq;
-using System.Web.WebPages;
-using Albatros.DNN.Modules.Balises.Common.Settings;
-using DotNetNuke.Web.Razor;
-using DotNetNuke.Web.Razor.Helpers;
+using System.Web.Mvc;
+using DotNetNuke.Web.Mvc.Helpers;
+using DotNetNuke.Web.Mvc.Framework;
+using System.Web;
+using Albatros.Balises.Core.Common;
 
 namespace Albatros.DNN.Modules.Balises.Common
 {
-    public abstract class BalisesWebPage : DotNetNukeWebPage
+    public abstract class BalisesWebPage : DnnWebViewPage
     {
-        private ContextSecurity _security;
-        public ContextSecurity Security
+
+        public ContextHelper BalisesModuleContext { get; set; }
+
+        public override void InitHelpers()
         {
-            get { return _security ?? (_security = new ContextSecurity(Dnn.Module)); }
+            Ajax = new AjaxHelper<object>(ViewContext, this);
+            Html = new DnnHtmlHelper<object>(ViewContext, this);
+            Url = new DnnUrlHelper(ViewContext);
+            Dnn = new DnnHelper<object>(ViewContext, this);
+            BalisesModuleContext = new ContextHelper(ViewContext);
         }
 
-        private ModuleSettings _settings;
-        public ModuleSettings Settings
+        public string SerializedResources()
         {
-            get { return _settings ?? (_settings = ModuleSettings.GetSettings(Dnn.Module)); }
+            return Newtonsoft.Json.JsonConvert.SerializeObject(DotNetNuke.Services.Localization.LocalizationProvider.Instance.GetCompiledResourceFile(Dnn.PortalSettings, "/DesktopModules/MVC/Albatros/Balises/App_LocalResources/ClientResources.resx",
+                    System.Threading.Thread.CurrentThread.CurrentCulture.Name));
         }
 
-        public new DnnHelper Dnn
+        public string Locale
         {
             get
             {
-                return base.Dnn;
+                return System.Threading.Thread.CurrentThread.CurrentCulture.Name;
             }
         }
-        public new HtmlHelper Html
+
+        public string GetModuleUrl(string relativeUrl)
         {
-            get
+            if (relativeUrl.StartsWith("API/"))
             {
-                return base.Html;
+                return Dnn.PortalSettings.PortalAlias.ResolveUrl("~/DesktopModules/Albatros/Balises/" + relativeUrl);
             }
-        }
-        public new UrlHelper Url
-        {
-            get
+            else
             {
-                return base.Url;
+                return DotNetNuke.Common.Globals.ResolveUrl("~/DesktopModules/Albatros/Balises/" + relativeUrl);
             }
-        }
-
-        public string ModuleUrl(string relativeUrl)
-        {
-            return DotNetNuke.Common.Globals.ResolveUrl("~/DesktopModules/Albatros/Balises/" + relativeUrl);
-        }
-
-        public string EditUrl(string controlKey, params string[] additionParameters)
-        {
-            var par = additionParameters.ToList();
-            par.Add("mid=" + Dnn.Module.ModuleID);
-            return DotNetNuke.Common.Globals.NavigateURL(Dnn.Tab.TabID, controlKey, par.ToArray());
-        }
-
-        public string DetailView(string view, string objectName, int id)
-        {
-            return DotNetNuke.Common.Globals.NavigateURL(Dnn.Tab.TabID, "Detail", "View=" + view, "mid=" + Dnn.Module.ModuleID.ToString(), objectName + "=" + id.ToString());
-        }
-
-        public string LocalizeSafeJsString(string key)
-        {
-            return DotNetNuke.Services.Localization.Localization.GetSafeJSString(key, Globals.SharedResourceFileName);
-        }
-    }
-    public abstract class BalisesWebPage<T> : DotNetNukeWebPage<T>
-    {
-        private ContextSecurity _security;
-        public ContextSecurity Security
-        {
-            get { return _security ?? (_security = new ContextSecurity(Dnn.Module)); }
-        }
-
-        private ModuleSettings _settings;
-        public ModuleSettings Settings
-        {
-            get { return _settings ?? (_settings = ModuleSettings.GetSettings(Dnn.Module)); }
-        }
-
-        protected override void ConfigurePage(WebPageBase parentPage)
-        {
-            base.ConfigurePage(parentPage);
-            Context = parentPage.Context;
-            BalisesWebPage parent = (BalisesWebPage)parentPage;
-            _dnn = parent.Dnn;
-            _html = parent.Html;
-            _url = parent.Url;
-        }
-        private DnnHelper _dnn;
-        public new DnnHelper Dnn
-        {
-            get
-            {
-                if (base.Dnn == null)
-                {
-                    return _dnn;
-                }
-                else
-                {
-                    return base.Dnn;
-                }
-            }
-        }
-
-        private HtmlHelper _html;
-        public new HtmlHelper Html
-        {
-            get
-            {
-                if (base.Html == null)
-                {
-                    return _html;
-                }
-                else
-                {
-                    return base.Html;
-                }
-            }
-        }
-
-        private UrlHelper _url;
-        public new UrlHelper Url
-        {
-            get
-            {
-                if (base.Url == null)
-                {
-                    return _url;
-                }
-                else
-                {
-                    return base.Url;
-                }
-            }
-        }
-
-        public string ModuleUrl(string relativeUrl)
-        {
-            return DotNetNuke.Common.Globals.ResolveUrl("~/DesktopModules/Albatros/Balises/" + relativeUrl);
-        }
-
-        public string EditUrl(string controlKey, params string[] additionParameters)
-        {
-            var par = additionParameters.ToList();
-            par.Add("mid=" + Dnn.Module.ModuleID);
-            return DotNetNuke.Common.Globals.NavigateURL(Dnn.Tab.TabID, controlKey, additionParameters);
-        }
-
-        public string DetailView(string view, string objectName, int id)
-        {
-            return DotNetNuke.Common.Globals.NavigateURL(Dnn.Tab.TabID, "Detail", "View=" + view, "mid=" + Dnn.Module.ModuleID.ToString(), objectName + "=" + id.ToString());
-        }
-
-        public string LocalizeSafeJsString(string key)
-        {
-            return DotNetNuke.Services.Localization.Localization.GetSafeJSString(key, Globals.SharedResourceFileName);
         }
 
     }

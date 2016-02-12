@@ -1,33 +1,20 @@
 <dotnetnuke type="Package" version="5.0">
  <packages>
-  <package name="Balises" type="Module" version="01.00.00">
-   <friendlyName>Balises</friendlyName>
-   <description>Albatros Balises module</description>
-   <iconFile>DesktopModules/Albatros/Balises/img/Balises.png</iconFile>
-   <owner>
-    <name>Albatros</name>
-    <organization>Albatros</organization>
-    <url>http://www.Albatros.net</url>
-    <email>info@Albatros.net</email>
-   </owner>
-   <license src="License.txt"></license>
-   <releaseNotes src="ReleaseNotes.txt"></releaseNotes>
-   <dependencies>
-    <dependency type="CoreVersion">07.02.00</dependency>
-   </dependencies>
+  <package name="Balises" type="Module" version="00.00.01">
    <components>
     <component type="Module">
      <desktopModule>
       <moduleName>Albatros_Balises</moduleName>
       <foldername>Albatros/Balises</foldername>
+      <supportedFeatures />
       <moduleDefinitions>
        <moduleDefinition>
-        <friendlyName>Balises</friendlyName>
+        <friendlyName>Albatros Balises</friendlyName>
         <defaultCacheTime>0</defaultCacheTime>
         <moduleControls>
          <moduleControl>
           <controlKey />
-          <controlSrc>Albatros.DNN.Modules.Balises.ModuleHome, ALBATROS.DNN.MODULES.BALISES</controlSrc>
+          <controlSrc>Home/Index.mvc</controlSrc>
           <supportsPartialRendering>False</supportsPartialRendering>
           <controlTitle />
           <controlType>View</controlType>
@@ -36,24 +23,10 @@
           <viewOrder>0</viewOrder>
          </moduleControl>
          <moduleControl>
-          <controlKey>Detail</controlKey>
-          <controlSrc>Albatros.DNN.Modules.Balises.ModuleHome, ALBATROS.DNN.MODULES.BALISES</controlSrc>
-          <supportsPartialRendering>False</supportsPartialRendering>
-          <controlTitle>Detail</controlTitle>
-          <controlType>View</controlType>
-         </moduleControl>
-         <moduleControl>
-          <controlKey>EditFlight</controlKey>
-          <controlSrc>DesktopModules/Albatros/Balises/EditFlight.ascx</controlSrc>
-          <supportsPartialRendering>False</supportsPartialRendering>
-          <controlTitle>Edit Flight</controlTitle>
-          <controlType>Edit</controlType>
-         </moduleControl>
-         <moduleControl>
           <controlKey>Settings</controlKey>
-          <controlSrc>DesktopModules/Albatros/Balises/Settings.ascx</controlSrc>
+          <controlSrc>DesktopModules/MVC/Albatros/Balises/Settings.ascx</controlSrc>
           <supportsPartialRendering>False</supportsPartialRendering>
-          <controlTitle>Balises Settings</controlTitle>
+          <controlTitle>Balises Module Settings</controlTitle>
           <controlType>Edit</controlType>
           <iconFile />
           <helpUrl />
@@ -62,6 +35,7 @@
         </moduleControls>
         <permissions>
          <permission code="Albatros_Balises_MODULE" key="PILOT" name="Pilot"/>
+         <permission code="Albatros_Balises_MODULE" key="VERIFIER" name="Verifier"/>
         </permissions>
        </moduleDefinition>
       </moduleDefinitions>

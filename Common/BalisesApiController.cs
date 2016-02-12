@@ -1,20 +1,24 @@
-using Albatros.DNN.Modules.Balises.Common.Settings;
 using DotNetNuke.Web.Api;
+using System.Net;
+using System.Net.Http;
 
 namespace Albatros.DNN.Modules.Balises.Common
 {
     public class BalisesApiController : DnnApiController
     {
-        private ContextSecurity _security;
-        public ContextSecurity Security
+        private ContextHelper _balisesModuleContext;
+        public ContextHelper BalisesModuleContext
         {
-            get { return _security ?? (_security = new ContextSecurity(ActiveModule)); }
+            get { return _balisesModuleContext ?? (_balisesModuleContext = new ContextHelper(this)); }
         }
 
-        private ModuleSettings _settings;
-        public ModuleSettings Settings
+        public HttpResponseMessage ServiceError(string message) {
+            return Request.CreateResponse(HttpStatusCode.InternalServerError, message);
+        }
+
+        public HttpResponseMessage AccessViolation(string message)
         {
-            get { return _settings ?? (_settings = ModuleSettings.GetSettings(ActiveModule)); }
+            return Request.CreateResponse(HttpStatusCode.Unauthorized, message);
         }
 
     }

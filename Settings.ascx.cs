@@ -1,5 +1,4 @@
-
-using System;
+﻿using System;
 using System.IO;
 using System.Web.UI.WebControls;
 using DotNetNuke.Entities.Modules;
@@ -10,10 +9,10 @@ namespace Albatros.DNN.Modules.Balises
     public partial class Settings : ModuleSettingsBase
     {
         #region Properties
-        private Common.Settings.ModuleSettings _settings;
-        public Common.Settings.ModuleSettings ModSettings
+        private Common.ModuleSettings _settings;
+        public Common.ModuleSettings ModSettings
         {
-            get { return _settings ?? (_settings = Common.Settings.ModuleSettings.GetSettings(ModuleContext.Configuration)); }
+            get { return _settings ?? (_settings = Common.ModuleSettings.GetSettings(ModuleContext.Configuration)); }
         }
         #endregion
 
@@ -25,12 +24,12 @@ namespace Albatros.DNN.Modules.Balises
                 if (Page.IsPostBack == false)
                 {
                     ddView.Items.Clear();
-                    ddView.Items.Add(new ListItem("Home", "Home"));
-                    System.IO.DirectoryInfo viewDir = new DirectoryInfo(Server.MapPath("~/DesktopModules/Albatros/Balises/Views"));
+                    ddView.Items.Add(new ListItem(LocalizeString("Default"), "Index"));
+                    System.IO.DirectoryInfo viewDir = new DirectoryInfo(Server.MapPath("~/DesktopModules/MVC/Albatros/Balises/Views"));
                     foreach (var f in viewDir.GetFiles("*.cshtml"))
                     {
                         string vwName = Path.GetFileNameWithoutExtension(f.Name);
-                        if (vwName.ToLower() != "home")
+                        if (vwName.ToLower() != "index")
                         {
                             ddView.Items.Add(new ListItem(vwName, vwName));
                         }
@@ -53,7 +52,7 @@ namespace Albatros.DNN.Modules.Balises
             try
             {
                 ModSettings.View = ddView.SelectedValue;
-                ModSettings.SaveSettings();
+                ModSettings.SaveSettings(ModuleContext.Configuration);
             }
             catch (Exception exc) //Module failed to load
             {

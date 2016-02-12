@@ -1,0 +1,106 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{C24A0A0F-4DA0-4C05-B6DC-0FF3A4A6D306}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Albatros.Balises.Core</RootNamespace>
+    <AssemblyName>Albatros.Balises.Core</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="DotNetNuke">
+      <HintPath>..\_References\DotNetNuke.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Common\BalisesPath.cs" />
+    <Compile Include="Common\EarthCalculations.cs" />
+    <Compile Include="Common\Extensions.cs" />
+    <Compile Include="Common\Globals.cs" />
+    <Compile Include="Common\Point.cs" />
+    <Compile Include="Common\SwissProjection.cs" />
+    <Compile Include="Data\AuditableEntity.cs" />
+    <Compile Include="Data\RepositoryImpl.cs" />
+    <Compile Include="IGC\ARecord.cs" />
+    <Compile Include="IGC\BRecord.cs" />
+    <Compile Include="IGC\CRecord.cs" />
+    <Compile Include="IGC\DRecord.cs" />
+    <Compile Include="IGC\ERecord.cs" />
+    <Compile Include="IGC\ExtendedRecord.cs" />
+    <Compile Include="IGC\ExtensionPlace.cs" />
+    <Compile Include="IGC\ExtensionRecord.cs" />
+    <Compile Include="IGC\FRecord.cs" />
+    <Compile Include="IGC\GRecord.cs" />
+    <Compile Include="IGC\HRecord.cs" />
+    <Compile Include="IGC\IgcFile.cs" />
+    <Compile Include="IGC\KRecord.cs" />
+    <Compile Include="IGC\Record.cs" />
+    <Compile Include="IGC\TimeStampRecord.cs" />
+    <Compile Include="Models\Beacons\Beacon.cs" />
+    <Compile Include="Models\Beacons\BeaconBase.cs" />
+    <Compile Include="Models\Beacons\BeaconBase_Interfaces.cs" />
+    <Compile Include="Models\Beacons\Beacon_Interfaces.cs" />
+    <Compile Include="Models\Comments\Comment.cs" />
+    <Compile Include="Models\Comments\CommentBase.cs" />
+    <Compile Include="Models\Comments\CommentBase_Interfaces.cs" />
+    <Compile Include="Models\Comments\Comment_Interfaces.cs" />
+    <Compile Include="Models\FlightBeacons\FlightBeacon_Custom.cs" />
+    <Compile Include="Models\FlightBeacons\FlightBeacon.cs" />
+    <Compile Include="Models\FlightBeacons\FlightBeaconBase.cs" />
+    <Compile Include="Models\FlightBeacons\FlightBeaconBase_Interfaces.cs" />
+    <Compile Include="Models\FlightBeacons\FlightBeacon_Interfaces.cs" />
+    <Compile Include="Models\Flights\Flight.cs" />
+    <Compile Include="Models\Flights\FlightBase.cs" />
+    <Compile Include="Models\Flights\FlightBase_Interfaces.cs" />
+    <Compile Include="Models\Flights\Flight_Interfaces.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repositories\BeaconRepository.cs" />
+    <Compile Include="Repositories\CommentRepository.cs" />
+    <Compile Include="Repositories\FlightBeaconRepository.cs" />
+    <Compile Include="Repositories\FlightRepository.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Controllers\" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
