@@ -22,7 +22,7 @@
   <dt>@Dnn.LocalizeString("Start")</dt>
   <dd>@Model.StartDescription</dd>
   <dt>@Dnn.LocalizeString("Distance")</dt>
-  <dd>@((int)(Model.Distance / 100.0) / 10.0) km</dd>
+  <dd>@((int)(0.5 + Model.Distance / 100.0) / 10.0) km</dd>
   <dt>@Dnn.LocalizeString("Duration")</dt>
   <dd>@((new System.TimeSpan(0, Model.DurationMins, 0)).ToString("h\\:mm"))</dd>
   <dt>@Dnn.LocalizeString("LandingTime")</dt>
