@@ -11,14 +11,67 @@
      data-security="@(Newtonsoft.Json.JsonConvert.SerializeObject(BalisesModuleContext.Security))">
 </div>
 
-<h3>View Flight</h3>
+<h3>@String.Format(Dnn.LocalizeString("FlightTitle"), Model.StartDescription, Model.FlightStart)</h3>
 
-@Model.FlightStart
+<div>
+ <dl class="dl-horizontal">
+  <dt>@Dnn.LocalizeString("Pilot")</dt>
+  <dd>@Model.CreatedByUser</dd>
+  <dt>@Dnn.LocalizeString("FlightStart")</dt>
+  <dd>@Model.FlightStart.ToString("g")</dd>
+  <dt>@Dnn.LocalizeString("Start")</dt>
+  <dd>@Model.StartDescription</dd>
+  <dt>@Dnn.LocalizeString("Distance")</dt>
+  <dd>@((int)(Model.Distance / 100.0) / 10.0) km</dd>
+  <dt>@Dnn.LocalizeString("Duration")</dt>
+  <dd>@((new System.TimeSpan(0, Model.DurationMins, 0)).ToString("h\\:mm"))</dd>
+  <dt>@Dnn.LocalizeString("LandingTime")</dt>
+  <dd>@Model.LandingTime.ToString("t")</dd>
+  <dt>@Dnn.LocalizeString("Landing")</dt>
+  <dd>@Model.LandingDescription</dd>
+  <dt>@Dnn.LocalizeString("Points")</dt>
+  <dd>@Model.TotalPoints</dd>
+  <dt>@Dnn.LocalizeString("Status")</dt>
+  <dd>
+   @(Model.Validated ? Dnn.LocalizeString("Validated") : Dnn.LocalizeString("NotValidated"))
+  </dd>
+ </dl>
+ <h3>@Dnn.LocalizeString("History")</h3>
+ <div class="ab-audit-log">
+  <div>
+   @(String.Format(Dnn.LocalizeString("SubmittedByString"), Model.CreatedByUser, Model.CreatedOnDate))
+  </div>
+  @if (Model.LastModifiedOnDate != Model.CreatedOnDate)
+  {
+  <div>
+   @(String.Format(Dnn.LocalizeString("LastModifiedByString"), Model.ModifiedByUser, Model.LastModifiedOnDate))
+  </div>
+  }
+  @if (Model.Validated)
+  {
+  <div>
+   @(String.Format(Dnn.LocalizeString("ValidatedByString"), Model.ValidatedByUser, Model.ValidatedOnDate))
+  </div>
+  }
+  @if (Model.Rejected)
+  {
+  <div>
+   @(String.Format(Dnn.LocalizeString("RejectedByString"), Model.ValidatedByUser, Model.ValidatedOnDate))
+  </div>
+  }
+ </div>
+</div>
 
-<div class="viewMap" 
+<h3>@Dnn.LocalizeString("Track")</h3>
+
+<div class="viewMap"
      data-moduleid="@Dnn.ModuleContext.ModuleId"
      data-apikey="@BalisesModuleContext.Settings.GoogleMapApiKey"
      data-flight="@(Newtonsoft.Json.JsonConvert.SerializeObject(Model))"
      data-track="@(Newtonsoft.Json.JsonConvert.SerializeObject(FlightBeaconRepository.Instance.GetFlightBeaconsByFlight(Model.FlightId)))"
      style="width:100%;height:500px;">
+</div>
+
+<div style="width:100%;text-align:right;margin-top:30px;">
+ <a href="@Request.UrlReferrer.PathAndQuery" class="btn btn-primary">@Dnn.LocalizeString("Return")</a>
 </div>

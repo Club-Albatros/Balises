@@ -123,8 +123,29 @@
   <data name="Duration.Text" xml:space="preserve">
     <value>Duration</value>
   </data>
+  <data name="FlightStart.Text" xml:space="preserve">
+    <value>Flight Start</value>
+  </data>
+  <data name="FlightTitle.Text" xml:space="preserve">
+    <value>Flight from {0} at {1:HH:mm} on {1:d}</value>
+  </data>
+  <data name="History.Text" xml:space="preserve">
+    <value>History</value>
+  </data>
+  <data name="Landing.Text" xml:space="preserve">
+    <value>Landing</value>
+  </data>
+  <data name="LandingTime.Text" xml:space="preserve">
+    <value>Landing Time</value>
+  </data>
+  <data name="LastModifiedByString.Text" xml:space="preserve">
+    <value>Last modified by {0} on {1:d}</value>
+  </data>
   <data name="MyFlights.Text" xml:space="preserve">
     <value>My Flights</value>
+  </data>
+  <data name="NotValidated.Text" xml:space="preserve">
+    <value>Not Validated</value>
   </data>
   <data name="NrBeacons.Text" xml:space="preserve">
     <value>Nr Beacons</value>
@@ -132,7 +153,34 @@
   <data name="NrComments.Text" xml:space="preserve">
     <value>Nr Comments</value>
   </data>
+  <data name="Pilot.Text" xml:space="preserve">
+    <value>Pilot</value>
+  </data>
+  <data name="Points.Text" xml:space="preserve">
+    <value>Points</value>
+  </data>
+  <data name="RejectedByString.Text" xml:space="preserve">
+    <value>Rejected by {0} on {1:d}</value>
+  </data>
+  <data name="Return.Text" xml:space="preserve">
+    <value>Return</value>
+  </data>
   <data name="Start.Text" xml:space="preserve">
     <value>Start</value>
+  </data>
+  <data name="Status.Text" xml:space="preserve">
+    <value>Status</value>
+  </data>
+  <data name="SubmittedByString.Text" xml:space="preserve">
+    <value>Submitted by {0} on {1:d}</value>
+  </data>
+  <data name="Track.Text" xml:space="preserve">
+    <value>Track</value>
+  </data>
+  <data name="Validated.Text" xml:space="preserve">
+    <value>Validated</value>
+  </data>
+  <data name="ValidatedByString.Text" xml:space="preserve">
+    <value>Validated by {0} on {1:d}</value>
   </data>
 </root>
