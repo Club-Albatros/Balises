@@ -24,6 +24,7 @@ var ViewMap = React.createClass({
       mapDiv.width(mapDiv.parent().width());
       mapDiv.height(mapDiv.parent().height());
       this._map = new google.maps.Map(this.refs.mapDiv.getDOMNode(), {
+        scrollwheel: false,
         mapTypeId: google.maps.MapTypeId.TERRAIN
       });
       this._map.fitBounds(this.getBounds());
