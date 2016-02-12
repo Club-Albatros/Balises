@@ -39,6 +39,7 @@ namespace Albatros.DNN.Modules.Balises
                         ddView.Items.FindByValue(ModSettings.View).Selected = true;
                     }
                     catch { }
+                    txtGoogleMapApiKey.Text = ModSettings.GoogleMapApiKey;
                 }
             }
             catch (Exception exc) //Module failed to load
@@ -52,6 +53,7 @@ namespace Albatros.DNN.Modules.Balises
             try
             {
                 ModSettings.View = ddView.SelectedValue;
+                ModSettings.GoogleMapApiKey = txtGoogleMapApiKey.Text.Trim();
                 ModSettings.SaveSettings(ModuleContext.Configuration);
             }
             catch (Exception exc) //Module failed to load

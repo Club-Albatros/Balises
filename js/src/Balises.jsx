@@ -1,4 +1,5 @@
-var Upload = require('./UploadComponent/Upload.jsx');
+var Upload = require('./UploadComponent/Upload.jsx'),
+    ViewMap = require('./ViewMapComponent/ViewMap.jsx');
 
 (function($, window, document, undefined) {
 
@@ -8,6 +9,7 @@ var Upload = require('./UploadComponent/Upload.jsx');
 
   window.AlbatrosBalises = {
     modules: {},
+    googleLoaded: false,
 
     loadData: function() {
       $('.albatrosBalises').each(function(i, el) {
@@ -25,15 +27,15 @@ var Upload = require('./UploadComponent/Upload.jsx');
         var tabId = $(el).data('tabid');
         React.render(<Upload moduleId={moduleId} tabId={tabId} />, el);
       });
-    },
-
-    formatString: function(format) {
-      var args = Array.prototype.slice.call(arguments, 1);
-      return format.replace(/{(\d+)}/g, function(match, number) {
-        return typeof args[number] != 'undefined' ? args[number] : match;
+      $('.viewMap').each(function(i, el) {
+        var moduleId = $(el).data('moduleid');
+        var apiKey = $(el).data('apikey');
+        var track = $(el).data('track');
+        var flight = $(el).data('flight');
+        React.render(<ViewMap apiKey={apiKey} moduleId={moduleId} track={track}
+                 flight={flight} />, el);
       });
     }
-
 
   }
 

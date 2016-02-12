@@ -47,8 +47,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Common\BalisesPath.cs" />
+    <Compile Include="Common\BeaconPassage.cs" />
     <Compile Include="Common\EarthCalculations.cs" />
     <Compile Include="Common\Extensions.cs" />
+    <Compile Include="Common\Fix.cs" />
     <Compile Include="Common\Globals.cs" />
     <Compile Include="Common\Point.cs" />
     <Compile Include="Common\SwissProjection.cs" />
@@ -82,6 +84,7 @@
     <Compile Include="Models\FlightBeacons\FlightBeaconBase.cs" />
     <Compile Include="Models\FlightBeacons\FlightBeaconBase_Interfaces.cs" />
     <Compile Include="Models\FlightBeacons\FlightBeacon_Interfaces.cs" />
+    <Compile Include="Models\Flights\Flight_Custom.cs" />
     <Compile Include="Models\Flights\Flight.cs" />
     <Compile Include="Models\Flights\FlightBase.cs" />
     <Compile Include="Models\Flights\FlightBase_Interfaces.cs" />

@@ -2,8 +2,6 @@ using System.Web.Mvc;
 using DotNetNuke.Common;
 using Albatros.DNN.Modules.Balises.Common;
 using Albatros.Balises.Core.Repositories;
-using DotNetNuke.Services.FileSystem;
-using DotNetNuke.Entities.Users;
 
 namespace Albatros.DNN.Modules.Balises.Controllers
 {
@@ -21,9 +19,9 @@ namespace Albatros.DNN.Modules.Balises.Controllers
 
         [HttpGet]
         [BalisesAuthorize(SecurityLevel = SecurityAccessLevel.View)]
-        public ActionResult View()
+        public ActionResult View(int id)
         {
-            return View();
+            return View(FlightRepository.Instance.GetFlight(PortalSettings.PortalId, id));
         }
 
     }

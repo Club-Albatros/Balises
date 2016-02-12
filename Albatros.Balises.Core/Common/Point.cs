@@ -7,9 +7,10 @@ namespace Albatros.Balises.Core.Common
 
 		public double Latitude;
 		public double Longitude;
-
 		public int Altitude;
-		public Point(BRecord brec)
+
+        public Point() { }
+        public Point(BRecord brec)
 		{
 			Latitude = brec.Latitude;
 			Longitude = brec.Longitude;

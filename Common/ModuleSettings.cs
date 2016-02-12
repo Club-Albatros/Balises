@@ -9,6 +9,8 @@ namespace Albatros.DNN.Modules.Balises.Common
         public string View { get; set; } = "Index";
         [ModuleSetting]
         public int BeaconPassDistanceMeters { get; set; } = 200;
+        [PortalSetting(Prefix = "Albatros_Balises_")]
+        public string GoogleMapApiKey { get; set; } = "";
 
         public static ModuleSettings GetSettings(ModuleInfo module)
         {

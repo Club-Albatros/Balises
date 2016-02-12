@@ -1,0 +1,24 @@
+﻿@inherits BalisesWebPage<Flight>
+@using Albatros.DNN.Modules.Balises.Common;
+@using Albatros.Balises.Core.Models.Flights;
+@using Albatros.Balises.Core.Repositories;
+@{
+    BalisesModuleContext.AddModuleScript();
+}
+
+<div class="albatrosBalises" data-moduleid="@Dnn.ModuleContext.ModuleId"
+     data-resources="@SerializedResources()"
+     data-security="@(Newtonsoft.Json.JsonConvert.SerializeObject(BalisesModuleContext.Security))">
+</div>
+
+<h3>View Flight</h3>
+
+@Model.FlightStart
+
+<div class="viewMap" 
+     data-moduleid="@Dnn.ModuleContext.ModuleId"
+     data-apikey="@BalisesModuleContext.Settings.GoogleMapApiKey"
+     data-flight="@(Newtonsoft.Json.JsonConvert.SerializeObject(Model))"
+     data-track="@(Newtonsoft.Json.JsonConvert.SerializeObject(FlightBeaconRepository.Instance.GetFlightBeaconsByFlight(Model.FlightId)))"
+     style="width:100%;height:500px;">
+</div>

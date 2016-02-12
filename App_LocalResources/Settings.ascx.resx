@@ -120,6 +120,12 @@
   <data name="Default.Text" xml:space="preserve">
     <value>&lt; Default ... &gt;</value>
   </data>
+  <data name="lblGoogleMapApiKey.Help" xml:space="preserve">
+    <value>API key for using Google maps. Go to your Google account to create one.</value>
+  </data>
+  <data name="lblGoogleMapApiKey.Text" xml:space="preserve">
+    <value>Google Map API Key</value>
+  </data>
   <data name="lblView.Help" xml:space="preserve">
     <value>Select view control for this module instance</value>
   </data>
