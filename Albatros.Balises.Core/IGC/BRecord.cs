@@ -18,7 +18,7 @@ namespace Albatros.Balises.Core.IGC
 
         public int GnssAltitude { get; private set; }
 
-        public float Distance { get; private set; }
+        public int Distance { get; private set; }
 
         public int TimeDifference { get; private set; }
 
@@ -60,9 +60,9 @@ namespace Albatros.Balises.Core.IGC
 
         public void CompareWith(BRecord lastRecord)
         {
-            Distance = Convert.ToSingle(EarthCalculations.Distance(lastRecord.Latitude, lastRecord.Longitude, Latitude, Longitude) * 1000);
+            Distance = EarthCalculations.DistanceInMeters(lastRecord.Latitude, lastRecord.Longitude, Latitude, Longitude);
             TimeDifference = Convert.ToInt32(Time.Subtract(lastRecord.Time).TotalSeconds);
-            Speed = Distance / TimeDifference;
+            Speed = (float)Distance / (float)TimeDifference;
             AltitudeDifference = PressureAltitude - lastRecord.PressureAltitude;
             Vario = Convert.ToSingle(AltitudeDifference / TimeDifference);
         }

@@ -35,7 +35,7 @@ namespace Albatros.Balises.Core.IGC
         public float MaxVario { get; private set; }
         public float MinVario { get; private set; }
         public float MaxSpeed { get; private set; }
-        public float Distance { get; private set; }
+        public int Distance { get; private set; }
         public float AverageSpeed { get; private set; }
         
         public IgcFile(string contents)
@@ -193,7 +193,7 @@ namespace Albatros.Balises.Core.IGC
             DetectedLandingTime = currentRecord.Time;
             FlightTime = DetectedLandingTime.Subtract(DetectedStart);
             Landing = new Common.Point(currentRecord);
-            AverageSpeed = Convert.ToSingle(Distance / FlightTime.TotalSeconds);
+            AverageSpeed = Convert.ToSingle((float)Distance / (float)FlightTime.TotalSeconds);
 
         }
 

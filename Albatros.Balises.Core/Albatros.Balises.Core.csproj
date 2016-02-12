@@ -67,6 +67,7 @@
     <Compile Include="IGC\FRecord.cs" />
     <Compile Include="IGC\GRecord.cs" />
     <Compile Include="IGC\HRecord.cs" />
+    <Compile Include="IGC\IgcController.cs" />
     <Compile Include="IGC\IgcFile.cs" />
     <Compile Include="IGC\KRecord.cs" />
     <Compile Include="IGC\Record.cs" />

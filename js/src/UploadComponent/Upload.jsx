@@ -45,9 +45,7 @@ var Upload = React.createClass({
         }.bind(this),
         onComplete: function(filename, response) {
           this.refs.msgBox.getDOMNode().innerHtml = this.resources.DropHere;
-          this.setState({
-            resources: response
-          });
+          location.reload();
         }.bind(this),
         onError: function(filename, errorType, status, statusText, response, uploadBtn, fileSize) {
           this.refs.msgBox.getDOMNode().innerHtml = 'Error uploading file: ' + response;
