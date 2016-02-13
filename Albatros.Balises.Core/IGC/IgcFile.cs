@@ -201,15 +201,15 @@ namespace Albatros.Balises.Core.IGC
         {
 
             StringBuilder sb = new StringBuilder();
-            sb.AppendFormat("Date: {0:d}<br />", FlightDate);
-            sb.AppendFormat("Start: {0:HH:MM:ss}<br />", DetectedStart);
-            sb.AppendFormat("Distance (km): {0}<br />", Distance / 1000);
-            sb.AppendFormat("Duration (mins): {0}<br />", FlightTime.TotalMinutes);
-            sb.AppendFormat("Avg Speed (m/s): {0}<br />", AverageSpeed);
-            sb.AppendFormat("Max Speed (m/s): {0}<br />", MaxSpeed);
-            sb.AppendFormat("Max Altitude (m): {0}<br />", MaxAltitude);
-            sb.AppendFormat("Max Vario (m/s): {0}<br />", MaxVario);
-            sb.AppendFormat("Min Vario (m/s): {0}<br />", MinVario);
+            sb.AppendFormat("Date: {0:d}\r\n", FlightDate);
+            sb.AppendFormat("Start: {0:HH:MM:ss}\r\n", DetectedStart);
+            sb.AppendFormat("Distance (km): {0}\r\n", Distance / 1000);
+            sb.AppendFormat("Duration (mins): {0}\r\n", FlightTime.TotalMinutes);
+            sb.AppendFormat("Avg Speed (m/s): {0}\r\n", AverageSpeed);
+            sb.AppendFormat("Max Speed (m/s): {0}\r\n", MaxSpeed);
+            sb.AppendFormat("Max Altitude (m): {0}\r\n", MaxAltitude);
+            sb.AppendFormat("Max Vario (m/s): {0}\r\n", MaxVario);
+            sb.AppendFormat("Min Vario (m/s): {0}\r\n", MinVario);
 
             return sb.ToString();
 

@@ -1,3 +1,102 @@
-﻿@inherits BalisesWebPage<Flight>
+﻿@inherits BalisesWebPage<FlightBase>
 @using Albatros.DNN.Modules.Balises.Common
 @using Albatros.Balises.Core.Models.Flights
+@using DotNetNuke.Web.Mvc.Helpers;
+@{
+    BalisesModuleContext.AddScript("moment-with-locales.min.js", "moment", "2.11.2");
+    BalisesModuleContext.AddScript("bootstrap-datetimepicker.min.js", "bootstrap-datetimepicker", "4.17.37");
+    BalisesModuleContext.AddBootstrapCss();
+    BalisesModuleContext.AddModuleScript();
+}
+
+<fieldset id="editFlight">
+ <div class="dnnFormItem">
+  <div class="dnnLabel" style="position: relative;">
+   <label>@Dnn.LocalizeString("TakeoffDescription")</label>
+  </div>
+  @Html.TextBoxFor(m => m.TakeoffDescription)
+ </div>
+ <div class="dnnFormItem">
+  <div class="dnnLabel" style="position: relative;">
+   <label>@Dnn.LocalizeString("TakeoffTime")</label>
+  </div>
+  <input type="text" data-editor="datetime" data-val="TakeoffTime" />
+  @Html.HiddenFor(m => m.TakeoffTime)
+ </div>
+ <div class="dnnFormItem">
+  <div class="dnnLabel" style="position: relative;">
+   <label>@Dnn.LocalizeString("TakeoffLatitude")</label>
+  </div>
+  @Html.TextBoxFor(m => m.TakeoffLatitude, new { data_editor = "float" })
+ </div>
+ <div class="dnnFormItem">
+  <div class="dnnLabel" style="position: relative;">
+   <label>@Dnn.LocalizeString("TakeoffLongitude")</label>
+  </div>
+  @Html.TextBoxFor(m => m.TakeoffLongitude, new { data_editor = "float" })
+ </div>
+ <div class="dnnFormItem">
+  <div class="dnnLabel" style="position: relative;">
+   <label>@Dnn.LocalizeString("LandingDescription")</label>
+  </div>
+  @Html.TextBoxFor(m => m.LandingDescription)
+ </div>
+ <div class="dnnFormItem">
+  <div class="dnnLabel" style="position: relative;">
+   <label>@Dnn.LocalizeString("LandingTime")</label>
+  </div>
+  <input type="text" data-editor="datetime" data-val="LandingTime" />
+  @Html.HiddenFor(m => m.LandingTime)
+ </div>
+ <div class="dnnFormItem">
+  <div class="dnnLabel" style="position: relative;">
+   <label>@Dnn.LocalizeString("LandingLatitude")</label>
+  </div>
+  @Html.TextBoxFor(m => m.LandingLatitude, new { data_editor = "float" })
+ </div>
+ <div class="dnnFormItem">
+  <div class="dnnLabel" style="position: relative;">
+   <label>@Dnn.LocalizeString("LandingLongitude")</label>
+  </div>
+  @Html.TextBoxFor(m => m.LandingLongitude, new { data_editor = "float" })
+ </div>
+ <div class="dnnFormItem">
+  <div class="dnnLabel" style="position: relative;">
+   <label>@Dnn.LocalizeString("Summary")</label>
+  </div>
+  @Html.TextAreaFor(m => m.Summary)
+ </div>
+</fieldset>
+
+<div class="right">
+ @if (Model.FlightId > 0)
+ {
+ @Html.ActionLink(Dnn.LocalizeString("Delete"), "Delete", "Flight", new { FlightId = Model.FlightId }, new { @class = "btn btn-default cmdDelete" })
+ }
+ <button type="submit" class="btn btn-primary" id="cmdSave">@Dnn.LocalizeString("Save")</button>
+</div>
+
+<script type="text/javascript">
+ (function ($, Sys) {
+  $(document).ready(function () {
+
+   $('input[data-editor="datetime"]').each(function (i, el) {
+    $(el).val($('#' + $(el).data('val')).val());
+   });
+   $('input[data-editor="datetime"]').datetimepicker({
+    format: 'l LT'
+   }).on('dp.hide', function (e) {
+    $('#' + $(e.target).data('val')).val(e.date.format());
+   });
+   $('input[data-editor="float"]').keydown(function (e) {
+    return window.CheckFloatInput(e,
+    '@(System.Threading.Thread.CurrentThread.CurrentCulture.NumberFormat.NumberDecimalSeparator)')
+   });
+   //validateForm($('#editFlight'), $('#cmdSave'), $('#formErrors'));
+   $('.cmdDelete').click(function () {
+    return confirm('@Dnn.LocalizeString("DeleteFlight.Confirm")');
+   });
+
+  });
+ }(jQuery, window.Sys));
+</script>

@@ -189,4 +189,31 @@
   <data name="Takeoff.Text" xml:space="preserve">
     <value>Takeoff</value>
   </data>
+  <data name="LandingCoords.Text" xml:space="preserve">
+    <value>Landing Coordinates (SG)</value>
+  </data>
+  <data name="LandingDescription.Text" xml:space="preserve">
+    <value>Landing Description</value>
+  </data>
+  <data name="LandingLatitude.Text" xml:space="preserve">
+    <value>Landing Latitude</value>
+  </data>
+  <data name="LandingLongitude.Text" xml:space="preserve">
+    <value>Landing Longitude</value>
+  </data>
+  <data name="Summary.Text" xml:space="preserve">
+    <value>Summary</value>
+  </data>
+  <data name="TakeoffCoords.Text" xml:space="preserve">
+    <value>Takeoff Coordinates (SG)</value>
+  </data>
+  <data name="TakeoffDescription.Text" xml:space="preserve">
+    <value>Takeoff Description</value>
+  </data>
+  <data name="TakeoffLatitude.Text" xml:space="preserve">
+    <value>Takeoff Latitude</value>
+  </data>
+  <data name="TakeoffLongitude.Text" xml:space="preserve">
+    <value>Takeoff Longitude</value>
+  </data>
 </root>

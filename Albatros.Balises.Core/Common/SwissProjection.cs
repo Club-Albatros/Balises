@@ -37,7 +37,7 @@ namespace Albatros.Balises.Core.Common
         {
             var x = WGStoCHx(input.Latitude, input.Longitude);
             var y = WGStoCHy(input.Latitude, input.Longitude);
-            return String.Format("{0:0}/{1:0}", x, y);
+            return String.Format("{0:0}/{1:0}", y, x);
         }
 
         public static void LV03toWGS84(double east, double north, double height, ref double latitude, ref double longitude, ref double ellHeight)

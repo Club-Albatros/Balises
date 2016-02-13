@@ -52,6 +52,7 @@
     <Compile Include="Common\EntryMethod.cs" />
     <Compile Include="Common\Extensions.cs" />
     <Compile Include="Common\Fix.cs" />
+    <Compile Include="Common\FlightStatus.cs" />
     <Compile Include="Common\Globals.cs" />
     <Compile Include="Common\Point.cs" />
     <Compile Include="Common\SwissProjection.cs" />

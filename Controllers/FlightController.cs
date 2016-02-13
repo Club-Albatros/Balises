@@ -2,6 +2,7 @@ using System.Web.Mvc;
 using DotNetNuke.Common;
 using Albatros.DNN.Modules.Balises.Common;
 using Albatros.Balises.Core.Repositories;
+using Albatros.Balises.Core.Models.Flights;
 
 namespace Albatros.DNN.Modules.Balises.Controllers
 {
@@ -22,6 +23,36 @@ namespace Albatros.DNN.Modules.Balises.Controllers
         public ActionResult View(int id)
         {
             return View(FlightRepository.Instance.GetFlight(PortalSettings.PortalId, id));
+        }
+
+        [HttpGet]
+        [BalisesAuthorize(SecurityLevel = SecurityAccessLevel.Pilot)]
+        public ActionResult Edit(int FlightId)
+        {
+            var flight = FlightRepository.Instance.GetFlight(PortalSettings.PortalId, FlightId);
+            if (flight.UserId != User.UserID)
+            {
+                if (!BalisesModuleContext.Security.IsVerifier)
+                {
+                    throw new System.Exception("You don't have access to edit this");
+                }
+            }
+            return View(flight.GetFlightBase());
+        }
+
+        [HttpPost]
+        [BalisesAuthorize(SecurityLevel = SecurityAccessLevel.Pilot)]
+        public ActionResult Edit(FlightBase flight)
+        {
+            var existingFlight = FlightRepository.Instance.GetFlight(PortalSettings.PortalId, flight.FlightId);
+            if (existingFlight.UserId != User.UserID)
+            {
+                if (!BalisesModuleContext.Security.IsVerifier)
+                {
+                    throw new System.Exception("You don't have access to edit this");
+                }
+            }
+            return RedirectToDefaultRoute();
         }
 
     }
