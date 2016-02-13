@@ -22,14 +22,14 @@ namespace Albatros.Balises.Core.Repositories
         {
             using (var context = DataContext.Instance())
             {
-                return context.ExecuteQuery<Flight>(System.Data.CommandType.Text, "SELECT * FROM {databaseOwner}{objectQualifier}vw_Albatros_Balises_Flights WHERE PortalId=@0 AND CreatedByUserId=@1", portalId, userId);
+                return context.ExecuteQuery<Flight>(System.Data.CommandType.Text, "SELECT * FROM {databaseOwner}{objectQualifier}vw_Albatros_Balises_Flights WHERE PortalId=@0 AND UserId=@1", portalId, userId);
             }
         }
         public IPagedList<Flight> GetFlightsByPilot(int portalId, int userId, string searchField, string searchText, string orderByField, string sortOrder, int pageIndex, int pageSize)
         {
             using (var context = DataContext.Instance())
             {
-                var sql = String.Format("WHERE PortalId={0} AND CreatedByUserId={1} AND {2} LIKE '%{3}%' ORDER BY {4} {5}", portalId, userId, searchField, searchText, orderByField, sortOrder.ToUpper());
+                var sql = String.Format("WHERE PortalId={0} AND UserId={1} AND {2} LIKE '%{3}%' ORDER BY {4} {5}", portalId, userId, searchField, searchText, orderByField, sortOrder.ToUpper());
                 var rep = context.GetRepository<Flight>();
                 return rep.Find(pageIndex, pageSize, sql);
             }
@@ -42,11 +42,11 @@ namespace Albatros.Balises.Core.Repositories
                 return rep.Get(portalId);
             }
         }
-        public Flight FindFlight(int portalId, int userId, DateTime flightStart)
+        public Flight FindFlight(int portalId, int userId, DateTime takeoffTime)
         {
             using (var context = DataContext.Instance())
             {
-                return context.ExecuteSingleOrDefault<Flight>(System.Data.CommandType.Text, "SELECT * FROM {databaseOwner}{objectQualifier}vw_Albatros_Balises_Flights WHERE PortalId=@0 AND CreatedByUserId=@1 AND FlightStart=@2", portalId, userId, flightStart);
+                return context.ExecuteSingleOrDefault<Flight>(System.Data.CommandType.Text, "SELECT * FROM {databaseOwner}{objectQualifier}vw_Albatros_Balises_Flights WHERE PortalId=@0 AND UserId=@1 AND TakeoffTime=@2", portalId, userId, takeoffTime);
             }
         }
         public Flight GetFlight(int portalId, int flightId)
@@ -109,7 +109,7 @@ namespace Albatros.Balises.Core.Repositories
         IEnumerable<Flight> GetFlightsByPilot(int portalId, int userId);
         IPagedList<Flight> GetFlightsByPilot(int portalId, int userId, string searchField, string searchText, string orderByField, string sortOrder, int pageIndex, int pageSize);
         IEnumerable<Flight> GetFlights(int portalId);
-        Flight FindFlight(int portalId, int userId, DateTime flightStart);
+        Flight FindFlight(int portalId, int userId, DateTime takeoffTime);
         Flight GetFlight(int portalId, int flightId);
         int AddFlight(ref FlightBase flight, int userId);
         void DeleteFlight(FlightBase flight);

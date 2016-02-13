@@ -22,13 +22,15 @@ namespace Albatros.Balises.Core.Models.Flights
         [DataMember]
         public int? NrBeacons { get; set; }
         [DataMember]
-        public int? TotalPoints { get; set; }
+        public int TotalPoints { get; set; }
         [DataMember]
         public int? NrComments { get; set; }
         [DataMember]
+        public string Pilot { get; set; }
+        [DataMember]
         public string CreatedByUser { get; set; }
         [DataMember]
-        public string ModifiedByUser { get; set; }
+        public string LastModifiedByUser { get; set; }
         [DataMember]
         public string ValidatedByUser { get; set; }
         #endregion
@@ -39,22 +41,22 @@ namespace Albatros.Balises.Core.Models.Flights
             FlightBase res = new FlightBase();
              res.FlightId = FlightId;
              res.PortalId = PortalId;
-             res.FlightStart = FlightStart;
-             res.DurationMins = DurationMins;
-             res.Distance = Distance;
-             res.Category = Category;
-             res.StartDescription = StartDescription;
-             res.StartCoords = StartCoords;
-             res.StartLatitude = StartLatitude;
-             res.StartLongitude = StartLongitude;
+             res.UserId = UserId;
+             res.TakeoffDescription = TakeoffDescription;
+             res.TakeoffTime = TakeoffTime;
+             res.TakeoffCoords = TakeoffCoords;
+             res.TakeoffLatitude = TakeoffLatitude;
+             res.TakeoffLongitude = TakeoffLongitude;
              res.LandingDescription = LandingDescription;
              res.LandingTime = LandingTime;
              res.LandingCoords = LandingCoords;
              res.LandingLatitude = LandingLatitude;
              res.LandingLongitude = LandingLongitude;
+             res.DurationMins = DurationMins;
+             res.Distance = Distance;
+             res.Status = Status;
+             res.EntryMethod = EntryMethod;
              res.Summary = Summary;
-             res.Validated = Validated;
-             res.Rejected = Rejected;
              res.ValidatedByUserID = ValidatedByUserID;
              res.ValidatedOnDate = ValidatedOnDate;
   res.CreatedByUserID = CreatedByUserID;

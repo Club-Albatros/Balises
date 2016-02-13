@@ -11,16 +11,16 @@
      data-security="@(Newtonsoft.Json.JsonConvert.SerializeObject(BalisesModuleContext.Security))">
 </div>
 
-<h3>@String.Format(Dnn.LocalizeString("FlightTitle"), Model.StartDescription, Model.FlightStart)</h3>
+<h3>@String.Format(Dnn.LocalizeString("FlightTitle"), Model.TakeoffDescription, Model.TakeoffTime)</h3>
 
 <div>
  <dl class="dl-horizontal">
   <dt>@Dnn.LocalizeString("Pilot")</dt>
   <dd>@Model.CreatedByUser</dd>
-  <dt>@Dnn.LocalizeString("FlightStart")</dt>
-  <dd>@Model.FlightStart.ToString("g")</dd>
+  <dt>@Dnn.LocalizeString("TakeoffTime")</dt>
+  <dd>@Model.TakeoffTime.ToString("g")</dd>
   <dt>@Dnn.LocalizeString("Start")</dt>
-  <dd>@Model.StartDescription</dd>
+  <dd>@Model.TakeoffDescription</dd>
   <dt>@Dnn.LocalizeString("Distance")</dt>
   <dd>@((int)(0.5 + Model.Distance / 100.0) / 10.0) km</dd>
   <dt>@Dnn.LocalizeString("Duration")</dt>
@@ -33,7 +33,7 @@
   <dd>@Model.TotalPoints</dd>
   <dt>@Dnn.LocalizeString("Status")</dt>
   <dd>
-   @(Model.Validated ? Dnn.LocalizeString("Validated") : Dnn.LocalizeString("NotValidated"))
+   @(Model.Status)
   </dd>
  </dl>
  <h3>@Dnn.LocalizeString("History")</h3>
@@ -44,19 +44,13 @@
   @if (Model.LastModifiedOnDate != Model.CreatedOnDate)
   {
   <div>
-   @(String.Format(Dnn.LocalizeString("LastModifiedByString"), Model.ModifiedByUser, Model.LastModifiedOnDate))
+   @(String.Format(Dnn.LocalizeString("LastModifiedByString"), Model.LastModifiedByUser, Model.LastModifiedOnDate))
   </div>
   }
-  @if (Model.Validated)
+  @if (Model.Status > 1)
   {
   <div>
    @(String.Format(Dnn.LocalizeString("ValidatedByString"), Model.ValidatedByUser, Model.ValidatedOnDate))
-  </div>
-  }
-  @if (Model.Rejected)
-  {
-  <div>
-   @(String.Format(Dnn.LocalizeString("RejectedByString"), Model.ValidatedByUser, Model.ValidatedOnDate))
   </div>
   }
  </div>

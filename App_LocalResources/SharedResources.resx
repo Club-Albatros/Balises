@@ -123,8 +123,8 @@
   <data name="Duration.Text" xml:space="preserve">
     <value>Duration</value>
   </data>
-  <data name="FlightStart.Text" xml:space="preserve">
-    <value>Flight Start</value>
+  <data name="TakeoffTime.Text" xml:space="preserve">
+    <value>Takeoff Time</value>
   </data>
   <data name="FlightTitle.Text" xml:space="preserve">
     <value>Flight from {0} at {1:HH:mm} on {1:d}</value>
@@ -185,5 +185,8 @@
   </data>
   <data name="ValidatedByString.Text" xml:space="preserve">
     <value>Validated by {0} on {1:d}</value>
+  </data>
+  <data name="Takeoff.Text" xml:space="preserve">
+    <value>Takeoff</value>
   </data>
 </root>

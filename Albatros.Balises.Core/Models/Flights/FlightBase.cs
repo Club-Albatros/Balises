@@ -27,21 +27,17 @@ namespace Albatros.Balises.Core.Models.Flights
         [DataMember]
         public int PortalId { get; set; }
         [DataMember]
-        public DateTime FlightStart { get; set; }
+        public int UserId { get; set; }
         [DataMember]
-        public int DurationMins { get; set; }
+        public string TakeoffDescription { get; set; }
         [DataMember]
-        public int Distance { get; set; }
+        public DateTime TakeoffTime { get; set; }
         [DataMember]
-        public int Category { get; set; }
+        public string TakeoffCoords { get; set; }
         [DataMember]
-        public string StartDescription { get; set; }
+        public double TakeoffLatitude { get; set; }
         [DataMember]
-        public string StartCoords { get; set; }
-        [DataMember]
-        public double StartLatitude { get; set; }
-        [DataMember]
-        public double StartLongitude { get; set; }
+        public double TakeoffLongitude { get; set; }
         [DataMember]
         public string LandingDescription { get; set; }
         [DataMember]
@@ -53,11 +49,15 @@ namespace Albatros.Balises.Core.Models.Flights
         [DataMember]
         public double LandingLongitude { get; set; }
         [DataMember]
+        public int DurationMins { get; set; }
+        [DataMember]
+        public int Distance { get; set; }
+        [DataMember]
+        public int Status { get; set; }
+        [DataMember]
+        public int EntryMethod { get; set; }
+        [DataMember]
         public string Summary { get; set; }
-        [DataMember]
-        public bool Validated { get; set; }
-        [DataMember]
-        public bool Rejected { get; set; }
         [DataMember]
         public int? ValidatedByUserID { get; set; }
         [DataMember]
@@ -73,26 +73,20 @@ namespace Albatros.Balises.Core.Models.Flights
             if (flight.PortalId > -1)
                 PortalId = flight.PortalId;
 
-            FlightStart = flight.FlightStart;
+            if (flight.UserId > -1)
+                UserId = flight.UserId;
 
-            if (flight.DurationMins > -1)
-                DurationMins = flight.DurationMins;
+            if (!String.IsNullOrEmpty(flight.TakeoffDescription))
+                TakeoffDescription = flight.TakeoffDescription;
 
-            if (flight.Distance > -1)
-                Distance = flight.Distance;
+            TakeoffTime = flight.TakeoffTime;
 
-            if (flight.Category > -1)
-                Category = flight.Category;
+            if (!String.IsNullOrEmpty(flight.TakeoffCoords))
+                TakeoffCoords = flight.TakeoffCoords;
 
-            if (!String.IsNullOrEmpty(flight.StartDescription))
-                StartDescription = flight.StartDescription;
+            TakeoffLatitude = flight.TakeoffLatitude;
 
-            if (!String.IsNullOrEmpty(flight.StartCoords))
-                StartCoords = flight.StartCoords;
-
-            StartLatitude = flight.StartLatitude;
-
-            StartLongitude = flight.StartLongitude;
+            TakeoffLongitude = flight.TakeoffLongitude;
 
             if (!String.IsNullOrEmpty(flight.LandingDescription))
                 LandingDescription = flight.LandingDescription;
@@ -106,12 +100,20 @@ namespace Albatros.Balises.Core.Models.Flights
 
             LandingLongitude = flight.LandingLongitude;
 
+            if (flight.DurationMins > -1)
+                DurationMins = flight.DurationMins;
+
+            if (flight.Distance > -1)
+                Distance = flight.Distance;
+
+            if (flight.Status > -1)
+                Status = flight.Status;
+
+            if (flight.EntryMethod > -1)
+                EntryMethod = flight.EntryMethod;
+
             if (!String.IsNullOrEmpty(flight.Summary))
                 Summary = flight.Summary;
-
-            Validated = flight.Validated;
-
-            Rejected = flight.Rejected;
 
             if (flight.ValidatedByUserID > -1)
                 ValidatedByUserID = flight.ValidatedByUserID;

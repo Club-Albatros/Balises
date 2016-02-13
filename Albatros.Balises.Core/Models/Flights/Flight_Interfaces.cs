@@ -20,8 +20,9 @@ namespace Albatros.Balises.Core.Models.Flights
    NrBeacons = Convert.ToInt32(Null.SetNull(dr["NrBeacons"], NrBeacons));
    TotalPoints = Convert.ToInt32(Null.SetNull(dr["TotalPoints"], TotalPoints));
    NrComments = Convert.ToInt32(Null.SetNull(dr["NrComments"], NrComments));
+   Pilot = Convert.ToString(Null.SetNull(dr["Pilot"], Pilot));
    CreatedByUser = Convert.ToString(Null.SetNull(dr["CreatedByUser"], CreatedByUser));
-   ModifiedByUser = Convert.ToString(Null.SetNull(dr["ModifiedByUser"], ModifiedByUser));
+   LastModifiedByUser = Convert.ToString(Null.SetNull(dr["LastModifiedByUser"], LastModifiedByUser));
    ValidatedByUser = Convert.ToString(Null.SetNull(dr["ValidatedByUser"], ValidatedByUser));
   }
   #endregion
@@ -37,29 +38,31 @@ namespace Albatros.Balises.Core.Models.Flights
      };
      return ((int)NrBeacons).ToString(strFormat, formatProvider);
     case "totalpoints": // Int
-     if (TotalPoints == null)
-     {
-         return "";
-     };
-     return ((int)TotalPoints).ToString(strFormat, formatProvider);
+     return TotalPoints.ToString(strFormat, formatProvider);
     case "nrcomments": // Int
      if (NrComments == null)
      {
          return "";
      };
      return ((int)NrComments).ToString(strFormat, formatProvider);
+    case "pilot": // NVarChar
+     if (Pilot == null)
+     {
+         return "";
+     };
+     return PropertyAccess.FormatString(Pilot, strFormat);
     case "createdbyuser": // NVarChar
      if (CreatedByUser == null)
      {
          return "";
      };
      return PropertyAccess.FormatString(CreatedByUser, strFormat);
-    case "modifiedbyuser": // NVarChar
-     if (ModifiedByUser == null)
+    case "lastmodifiedbyuser": // NVarChar
+     if (LastModifiedByUser == null)
      {
          return "";
      };
-     return PropertyAccess.FormatString(ModifiedByUser, strFormat);
+     return PropertyAccess.FormatString(LastModifiedByUser, strFormat);
     case "validatedbyuser": // NVarChar
      if (ValidatedByUser == null)
      {

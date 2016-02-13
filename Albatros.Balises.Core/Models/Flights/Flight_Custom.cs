@@ -10,18 +10,18 @@ namespace Albatros.Balises.Core.Models.Flights
 
         [IgnoreColumn]
         [DataMember]
-        public BeaconPassage Start
+        public BeaconPassage Takeoff
         {
             get
             {
                 return new BeaconPassage()
                 {
-                    Latitude = this.StartLatitude,
-                    Longitude = this.StartLongitude,
+                    Latitude = this.TakeoffLatitude,
+                    Longitude = this.TakeoffLongitude,
                     Altitude = 0,
-                    PassageTime = this.FlightStart,
-                    Name = this.StartDescription,
-                    Description = this.StartDescription
+                    PassageTime = this.TakeoffTime,
+                    Name = this.TakeoffDescription,
+                    Description = this.TakeoffDescription
                 };
             }
         }

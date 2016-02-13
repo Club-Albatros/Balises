@@ -16,7 +16,8 @@ namespace Albatros.Balises.Core.IGC
             {
                 var f = new FlightBase()
                 {
-                    FlightStart = path.Igc.DetectedStart,
+                    EntryMethod = 1,
+                    TakeoffTime = path.Igc.DetectedStart,
                     DurationMins = (int)path.Igc.FlightTime.TotalMinutes,
                     Distance = path.OfficialDistance,
                     LandingCoords = path.Igc.Landing.ToSwissCoordinates(),
@@ -25,14 +26,14 @@ namespace Albatros.Balises.Core.IGC
                     LandingLongitude = path.Igc.Landing.Longitude,
                     LandingTime = path.Igc.DetectedLandingTime,
                     PortalId = portalId,
-                    StartCoords = path.Igc.Takeoff.ToSwissCoordinates(),
-                    StartDescription = path.TakeOff.Description,
-                    StartLatitude = path.Igc.Takeoff.Latitude,
-                    StartLongitude = path.Igc.Takeoff.Longitude,
+                    UserId = userId,
+                    TakeoffCoords = path.Igc.Takeoff.ToSwissCoordinates(),
+                    TakeoffDescription = path.TakeOff.Description,
+                    TakeoffLatitude = path.Igc.Takeoff.Latitude,
+                    TakeoffLongitude = path.Igc.Takeoff.Longitude,
                     Summary = path.Igc.Report(),
-                    Validated = false,
-                    ValidatedOnDate = new System.DateTime(1900, 1, 1),
-                    Rejected = false
+                    Status = 0, //todo
+                    ValidatedOnDate = new System.DateTime(1900, 1, 1)
                 };
                 FlightRepository.Instance.AddFlight(ref f, userId);
                 foreach (var pt in path.PassedBeacons)

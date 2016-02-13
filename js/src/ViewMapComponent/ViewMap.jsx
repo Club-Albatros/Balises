@@ -30,8 +30,8 @@ var ViewMap = React.createClass({
       this._map.fitBounds(this.getBounds());
       var linePath = [];
       linePath.push({
-        lat: this.props.flight.Start.Latitude, 
-        lng: this.props.flight.Start.Longitude
+        lat: this.props.flight.Takeoff.Latitude, 
+        lng: this.props.flight.Takeoff.Longitude
       });
       for (var i=0;i<this.props.track.length;i++)
       {
@@ -52,7 +52,7 @@ var ViewMap = React.createClass({
         strokeWeight: 3
       });
       line.setMap(this._map);
-      this.addPointToMap(this.props.flight.Start, 'D');
+      this.addPointToMap(this.props.flight.Takeoff, 'D');
       this.addPointToMap(this.props.flight.Landing, 'A');
       for (var i=0;i<this.props.track.length;i++)
       {
@@ -71,10 +71,10 @@ var ViewMap = React.createClass({
   },
 
   getBounds: function() {
-    var minLat = this.props.flight.Start.Latitude, 
-        maxLat = this.props.flight.Start.Latitude, 
-        minLong = this.props.flight.Start.Longitude, 
-        maxLong = this.props.flight.Start.Longitude;
+    var minLat = this.props.flight.Takeoff.Latitude, 
+        maxLat = this.props.flight.Takeoff.Latitude, 
+        minLong = this.props.flight.Takeoff.Longitude, 
+        maxLong = this.props.flight.Takeoff.Longitude;
     if(this.props.flight.Landing.Latitude < minLat) {
       minLat = this.props.flight.Landing.Latitude;
     }

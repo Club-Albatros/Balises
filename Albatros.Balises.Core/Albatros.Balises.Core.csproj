@@ -49,6 +49,7 @@
     <Compile Include="Common\BalisesPath.cs" />
     <Compile Include="Common\BeaconPassage.cs" />
     <Compile Include="Common\EarthCalculations.cs" />
+    <Compile Include="Common\EntryMethod.cs" />
     <Compile Include="Common\Extensions.cs" />
     <Compile Include="Common\Fix.cs" />
     <Compile Include="Common\Globals.cs" />

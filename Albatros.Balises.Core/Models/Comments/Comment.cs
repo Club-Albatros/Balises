@@ -1,6 +1,6 @@
-using System;
 using System.Runtime.Serialization;
 using DotNetNuke.ComponentModel.DataAnnotations;
+using System;
 
 namespace Albatros.Balises.Core.Models.Comments
 {
@@ -22,9 +22,9 @@ namespace Albatros.Balises.Core.Models.Comments
         [DataMember]
         public string DisplayName { get; set; }
         [DataMember]
-        public DateTime FlightStart { get; set; }
+        public DateTime TakeoffTime { get; set; }
         [DataMember]
-        public string StartDescription { get; set; }
+        public string TakeoffDescription { get; set; }
         #endregion
 
         #region Methods

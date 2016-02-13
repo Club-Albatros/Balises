@@ -15,8 +15,8 @@
  <thead>
   <tr>
    <th data-column-id="FlightId" data-type="numeric" data-identifier="true" data-visible="false">ID</th>
-   <th data-column-id="FlightStart" data-header-css-class="bg_medcol" data-order="asc" data-formatter="datime">@Dnn.LocalizeString("Start")</th>
-   <th data-column-id="StartDescription">@Dnn.LocalizeString("Start")</th>
+   <th data-column-id="TakeoffTime" data-header-css-class="bg_medcol" data-order="asc" data-formatter="datime">@Dnn.LocalizeString("Takeoff")</th>
+   <th data-column-id="TakeoffDescription">@Dnn.LocalizeString("Takeoff")</th>
    <th data-column-id="LandingDescription">@Dnn.LocalizeString("Landing")</th>
    <th data-column-id="DurationMins" data-header-css-class="bg_smallcol colTime" data-formatter="duration"></th>
    <th data-column-id="Distance" data-header-css-class="bg_smallcol colDistance" data-formatter="distance"></th>
@@ -56,7 +56,7 @@
     formatters: {
      "datime": function(column, row)
      {
-      var m = moment(row.FlightStart);
+      var m = moment(row.TakeoffTime);
       return m.format('lll');
      },
      "duration": function(column, row)

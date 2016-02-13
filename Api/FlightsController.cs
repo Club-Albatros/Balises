@@ -24,7 +24,7 @@ namespace Albatros.DNN.Modules.Balises.Api
             var res = new BootGridResponseData<Flight>();
             res.current = postData.current;
             res.rowCount = postData.rowCount;
-            var sortField = "FlightStart";
+            var sortField = "TakeoffTime";
             var sortOrder = "desc";
             foreach (var key in HttpContext.Current.Request.Form.AllKeys)
             {

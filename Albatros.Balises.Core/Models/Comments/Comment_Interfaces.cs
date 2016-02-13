@@ -18,8 +18,8 @@ namespace Albatros.Balises.Core.Models.Comments
   {
    base.Fill(dr);
    DisplayName = Convert.ToString(Null.SetNull(dr["DisplayName"], DisplayName));
-   FlightStart = (DateTime)(Null.SetNull(dr["FlightStart"], FlightStart));
-   StartDescription = Convert.ToString(Null.SetNull(dr["StartDescription"], StartDescription));
+   TakeoffTime = (DateTime)(Null.SetNull(dr["TakeoffTime"], TakeoffTime));
+   TakeoffDescription = Convert.ToString(Null.SetNull(dr["TakeoffDescription"], TakeoffDescription));
   }
   #endregion
 
@@ -33,10 +33,10 @@ namespace Albatros.Balises.Core.Models.Comments
          return "";
      };
      return PropertyAccess.FormatString(DisplayName, strFormat);
-    case "flightstart": // DateTime
-     return FlightStart.ToString(strFormat, formatProvider);
-    case "startdescription": // NVarChar
-     return PropertyAccess.FormatString(StartDescription, strFormat);
+    case "takeofftime": // DateTime
+     return TakeoffTime.ToString(strFormat, formatProvider);
+    case "takeoffdescription": // NVarChar
+     return PropertyAccess.FormatString(TakeoffDescription, strFormat);
     default:
        return base.GetProperty(strPropertyName, strFormat, formatProvider, accessingUser, accessLevel, ref propertyNotFound);
    }
