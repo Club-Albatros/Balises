@@ -92,11 +92,13 @@
     <Compile Include="Models\Flights\FlightBase.cs" />
     <Compile Include="Models\Flights\FlightBase_Interfaces.cs" />
     <Compile Include="Models\Flights\Flight_Interfaces.cs" />
+    <Compile Include="Models\Sites\Site.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\BeaconRepository.cs" />
     <Compile Include="Repositories\CommentRepository.cs" />
     <Compile Include="Repositories\FlightBeaconRepository.cs" />
     <Compile Include="Repositories\FlightRepository.cs" />
+    <Compile Include="Repositories\SitesRepository.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Controllers\" />

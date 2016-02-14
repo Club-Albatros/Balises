@@ -33,6 +33,13 @@ namespace Albatros.Balises.Core.Common
     public static class SwissProjection
     {
 
+        public static string ToSwissCoordinates(double latitude, double longitude)
+        {
+            var x = WGStoCHx(latitude, longitude);
+            var y = WGStoCHy(latitude, longitude);
+            return String.Format("{0:0}/{1:0}", y, x);
+        }
+
         public static string ToSwissCoordinates(this Point input)
         {
             var x = WGStoCHx(input.Latitude, input.Longitude);

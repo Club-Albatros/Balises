@@ -130,6 +130,7 @@
     <Compile Include="Api\BeaconsController.cs" />
     <Compile Include="Api\CommentsController.cs" />
     <Compile Include="Api\FlightBeaconsController.cs" />
+    <Compile Include="Api\SitesController.cs" />
     <Compile Include="Api\FlightsController.cs" />
     <Compile Include="Common\BalisesApiController.cs" />
     <Compile Include="Common\BalisesAuthorizeAttribute.cs" />

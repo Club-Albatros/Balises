@@ -70,12 +70,11 @@ function setupForm(form, saveButton, errorPanel, decSeparator) {
     }).on('dp.hide', function(e) {
         $(e.target).attr('data-value', e.date.format());
     });
-    form.find('input[data-editor="time"]').clockpicker({
-        autoclose: true,
-        afterHide: function() {
-            console.log('hidden');
-        }
+
+    $('.clockpicker').clockpicker({
+        autoclose: true
     });
+
     form.find('input[data-editor="float"]').keydown(function(e) {
         return window.CheckFloatInput(e, decSeparator);
     });

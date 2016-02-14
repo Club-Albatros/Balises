@@ -39,4 +39,12 @@ window.AlbatrosBalisesService = function($, mid) {
         this.ajaxCall('POST', 'Flights', 'Delete', id, null, success);
     }
 
+    this.listTakeoffs = function (searchString, success) {
+        this.ajaxCall('GET', 'Sites', 'Takeoffs', null, { SearchString: searchString }, success);
+    }
+
+    this.listLandings = function (searchString, success) {
+        this.ajaxCall('GET', 'Sites', 'Landings', null, { SearchString: searchString }, success);
+    }
+
 }

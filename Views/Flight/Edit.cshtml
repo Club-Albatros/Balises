@@ -3,6 +3,7 @@
 @using Albatros.Balises.Core.Models.Flights
 @using DotNetNuke.Web.Mvc.Helpers;
 @{
+    BalisesModuleContext.AddJqueryUi();
     BalisesModuleContext.AddBootstrapCss();
     //BalisesModuleContext.AddBootstrapJs();
     BalisesModuleContext.AddModuleScript();
@@ -13,6 +14,11 @@
     BalisesModuleContext.AddCss("bootstrap-clockpicker.min.css", "bootstrap-clockpicker", "0.0.7");
 }
 
+<div class="albatrosBalises" data-moduleid="@Dnn.ModuleContext.ModuleId"
+     data-resources="@SerializedResources()"
+     data-security="@(Newtonsoft.Json.JsonConvert.SerializeObject(BalisesModuleContext.Security))">
+</div>
+
 <div id="editFlight">
 
  <fieldset>
@@ -20,28 +26,52 @@
    <div class="dnnLabel" style="position: relative;">
     <label>@Dnn.LocalizeString("FlightDate")</label>
    </div>
-   <input type="text" id="FlightDate" data-editor="date" data-value="@Model.TakeoffTime.ToString("yyyy-MM-dd")" foo="bar" />
+   <input type="text" id="FlightDate" data-editor="date" data-value="@Model.TakeoffTime.ToString("yyyy-MM-dd")" value="@Model.TakeoffTime.ToString("d")" />
   </div>
  </fieldset>
 
  <table class="table">
   <tr>
-   <th></th>
+   <th style="width:100px"></th>
+   <th style="width:120px;">@Dnn.LocalizeString("Time")</th>
    <th>@Dnn.LocalizeString("Description")</th>
-   <th>@Dnn.LocalizeString("Time")</th>
    <th>@Dnn.LocalizeString("Coordinates")</th>
   </tr>
   <tr>
    <td><strong>@Dnn.LocalizeString("Start")</strong></td>
-   <td>@Html.TextBoxFor(m => m.TakeoffDescription, new { @class = "form-control" })</td>
-   <td><input type="text" class="form-control" data-editor="time" data-val="TakeoffTime" data-date="FlightDate" id="pickTakeoffTime" /></td>
-   <td><input type="text" class="form-control" data-editor="coordinates" data-lat="TakeoffLatitude" data-long="TakeoffLongitude" /></td>
+   <td>
+    <div class="input-group clockpicker">
+     <input type="text" class="form-control" data-editor="time" data-val="TakeoffTime" data-date="FlightDate" id="pickTakeoffTime"
+            value="@Model.TakeoffTime.ToString("HH:mm")" />
+     <span class="input-group-addon">
+      <span class="glyphicon glyphicon-time"></span>
+     </span>
+    </div>
+   </td>
+   <td>
+    @Html.TextBoxFor(m => m.TakeoffDescription, new { @class = "form-control", data_editor = "siteselect", data_coords = "TakeoffCoords" })
+   </td>
+   <td>
+    @Html.TextBoxFor(m => m.TakeoffCoords, new { @class = "form-control", data_validator = "coordinates" })
+   </td>
   </tr>
   <tr>
    <td><strong>@Dnn.LocalizeString("Landing")</strong></td>
-   <td>@Html.TextBoxFor(m => m.LandingDescription, new { @class = "form-control" })</td>
-   <td><input type="text" class="form-control" data-editor="time" data-val="LandingTime" data-date="FlightDate" id="pickLandingTime" /></td>
-   <td><input type="text" class="form-control" data-editor="coordinates" data-lat="LandingLatitude" data-long="LandingLongitude" /></td>
+   <td>
+    <div class="input-group clockpicker">
+     <input type="text" class="form-control" data-editor="time" data-val="LandingTime" data-date="FlightDate" id="pickLandingTime"
+            value="@Model.LandingTime.ToString("HH:mm")"  />
+     <span class="input-group-addon">
+      <span class="glyphicon glyphicon-time"></span>
+     </span>
+    </div>
+   </td>
+   <td>
+    @Html.TextBoxFor(m => m.LandingDescription, new { @class = "form-control", data_editor = "siteselect", data_coords = "LandingCoords" })
+   </td>
+   <td>
+    @Html.TextBoxFor(m => m.LandingCoords, new { @class = "form-control", data_validator = "coordinates" })
+   </td>
   </tr>
  </table>
 
@@ -73,6 +103,27 @@
    });
    $('#FlightDate').on('dp.hide', function (e) {
     SetTimes();
+   });
+
+   $('#TakeoffDescription').autocomplete({
+    source: function(request, response) {
+     window.AlbatrosBalises.modules[@Dnn.ModuleContext.ModuleId].service.listTakeoffs(request.term, function(data) {
+      response(data)
+     })
+    },
+    select: function(event, ui) {
+     $('#TakeoffCoords').val(ui.item.coords);
+    }
+   });
+   $('#LandingDescription').autocomplete({
+    source: function(request, response) {
+     window.AlbatrosBalises.modules[@Dnn.ModuleContext.ModuleId].service.listLandings(request.term, function(data) {
+      response(data)
+     })
+    },
+    select: function(event, ui) {
+     $('#LandingCoords').val(ui.item.coords);
+    }
    });
 
    $('.cmdDelete').click(function () {
