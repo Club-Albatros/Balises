@@ -216,4 +216,16 @@
   <data name="TakeoffLongitude.Text" xml:space="preserve">
     <value>Takeoff Longitude</value>
   </data>
+  <data name="Coordinates.Text" xml:space="preserve">
+    <value>Coordinates</value>
+  </data>
+  <data name="Description.Text" xml:space="preserve">
+    <value>Description</value>
+  </data>
+  <data name="Time.Text" xml:space="preserve">
+    <value>Time</value>
+  </data>
+  <data name="FlightDate.Text" xml:space="preserve">
+    <value>Flight Date</value>
+  </data>
 </root>

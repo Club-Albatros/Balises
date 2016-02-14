@@ -98,7 +98,7 @@ namespace Albatros.DNN.Modules.Balises.Common
         }
         public void AddBootstrapJs()
         {
-            AddScript("bootstrap.min.js", "bootstrap", "todo");
+            AddScript("bootstrap.min.js", "bootstrap", "3.3.6");
         }
         public void AddReactJs()
         {

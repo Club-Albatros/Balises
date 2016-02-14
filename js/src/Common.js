@@ -53,3 +53,31 @@ function CheckFloatInput(e, decSeparator) {
         e.preventDefault();
     }
 }
+
+function setupForm(form, saveButton, errorPanel, decSeparator) {
+
+    form.find('input[data-editor="datetime"]').each(function(i, el) {
+        $(el).val($('#' + $(el).data('val')).val());
+    });
+    form.find('input[data-editor="datetime"]').datetimepicker({
+        format: 'l LT'
+    }).on('dp.hide', function(e) {
+        $('#' + $(e.target).data('val')).val(e.date.format());
+    });
+
+    form.find('input[data-editor="date"]').datetimepicker({
+        format: 'l'
+    }).on('dp.hide', function(e) {
+        $(e.target).attr('data-value', e.date.format());
+    });
+    form.find('input[data-editor="time"]').clockpicker({
+        autoclose: true,
+        afterHide: function() {
+            console.log('hidden');
+        }
+    });
+    form.find('input[data-editor="float"]').keydown(function(e) {
+        return window.CheckFloatInput(e, decSeparator);
+    });
+
+}

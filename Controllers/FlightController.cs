@@ -20,9 +20,9 @@ namespace Albatros.DNN.Modules.Balises.Controllers
 
         [HttpGet]
         [BalisesAuthorize(SecurityLevel = SecurityAccessLevel.View)]
-        public ActionResult View(int id)
+        public ActionResult View(int FlightId)
         {
-            return View(FlightRepository.Instance.GetFlight(PortalSettings.PortalId, id));
+            return View(FlightRepository.Instance.GetFlight(PortalSettings.PortalId, FlightId));
         }
 
         [HttpGet]

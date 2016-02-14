@@ -71,11 +71,11 @@
      },
      "editor": function(column, row)
      {
-      return '<a href="@Url.Action("Edit", "Flight")?id=' + row.FlightId + '" class="btn btn-sm btn-default"><span class="glyphicon glyphicon-pencil"></span></a>';
+      return '<a href="@Url.Action("Edit", "Flight")?FlightId=' + row.FlightId + '" class="btn btn-sm btn-default"><span class="glyphicon glyphicon-pencil"></span></a>';
      },
      "viewer": function(column, row)
      {
-      return '<a href="@Url.Action("View", "Flight")?id=' + row.FlightId + '" class="btn btn-sm btn-default"><span class="glyphicon glyphicon-eye-open"></span></a>';
+      return '<a href="@Url.Action("View", "Flight")?FlightId=' + row.FlightId + '" class="btn btn-sm btn-default"><span class="glyphicon glyphicon-eye-open"></span></a>';
      }
     },
     rowCount: 20,
