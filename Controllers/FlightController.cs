@@ -69,6 +69,15 @@ namespace Albatros.DNN.Modules.Balises.Controllers
             existingFlight.RecalculateDistanceAndTime();
             FlightRepository.Instance.UpdateFlight(existingFlight.GetFlightBase(), User.UserID);
 
+            if (!string.IsNullOrEmpty(existingFlight.TakeoffDescription))
+            {
+                SitesRepository.Instance.SetNewSite(existingFlight.TakeoffLatitude, existingFlight.TakeoffLongitude, existingFlight.TakeoffDescription, BalisesModuleContext.Settings.BeaconPassDistanceMeters);
+            }
+            if (!string.IsNullOrEmpty(existingFlight.LandingDescription))
+            {
+                SitesRepository.Instance.SetNewSite(existingFlight.LandingLatitude, existingFlight.LandingLongitude, existingFlight.LandingDescription, BalisesModuleContext.Settings.BeaconPassDistanceMeters);
+            }
+
             return ReturnRoute(flight.FlightId, View("View", _repository.GetFlight(PortalSettings.PortalId, flight.FlightId)));
         }
 
