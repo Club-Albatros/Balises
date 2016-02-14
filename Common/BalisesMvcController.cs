@@ -14,5 +14,31 @@ namespace Albatros.DNN.Modules.Balises.Common
             get { return _balisesModuleContext ?? (_balisesModuleContext = new ContextHelper(this)); }
         }
 
+        public string GetRouteParameter()
+        {
+            if (ControllerContext.HttpContext.Request.Params["ret"] == null)
+            {
+                return "";
+            }
+            else
+            {
+                return ControllerContext.HttpContext.Request.Params["ret"];
+            }
+        }
+
+        public ActionResult ReturnRoute(int? id, ActionResult defaultRoute)
+        {
+            RouteValueDictionary routeValues = new RouteValueDictionary();
+            switch (GetRouteParameter())
+            {
+                case "p-mf":
+                    routeValues["controller"] = "Pilot";
+                    routeValues["action"] = "MyFlights";
+                    return Redirect(ModuleRoutingProvider.Instance().GenerateUrl(routeValues, ModuleContext));
+                case "home":
+                    return RedirectToDefaultRoute();
+            }
+            return defaultRoute;
+        }
     }
 }

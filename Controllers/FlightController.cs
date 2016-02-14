@@ -44,6 +44,7 @@ namespace Albatros.DNN.Modules.Balises.Controllers
         [BalisesAuthorize(SecurityLevel = SecurityAccessLevel.Pilot)]
         public ActionResult Edit(FlightBase flight)
         {
+
             var existingFlight = FlightRepository.Instance.GetFlight(PortalSettings.PortalId, flight.FlightId);
             if (existingFlight.UserId != User.UserID)
             {
@@ -52,7 +53,23 @@ namespace Albatros.DNN.Modules.Balises.Controllers
                     throw new System.Exception("You don't have access to edit this");
                 }
             }
-            return RedirectToDefaultRoute();
+            if (existingFlight.TakeoffCoords != flight.TakeoffCoords)
+            {
+                existingFlight.ReadTakeoffCoordinates(flight.TakeoffCoords);
+            }
+            existingFlight.TakeoffDescription = flight.TakeoffDescription;
+            existingFlight.TakeoffTime = flight.TakeoffTime;
+            if (existingFlight.LandingCoords != flight.LandingCoords)
+            {
+                existingFlight.ReadLandingCoordinates(flight.LandingCoords);
+            }
+            existingFlight.LandingDescription = flight.LandingDescription;
+            existingFlight.LandingTime = flight.LandingTime;
+            existingFlight.Summary = flight.Summary;
+            existingFlight.RecalculateDistanceAndTime();
+            FlightRepository.Instance.UpdateFlight(existingFlight.GetFlightBase(), User.UserID);
+
+            return ReturnRoute(flight.FlightId, View("View", _repository.GetFlight(PortalSettings.PortalId, flight.FlightId)));
         }
 
     }

@@ -42,5 +42,31 @@ namespace Albatros.Balises.Core.Common
             }
         }
 
+        public static Point ToPoint(this string coordinates)
+        {
+            if (string.IsNullOrEmpty(coordinates) || coordinates.IndexOf('/') < 0)
+            {
+                return null;
+            }
+            var coords = coordinates.Split('/');
+            int iLng;
+            int iLat;
+            double dLng;
+            double dLat;
+            if (int.TryParse(coords[0], out iLng) & int.TryParse(coords[1], out iLat))
+            {
+                double wgsLat = 0;
+                double wgsLng = 0;
+                double wgsAlt = 0;
+                SwissProjection.LV03toWGS84((double)iLng, (double)iLat, 0, ref wgsLat, ref wgsLng, ref wgsAlt);
+                return new Point() { Latitude = wgsLat, Longitude = wgsLng };
+            }
+            else if (double.TryParse(coords[0], out dLng) & double.TryParse(coords[1], out dLat))
+            {
+                return new Point() { Latitude = dLat, Longitude = dLng };
+            }
+            return null;
+        }
+
     }
 }

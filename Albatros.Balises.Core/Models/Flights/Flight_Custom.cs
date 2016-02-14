@@ -43,6 +43,5 @@ namespace Albatros.Balises.Core.Models.Flights
                 };
             }
         }
-
     }
 }
