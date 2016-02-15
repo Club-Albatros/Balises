@@ -72,6 +72,24 @@ namespace Albatros.Balises.Core.Repositories
             }
         }
 
+        public IEnumerable<Site> GetClosestTakeoffSites(int portalId, double latitude, double longitude, int maxDistance)
+        {
+            using (var context = DataContext.Instance())
+            {
+                return context.ExecuteQuery<Site>(System.Data.CommandType.Text,
+                "SELECT TOP 1 * FROM (SELECT f.TakeoffDescription Name, f.TakeoffLatitude Latitude, f.TakeoffLongitude Longitude, {databaseOwner}{objectQualifier}Albatros_Balises_CalculateDistance(@1, @2, f.TakeoffLatitude, f.TakeoffLongitude) Dist FROM {databaseOwner}{objectQualifier}Albatros_Balises_Flights f WHERE f.TakeoffDescription <> '' AND f.PortalId=@0) x WHERE x.Dist < @3 ORDER BY x.Dist DESC", portalId, latitude, longitude, maxDistance);
+            }
+        }
+
+        public IEnumerable<Site> GetClosestLandingSites(int portalId, double latitude, double longitude, int maxDistance)
+        {
+            using (var context = DataContext.Instance())
+            {
+                return context.ExecuteQuery<Site>(System.Data.CommandType.Text,
+                "SELECT TOP 1 * FROM (SELECT f.LandingDescription Name, f.LandingLatitude Latitude, f.LandingLongitude Longitude, {databaseOwner}{objectQualifier}Albatros_Balises_CalculateDistance(@1, @2, f.LandingLatitude, f.LandingLongitude) Dist FROM {databaseOwner}{objectQualifier}Albatros_Balises_Flights f WHERE f.LandingDescription <> '' AND f.PortalId=@0) x WHERE x.Dist < @3 ORDER BY x.Dist DESC", portalId, latitude, longitude, maxDistance);
+            }
+        }
+
     }
 
     public interface ISitesRepository
@@ -81,5 +99,7 @@ namespace Albatros.Balises.Core.Repositories
         Dictionary<string, Site> GetTakeoffSiteList(int portalId);
         Dictionary<string, Site> GetLandingSiteList(int portalId);
         void SetNewSite(double latitude, double longitude, string newName, int maxDistance);
+        IEnumerable<Site> GetClosestTakeoffSites(int portalId, double latitude, double longitude, int maxDistance);
+        IEnumerable<Site> GetClosestLandingSites(int portalId, double latitude, double longitude, int maxDistance);
     }
 }

@@ -54,7 +54,12 @@
     @Html.TextBoxFor(m => m.TakeoffDescription, new { @class = "form-control", data_editor = "siteselect", data_coords = "TakeoffCoords" })
    </td>
    <td>
-    @Html.TextBoxFor(m => m.TakeoffCoords, new { @class = "form-control", data_validator = "coordinates" })
+    <div class="input-group">
+     @Html.TextBoxFor(m => m.TakeoffCoords, new { @class = "form-control", data_validator = "coordinates" })
+     <span class="input-group-addon clickable">
+      <span class="glyphicon glyphicon-search"></span>
+     </span>
+    </div>
    </td>
   </tr>
   <tr>
@@ -63,7 +68,7 @@
     <div class="input-group clockpicker">
      <input type="text" class="form-control" data-editor="time" data-val="LandingTime" data-date="FlightDate" id="pickLandingTime"
             value="@Model.LandingTime.ToString("HH:mm")" />
-     <span class="input-group-addon">
+     <span class="input-group-addon" id="cmdSearchTakeoff">
       <span class="glyphicon glyphicon-time"></span>
      </span>
     </div>
@@ -72,7 +77,12 @@
     @Html.TextBoxFor(m => m.LandingDescription, new { @class = "form-control", data_editor = "siteselect", data_coords = "LandingCoords" })
    </td>
    <td>
-    @Html.TextBoxFor(m => m.LandingCoords, new { @class = "form-control", data_validator = "coordinates" })
+    <div class="input-group">
+     @Html.TextBoxFor(m => m.LandingCoords, new { @class = "form-control", data_validator = "coordinates" })
+     <span class="input-group-addon clickable" id="cmdSearchLanding">
+      <span class="glyphicon glyphicon-search"></span>
+     </span>
+    </div>
    </td>
   </tr>
  </table>
@@ -141,6 +151,25 @@
     select: function(event, ui) {
      $('#LandingCoords').val(ui.item.coords);
     }
+   });
+
+   $('#cmdSearchTakeoff').click(function(e){
+    e.preventDefault();
+    window.AlbatrosBalises.modules[@Dnn.ModuleContext.ModuleId].service.searchClosestTakeoff($('#TakeoffCoords').val(), function(data) {
+     if (data.length > 0) {
+      $('#TakeoffDescription').val(data[0].Name);
+      $('#TakeoffCoords').val(data[0].Coords);
+     }
+    })
+   });
+   $('#cmdSearchLanding').click(function(e){
+    e.preventDefault();
+    window.AlbatrosBalises.modules[@Dnn.ModuleContext.ModuleId].service.searchClosestLanding($('#LandingCoords').val(), function(data) {
+     if (data.length > 0) {
+      $('#LandingDescription').val(data[0].Name);
+      $('#LandingCoords').val(data[0].Coords);
+     }
+    })
    });
 
    $('.cmdDelete').click(function () {

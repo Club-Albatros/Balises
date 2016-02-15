@@ -47,4 +47,12 @@ window.AlbatrosBalisesService = function($, mid) {
         this.ajaxCall('GET', 'Sites', 'Landings', null, { SearchString: searchString }, success);
     }
 
+    this.searchClosestTakeoff = function (coords, success) {
+        this.ajaxCall('GET', 'Sites', 'ClosestTakeoff', null, { Coords: coords }, success);
+    }
+
+    this.searchClosestLanding = function (coords, success) {
+        this.ajaxCall('GET', 'Sites', 'ClosestLanding', null, { Coords: coords }, success);
+    }
+
 }

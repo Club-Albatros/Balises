@@ -25,7 +25,7 @@ namespace Albatros.DNN.Modules.Balises.Api
         [BalisesAuthorize(SecurityLevel = SecurityAccessLevel.Pilot)]
         public HttpResponseMessage Takeoffs(string SearchString)
         {
-            var res = SitesRepository.Instance.GetTakeoffSiteList(PortalSettings.PortalId).Values.Where(s => s.Name.ToLowerInvariant().Contains(SearchString.ToLowerInvariant())).Select(s => new Site() { label = s.Name, value = s.Name, coords = SwissProjection.ToSwissCoordinates(s.Latitude, s.Longitude) });
+            var res = SitesRepository.Instance.GetTakeoffSiteList(PortalSettings.PortalId).Values.Where(s => s.Name.ToLowerInvariant().Contains(SearchString.ToLowerInvariant())).Select(s => new Site() { label = s.Name, value = s.Name, coords = s.Coords });
             return Request.CreateResponse(HttpStatusCode.OK, res);
         }
 
@@ -33,8 +33,38 @@ namespace Albatros.DNN.Modules.Balises.Api
         [BalisesAuthorize(SecurityLevel = SecurityAccessLevel.Pilot)]
         public HttpResponseMessage Landings(string SearchString)
         {
-            var res = SitesRepository.Instance.GetLandingSiteList(PortalSettings.PortalId).Values.Where(s => s.Name.ToLowerInvariant().Contains(SearchString.ToLowerInvariant())).Select(s => new Site() { label = s.Name, value = s.Name, coords = SwissProjection.ToSwissCoordinates(s.Latitude, s.Longitude) });
+            var res = SitesRepository.Instance.GetLandingSiteList(PortalSettings.PortalId).Values.Where(s => s.Name.ToLowerInvariant().Contains(SearchString.ToLowerInvariant())).Select(s => new Site() { label = s.Name, value = s.Name, coords = s.Coords });
             return Request.CreateResponse(HttpStatusCode.OK, res);
+        }
+
+        [HttpGet]
+        [BalisesAuthorize(SecurityLevel = SecurityAccessLevel.Pilot)]
+        public HttpResponseMessage ClosestTakeoff(string Coords)
+        {
+            var point = Coords.ToPoint();
+            if (point != null)
+            {
+                return Request.CreateResponse(HttpStatusCode.OK, SitesRepository.Instance.GetClosestTakeoffSites(PortalSettings.PortalId, point.Latitude, point.Longitude, BalisesModuleContext.Settings.BeaconPassDistanceMeters));
+            }
+            else
+            {
+                return Request.CreateResponse(HttpStatusCode.OK, new List<Albatros.Balises.Core.Models.Sites.Site>());
+            }
+        }
+
+        [HttpGet]
+        [BalisesAuthorize(SecurityLevel = SecurityAccessLevel.Pilot)]
+        public HttpResponseMessage ClosestLanding(string Coords)
+        {
+            var point = Coords.ToPoint();
+            if (point != null)
+            {
+                return Request.CreateResponse(HttpStatusCode.OK, SitesRepository.Instance.GetClosestLandingSites(PortalSettings.PortalId, point.Latitude, point.Longitude, BalisesModuleContext.Settings.BeaconPassDistanceMeters));
+            }
+            else
+            {
+                return Request.CreateResponse(HttpStatusCode.OK, new List<Albatros.Balises.Core.Models.Sites.Site>());
+            }
         }
 
     }
