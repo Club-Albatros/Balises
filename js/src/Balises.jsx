@@ -1,5 +1,6 @@
 var Upload = require('./UploadComponent/Upload.jsx'),
-    ViewMap = require('./ViewMapComponent/ViewMap.jsx');
+    ViewMap = require('./ViewMapComponent/ViewMap.jsx'),
+    EditMap = require('./EditMapComponent/EditMap.jsx');
 
 (function($, window, document, undefined) {
 
@@ -34,6 +35,15 @@ var Upload = require('./UploadComponent/Upload.jsx'),
         var flight = $(el).data('flight');
         React.render(<ViewMap apiKey={apiKey} moduleId={moduleId} track={track}
                  flight={flight} />, el);
+      });
+      $('.editMap').each(function(i, el) {
+        var moduleId = $(el).data('moduleid');
+        var apiKey = $(el).data('apikey');
+        var track = $(el).data('track');
+        var flight = $(el).data('flight');
+        var beacons = $(el).data('beacons');
+        React.render(<EditMap apiKey={apiKey} moduleId={moduleId} track={track}
+                 flight={flight} beacons={beacons} />, el);
       });
     }
 

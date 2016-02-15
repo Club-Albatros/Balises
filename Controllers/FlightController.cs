@@ -32,7 +32,7 @@ namespace Albatros.DNN.Modules.Balises.Controllers
             var flight = FlightRepository.Instance.GetFlight(PortalSettings.PortalId, FlightId);
             if (flight == null)
             {
-                flight = new Flight() { TakeoffTime = System.DateTime.Now, LandingTime = System.DateTime.Now };
+                flight = new Flight() { TakeoffTime = System.DateTime.Now, LandingTime = System.DateTime.Now, EntryMethod = 0 };
             }
             else
             {

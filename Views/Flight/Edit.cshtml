@@ -92,15 +92,26 @@
  @Html.TextAreaFor(m => m.Summary, 6, 100, new { @class = "form-control" })
 </div>
 
-@if (Model.EntryMethod != 0)
+@if (Model.EntryMethod == 0)
 {
- <div class="viewMap"
+ <div class="editMap"
       data-moduleid="@Dnn.ModuleContext.ModuleId"
       data-apikey="@BalisesModuleContext.Settings.GoogleMapApiKey"
+      data-beacons="@(Newtonsoft.Json.JsonConvert.SerializeObject(BeaconRepository.Instance.GetBeacons(Dnn.PortalSettings.PortalId)))"
       data-flight="@(Newtonsoft.Json.JsonConvert.SerializeObject(FlightRepository.Instance.GetFlight(Dnn.PortalSettings.PortalId, Model.FlightId)))"
       data-track="@(Newtonsoft.Json.JsonConvert.SerializeObject(FlightBeaconRepository.Instance.GetFlightBeaconsByFlight(Model.FlightId)))"
       style="width:100%;height:500px;">
  </div>
+}
+else
+{
+<div class="viewMap"
+     data-moduleid="@Dnn.ModuleContext.ModuleId"
+     data-apikey="@BalisesModuleContext.Settings.GoogleMapApiKey"
+     data-flight="@(Newtonsoft.Json.JsonConvert.SerializeObject(FlightRepository.Instance.GetFlight(Dnn.PortalSettings.PortalId, Model.FlightId)))"
+     data-track="@(Newtonsoft.Json.JsonConvert.SerializeObject(FlightBeaconRepository.Instance.GetFlightBeaconsByFlight(Model.FlightId)))"
+     style="width:100%;height:500px;">
+</div>
 }
 
 @Html.HiddenFor(m => m.TakeoffLatitude)
