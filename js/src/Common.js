@@ -67,9 +67,11 @@ function setupForm(form, saveButton, errorPanel, decSeparator) {
 
     form.find('input[data-editor="date"]').datetimepicker({
         format: 'l'
-    }).on('dp.hide', function(e) {
-        $(e.target).attr('data-value', e.date.format());
     });
+    form.find('input[data-editor="date"]').each(function(i, el) {
+        $(el).data("DateTimePicker").date(moment($(el).data('value')));
+    });
+
 
     $('.clockpicker').clockpicker({
         autoclose: true

@@ -15,7 +15,7 @@
  <thead>
   <tr>
    <th data-column-id="FlightId" data-type="numeric" data-identifier="true" data-visible="false">ID</th>
-   <th data-column-id="TakeoffTime" data-header-css-class="bg_medcol" data-order="asc" data-formatter="datime">@Dnn.LocalizeString("Takeoff")</th>
+   <th data-column-id="TakeoffTime" data-header-css-class="bg_medcol" data-order="desc" data-formatter="datime">@Dnn.LocalizeString("Takeoff")</th>
    <th data-column-id="TakeoffDescription">@Dnn.LocalizeString("Takeoff")</th>
    <th data-column-id="LandingDescription">@Dnn.LocalizeString("Landing")</th>
    <th data-column-id="DurationMins" data-header-css-class="bg_smallcol colTime" data-formatter="duration"></th>
@@ -39,6 +39,13 @@
   <div class="uploadComponent" data-moduleid="@Dnn.ModuleContext.ModuleId" data-tabid="@Dnn.ModuleContext.TabId">
   </div>
  </div>
+</div>
+
+<div style="width:100%;text-align:right;margin-top:30px;">
+ @if (BalisesModuleContext.Security.IsPilot)
+ {
+  <a href="@Url.Action("Edit", "Flight", new { FlightId = -1, ret = "p-mf" })" class="btn btn-primary">@Dnn.LocalizeString("AddFlight")</a>
+ }
 </div>
 
 <script type="text/javascript">

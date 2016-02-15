@@ -30,11 +30,18 @@ namespace Albatros.DNN.Modules.Balises.Controllers
         public ActionResult Edit(int FlightId)
         {
             var flight = FlightRepository.Instance.GetFlight(PortalSettings.PortalId, FlightId);
-            if (flight.UserId != User.UserID)
+            if (flight == null)
             {
-                if (!BalisesModuleContext.Security.IsVerifier)
+                flight = new Flight() { TakeoffTime = System.DateTime.Now, LandingTime = System.DateTime.Now };
+            }
+            else
+            {
+                if (flight.UserId != User.UserID)
                 {
-                    throw new System.Exception("You don't have access to edit this");
+                    if (!BalisesModuleContext.Security.IsVerifier)
+                    {
+                        throw new System.Exception("You don't have access to edit this");
+                    }
                 }
             }
             return View(flight.GetFlightBase());
@@ -46,40 +53,63 @@ namespace Albatros.DNN.Modules.Balises.Controllers
         {
 
             var existingFlight = FlightRepository.Instance.GetFlight(PortalSettings.PortalId, flight.FlightId);
-            if (existingFlight.UserId != User.UserID)
+            if (existingFlight == null)
             {
-                if (!BalisesModuleContext.Security.IsVerifier)
+                var newFlight = new FlightBase()
                 {
-                    throw new System.Exception("You don't have access to edit this");
+                    PortalId = PortalSettings.PortalId,
+                    UserId = User.UserID,
+                    TakeoffDescription = flight.TakeoffDescription,
+                    TakeoffTime = flight.TakeoffTime,
+                    LandingDescription = flight.LandingDescription,
+                    LandingTime = flight.LandingTime,
+                    Summary = flight.Summary
+                };
+                newFlight.ReadTakeoffCoordinates(flight.TakeoffCoords);
+                newFlight.ReadLandingCoordinates(flight.LandingCoords);
+                var newId = FlightRepository.Instance.AddFlight(ref newFlight, User.UserID);
+                // add points
+
+                // recalculate stuff
+                newFlight.RecalculateDistanceAndTime();
+                FlightRepository.Instance.UpdateFlight(newFlight, User.UserID);
+                return ReturnRoute(flight.FlightId, View("View", _repository.GetFlight(PortalSettings.PortalId, newId)));
+            }
+            else
+            {
+                if (existingFlight.UserId != User.UserID)
+                {
+                    if (!BalisesModuleContext.Security.IsVerifier)
+                    {
+                        throw new System.Exception("You don't have access to edit this");
+                    }
                 }
-            }
-            if (existingFlight.TakeoffCoords != flight.TakeoffCoords)
-            {
-                existingFlight.ReadTakeoffCoordinates(flight.TakeoffCoords);
-            }
-            existingFlight.TakeoffDescription = flight.TakeoffDescription;
-            existingFlight.TakeoffTime = flight.TakeoffTime;
-            if (existingFlight.LandingCoords != flight.LandingCoords)
-            {
-                existingFlight.ReadLandingCoordinates(flight.LandingCoords);
-            }
-            existingFlight.LandingDescription = flight.LandingDescription;
-            existingFlight.LandingTime = flight.LandingTime;
-            existingFlight.Summary = flight.Summary;
-            existingFlight.RecalculateDistanceAndTime();
-            FlightRepository.Instance.UpdateFlight(existingFlight.GetFlightBase(), User.UserID);
+                if (existingFlight.TakeoffCoords != flight.TakeoffCoords)
+                {
+                    existingFlight.ReadTakeoffCoordinates(flight.TakeoffCoords);
+                }
+                existingFlight.TakeoffDescription = flight.TakeoffDescription;
+                existingFlight.TakeoffTime = flight.TakeoffTime;
+                if (existingFlight.LandingCoords != flight.LandingCoords)
+                {
+                    existingFlight.ReadLandingCoordinates(flight.LandingCoords);
+                }
+                existingFlight.LandingDescription = flight.LandingDescription;
+                existingFlight.LandingTime = flight.LandingTime;
+                existingFlight.Summary = flight.Summary;
+                existingFlight.RecalculateDistanceAndTime();
+                FlightRepository.Instance.UpdateFlight(existingFlight.GetFlightBase(), User.UserID);
 
-            if (!string.IsNullOrEmpty(existingFlight.TakeoffDescription))
-            {
-                SitesRepository.Instance.SetNewSite(existingFlight.TakeoffLatitude, existingFlight.TakeoffLongitude, existingFlight.TakeoffDescription, BalisesModuleContext.Settings.BeaconPassDistanceMeters);
+                if (!string.IsNullOrEmpty(existingFlight.TakeoffDescription))
+                {
+                    SitesRepository.Instance.SetNewSite(existingFlight.TakeoffLatitude, existingFlight.TakeoffLongitude, existingFlight.TakeoffDescription, BalisesModuleContext.Settings.BeaconPassDistanceMeters);
+                }
+                if (!string.IsNullOrEmpty(existingFlight.LandingDescription))
+                {
+                    SitesRepository.Instance.SetNewSite(existingFlight.LandingLatitude, existingFlight.LandingLongitude, existingFlight.LandingDescription, BalisesModuleContext.Settings.BeaconPassDistanceMeters);
+                }
+                return ReturnRoute(flight.FlightId, View("View", _repository.GetFlight(PortalSettings.PortalId, flight.FlightId)));
             }
-            if (!string.IsNullOrEmpty(existingFlight.LandingDescription))
-            {
-                SitesRepository.Instance.SetNewSite(existingFlight.LandingLatitude, existingFlight.LandingLongitude, existingFlight.LandingDescription, BalisesModuleContext.Settings.BeaconPassDistanceMeters);
-            }
-
-            return ReturnRoute(flight.FlightId, View("View", _repository.GetFlight(PortalSettings.PortalId, flight.FlightId)));
         }
-
     }
 }

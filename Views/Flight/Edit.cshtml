@@ -6,7 +6,6 @@
 @{
     BalisesModuleContext.AddJqueryUi();
     BalisesModuleContext.AddBootstrapCss();
-    //BalisesModuleContext.AddBootstrapJs();
     BalisesModuleContext.AddModuleScript();
     BalisesModuleContext.AddScript("moment-with-locales.min.js", "moment", "2.11.2");
     BalisesModuleContext.AddScript("bootstrap-datetimepicker.min.js", "bootstrap-datetimepicker", "4.17.37");
@@ -28,7 +27,7 @@
     <label>@Dnn.LocalizeString("FlightDate")</label>
    </div>
    <input type="text" id="FlightDate" data-editor="date" data-value="@Model.TakeoffTime.ToString("yyyy-MM-dd")"
-          value="@Model.TakeoffTime.ToString("d")" disabled="@((Model.EntryMethod != 0).ToString())" />
+          value="@Model.TakeoffTime.ToString("d")" @((Model.EntryMethod != 0) ? "disabled" : "") />
   </div>
  </fieldset>
 
@@ -129,6 +128,7 @@
     SetTimes();
    });
    $('#FlightDate').on('dp.hide', function (e) {
+    $(e.target).attr('data-value', e.date.format());
     SetTimes();
    });
 
@@ -178,8 +178,8 @@
 
   });
 
-  function SetTimes() {
-   var dt = $('#FlightDate').data('value');
+  function SetTimes(dt) {
+   var dt = $('#FlightDate').attr('data-value').substring(0,10);
    $('#TakeoffTime').val(dt + 'T' + $('#pickTakeoffTime').val() + ":00");
    $('#LandingTime').val(dt + 'T' + $('#pickLandingTime').val() + ":00");
   }

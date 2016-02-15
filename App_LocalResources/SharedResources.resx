@@ -228,4 +228,7 @@
   <data name="FlightDate.Text" xml:space="preserve">
     <value>Flight Date</value>
   </data>
+  <data name="AddFlight.Text" xml:space="preserve">
+    <value>Add Flight</value>
+  </data>
 </root>
