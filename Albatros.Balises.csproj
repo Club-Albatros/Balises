@@ -166,7 +166,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="App_LocalResources\ClientResources.resx" />
-    <Content Include="App_LocalResources\SharedResources.resx" />
+    <Content Include="App_LocalResources\SharedResources.resx">
+      <SubType>Designer</SubType>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="Albatros.Balises.Core\Albatros.Balises.Core.csproj">
@@ -182,7 +184,7 @@
     <Content Include="Views\Home\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\Pilot\MyFlights.cshtml" />
+    <Content Include="Views\Pilot\Log.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Pilot\View.cshtml" />

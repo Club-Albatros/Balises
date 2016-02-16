@@ -141,8 +141,8 @@
   <data name="LastModifiedByString.Text" xml:space="preserve">
     <value>Last modified by {0} on {1:d}</value>
   </data>
-  <data name="MyFlights.Text" xml:space="preserve">
-    <value>My Flights</value>
+  <data name="Log.Text" xml:space="preserve">
+    <value>Log</value>
   </data>
   <data name="NotValidated.Text" xml:space="preserve">
     <value>Not Validated</value>
@@ -260,5 +260,23 @@
   </data>
   <data name="Category.Text" xml:space="preserve">
     <value>Category</value>
+  </data>
+  <data name="Date.Text" xml:space="preserve">
+    <value>Date</value>
+  </data>
+  <data name="Flight.Text" xml:space="preserve">
+    <value>Flight</value>
+  </data>
+  <data name="Rank.Text" xml:space="preserve">
+    <value>Rank</value>
+  </data>
+  <data name="Results.Text" xml:space="preserve">
+    <value>Results</value>
+  </data>
+  <data name="Total.Text" xml:space="preserve">
+    <value>Total</value>
+  </data>
+  <data name="View.Text" xml:space="preserve">
+    <value>View</value>
   </data>
 </root>

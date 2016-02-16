@@ -90,6 +90,7 @@
     <Compile Include="Models\FlightBeacons\FlightBeaconBase_Interfaces.cs" />
     <Compile Include="Models\FlightBeacons\FlightBeacon_Interfaces.cs" />
     <Compile Include="Models\Flights\FlightBase_Custom.cs" />
+    <Compile Include="Models\Flights\FlightRanking.cs" />
     <Compile Include="Models\Flights\Flight_Custom.cs" />
     <Compile Include="Models\Flights\Flight.cs" />
     <Compile Include="Models\Flights\FlightBase.cs" />

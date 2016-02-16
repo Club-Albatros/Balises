@@ -111,6 +111,13 @@ namespace Albatros.Balises.Core.Repositories
                 rep.Update(flight);
             }
         }
+        public IEnumerable<FlightRanking> GetRankings(int portalId, int year)
+        {
+            using (var context = DataContext.Instance())
+            {
+                return context.ExecuteQuery<FlightRanking>(System.Data.CommandType.StoredProcedure, "{databaseOwner}{objectQualifier}Albatros_Balises_GetRankings", portalId, year);
+            }
+        }
     }
 
     public interface IFlightRepository
@@ -125,6 +132,7 @@ namespace Albatros.Balises.Core.Repositories
         void DeleteFlight(FlightBase flight);
         void DeleteFlight(int portalId, int flightId);
         void UpdateFlight(FlightBase flight, int userId);
+        IEnumerable<FlightRanking> GetRankings(int portalId, int year);
     }
 }
 

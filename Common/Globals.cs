@@ -11,5 +11,15 @@ namespace Albatros.DNN.Modules.Balises.Common
             return ((double)speed * 3.6).ToString("0.0", System.Threading.Thread.CurrentThread.CurrentCulture);
         }
 
+        public static string ToKm(this int meters)
+        {
+            return (meters / 1000).ToString("0.0");
+        }
+
+        public static string ToTime(this int minutes)
+        {
+            return (new System.TimeSpan(0, minutes, 0)).ToString("%h\\:mm");
+        }
+
     }
 }

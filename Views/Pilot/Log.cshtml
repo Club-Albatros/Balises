@@ -7,9 +7,15 @@
     BalisesModuleContext.AddScript("moment-with-locales.min.js", "moment", "2.11.2");
     BalisesModuleContext.AddModuleScript();
     BalisesModuleContext.AddScript("SimpleAjaxUploader.min.js", "SimpleAjaxUploader", "2.4");
+
+    var userId = Dnn.User.UserID;
+    if (Request.Params["UserId"] != null)
+    {
+     userId = int.Parse(Request.Params["UserId"]);
+    }
 }
 
-<h3>@Dnn.LocalizeString("MyFlights")</h3>
+<h3>@Dnn.LocalizeString("Log")</h3>
 
 <table id="flightsGrid" class="table table-condensed table-hover table-striped">
  <thead>
@@ -44,7 +50,7 @@
 <div style="width:100%;text-align:right;margin-top:30px;">
  @if (BalisesModuleContext.Security.IsPilot)
  {
-  <a href="@Url.Action("Edit", "Flight", new { FlightId = -1, ret = "p-mf" })" class="btn btn-primary">@Dnn.LocalizeString("AddFlight")</a>
+ <a href="@Url.Action("Edit", "Flight", new { FlightId = -1, ret = "p-mf" })" class="btn btn-primary">@Dnn.LocalizeString("AddFlight")</a>
  }
 </div>
 
@@ -54,7 +60,7 @@
    moment.locale('@System.Threading.Thread.CurrentThread.CurrentCulture.TwoLetterISOLanguageName');
    $('#flightsGrid').bootgrid({
     ajax: true,
-    url: '@GetModuleUrl("API/Flights/List/")@Dnn.User.UserID',
+    url: '@GetModuleUrl("API/Flights/List/")@userId',
     requestHandler: function (request) {
      request["moduleId"] = @Dnn.ActiveModule.ModuleID;
      request["tabId"] = @Dnn.ActiveModule.TabID;
@@ -91,7 +97,7 @@
       return '<a href="@Url.Action("View", "Flight")?FlightId=' + row.FlightId + '" class="btn btn-sm ' + color + '"><span class="glyphicon glyphicon-eye-open"></span></a>';
      }
     },
-    rowCount: 20,
+    rowCount: 10,
     columnSelection: false
    })
     .on("loaded.rs.jquery.bootgrid", function (e)

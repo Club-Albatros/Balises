@@ -74,6 +74,15 @@ namespace Albatros.Balises.Core.Models.Flights
 
         }
 
+        [IgnoreColumn]
+        public IEnumerable<FlightBeacon> PassedBeacons
+        {
+            get {
+                return FlightBeaconRepository.Instance.GetFlightBeaconsByFlight(FlightId).OrderBy(fb => fb.PassageTime);
+
+            }
+        }
+
     }
 }
 

@@ -18,8 +18,8 @@ namespace Albatros.DNN.Modules.Balises.Controllers
         }
 
         [HttpGet]
-        [BalisesAuthorize(SecurityLevel = SecurityAccessLevel.Pilot)]
-        public ActionResult MyFlights()
+        [BalisesAuthorize(SecurityLevel = SecurityAccessLevel.View)]
+        public ActionResult Log()
         {
             return View();
         }
