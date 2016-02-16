@@ -71,8 +71,8 @@ namespace Albatros.Balises.Core.Common
             }
 
             // detect closest beacons for take off and landing
-            TakeOff = new FlightBeacon() { BeaconId = -1, PassedDistance = 3 * MaxDistance, Description = "", Latitude = Igc.Takeoff.Latitude, Longitude = Igc.Takeoff.Longitude };
-            Landing = new FlightBeacon() { BeaconId = -1, PassedDistance = 3 * MaxDistance, Description = "", Latitude = Igc.Landing.Latitude, Longitude = Igc.Landing.Longitude };
+            TakeOff = new FlightBeacon() { BeaconId = -1, PassedDistance = 3 * MaxDistance, Description = "", Latitude = Igc.Takeoff.Latitude, Longitude = Igc.Takeoff.Longitude, Altitude = Igc.Takeoff.Altitude };
+            Landing = new FlightBeacon() { BeaconId = -1, PassedDistance = 3 * MaxDistance, Description = "", Latitude = Igc.Landing.Latitude, Longitude = Igc.Landing.Longitude, Altitude = Igc.Landing.Altitude };
             foreach (var beacon in beacons)
             {
                 var passedDistance = EarthCalculations.DistanceInMeters(Igc.Takeoff.Latitude, Igc.Takeoff.Longitude, beacon.Latitude, beacon.Longitude);

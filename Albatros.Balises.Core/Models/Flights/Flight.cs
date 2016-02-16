@@ -47,11 +47,17 @@ namespace Albatros.Balises.Core.Models.Flights
              res.TakeoffCoords = TakeoffCoords;
              res.TakeoffLatitude = TakeoffLatitude;
              res.TakeoffLongitude = TakeoffLongitude;
+             res.TakeoffAltitude = TakeoffAltitude;
              res.LandingDescription = LandingDescription;
              res.LandingTime = LandingTime;
              res.LandingCoords = LandingCoords;
              res.LandingLatitude = LandingLatitude;
              res.LandingLongitude = LandingLongitude;
+             res.LandingAltitude = LandingAltitude;
+             res.MaxHeight = MaxHeight;
+             res.MaxVario = MaxVario;
+             res.MaxSpeed = MaxSpeed;
+             res.AverageSpeed = AverageSpeed;
              res.DurationMins = DurationMins;
              res.Distance = Distance;
              res.Status = Status;

@@ -231,4 +231,22 @@
   <data name="AddFlight.Text" xml:space="preserve">
     <value>Add Flight</value>
   </data>
+  <data name="AverageSpeed.Text" xml:space="preserve">
+    <value>Average Speed</value>
+  </data>
+  <data name="MaxSpeed.Text" xml:space="preserve">
+    <value>Max Speed</value>
+  </data>
+  <data name="MaxVario.Text" xml:space="preserve">
+    <value>Max Vario</value>
+  </data>
+  <data name="Altitude.Text" xml:space="preserve">
+    <value>Altitude</value>
+  </data>
+  <data name="kph.Text" xml:space="preserve">
+    <value>Km/h</value>
+  </data>
+  <data name="mps.Text" xml:space="preserve">
+    <value>m/s</value>
+  </data>
 </root>

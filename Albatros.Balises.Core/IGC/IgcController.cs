@@ -20,10 +20,15 @@ namespace Albatros.Balises.Core.IGC
                     TakeoffTime = path.Igc.DetectedStart,
                     DurationMins = (int)path.Igc.FlightTime.TotalMinutes,
                     Distance = path.OfficialDistance,
+                    MaxHeight = path.Igc.MaxAltitude,
+                    MaxVario = path.Igc.MaxVario,
+                    MaxSpeed = path.Igc.MaxSpeed,
+                    AverageSpeed = path.Igc.AverageSpeed,
                     LandingCoords = path.Igc.Landing.ToSwissCoordinates(),
                     LandingDescription = path.Landing.Description,
                     LandingLatitude = path.Igc.Landing.Latitude,
                     LandingLongitude = path.Igc.Landing.Longitude,
+                    LandingAltitude = path.Igc.Landing.Altitude,
                     LandingTime = path.Igc.DetectedLandingTime,
                     PortalId = portalId,
                     UserId = userId,
@@ -31,6 +36,7 @@ namespace Albatros.Balises.Core.IGC
                     TakeoffDescription = path.TakeOff.Description,
                     TakeoffLatitude = path.Igc.Takeoff.Latitude,
                     TakeoffLongitude = path.Igc.Takeoff.Longitude,
+                    TakeoffAltitude = path.Igc.Takeoff.Altitude,
                     Summary = path.Igc.Report(),
                     Status = 0, //todo
                     ValidatedOnDate = new System.DateTime(1900, 1, 1)

@@ -39,6 +39,8 @@ namespace Albatros.Balises.Core.Models.Flights
         [DataMember]
         public double TakeoffLongitude { get; set; }
         [DataMember]
+        public int? TakeoffAltitude { get; set; }
+        [DataMember]
         public string LandingDescription { get; set; }
         [DataMember]
         public DateTime LandingTime { get; set; }
@@ -48,6 +50,16 @@ namespace Albatros.Balises.Core.Models.Flights
         public double LandingLatitude { get; set; }
         [DataMember]
         public double LandingLongitude { get; set; }
+        [DataMember]
+        public int? LandingAltitude { get; set; }
+        [DataMember]
+        public int? MaxHeight { get; set; }
+        [DataMember]
+        public double? MaxVario { get; set; }
+        [DataMember]
+        public double? MaxSpeed { get; set; }
+        [DataMember]
+        public double? AverageSpeed { get; set; }
         [DataMember]
         public int DurationMins { get; set; }
         [DataMember]
@@ -88,6 +100,9 @@ namespace Albatros.Balises.Core.Models.Flights
 
             TakeoffLongitude = flight.TakeoffLongitude;
 
+            if (flight.TakeoffAltitude > -1)
+                TakeoffAltitude = flight.TakeoffAltitude;
+
             if (!String.IsNullOrEmpty(flight.LandingDescription))
                 LandingDescription = flight.LandingDescription;
 
@@ -99,6 +114,21 @@ namespace Albatros.Balises.Core.Models.Flights
             LandingLatitude = flight.LandingLatitude;
 
             LandingLongitude = flight.LandingLongitude;
+
+            if (flight.LandingAltitude > -1)
+                LandingAltitude = flight.LandingAltitude;
+
+            if (flight.MaxHeight > -1)
+                MaxHeight = flight.MaxHeight;
+
+            if (flight.MaxVario != null)
+            MaxVario = flight.MaxVario;
+
+            if (flight.MaxSpeed != null)
+            MaxSpeed = flight.MaxSpeed;
+
+            if (flight.AverageSpeed != null)
+            AverageSpeed = flight.AverageSpeed;
 
             if (flight.DurationMins > -1)
                 DurationMins = flight.DurationMins;

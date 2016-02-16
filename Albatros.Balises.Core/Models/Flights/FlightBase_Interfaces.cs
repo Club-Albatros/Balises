@@ -25,11 +25,17 @@ namespace Albatros.Balises.Core.Models.Flights
    TakeoffCoords = Convert.ToString(Null.SetNull(dr["TakeoffCoords"], TakeoffCoords));
    TakeoffLatitude = Convert.ToDouble(Null.SetNull(dr["TakeoffLatitude"], TakeoffLatitude));
    TakeoffLongitude = Convert.ToDouble(Null.SetNull(dr["TakeoffLongitude"], TakeoffLongitude));
+   TakeoffAltitude = Convert.ToInt32(Null.SetNull(dr["TakeoffAltitude"], TakeoffAltitude));
    LandingDescription = Convert.ToString(Null.SetNull(dr["LandingDescription"], LandingDescription));
    LandingTime = (DateTime)(Null.SetNull(dr["LandingTime"], LandingTime));
    LandingCoords = Convert.ToString(Null.SetNull(dr["LandingCoords"], LandingCoords));
    LandingLatitude = Convert.ToDouble(Null.SetNull(dr["LandingLatitude"], LandingLatitude));
    LandingLongitude = Convert.ToDouble(Null.SetNull(dr["LandingLongitude"], LandingLongitude));
+   LandingAltitude = Convert.ToInt32(Null.SetNull(dr["LandingAltitude"], LandingAltitude));
+   MaxHeight = Convert.ToInt32(Null.SetNull(dr["MaxHeight"], MaxHeight));
+   MaxVario = Convert.ToDouble(Null.SetNull(dr["MaxVario"], MaxVario));
+   MaxSpeed = Convert.ToDouble(Null.SetNull(dr["MaxSpeed"], MaxSpeed));
+   AverageSpeed = Convert.ToDouble(Null.SetNull(dr["AverageSpeed"], AverageSpeed));
    DurationMins = Convert.ToInt32(Null.SetNull(dr["DurationMins"], DurationMins));
    Distance = Convert.ToInt32(Null.SetNull(dr["Distance"], Distance));
    Status = Convert.ToInt32(Null.SetNull(dr["Status"], Status));
@@ -72,6 +78,12 @@ namespace Albatros.Balises.Core.Models.Flights
      return TakeoffLatitude.ToString(strFormat, formatProvider);
     case "takeofflongitude": // Float
      return TakeoffLongitude.ToString(strFormat, formatProvider);
+    case "takeoffaltitude": // Int
+     if (TakeoffAltitude == null)
+     {
+         return "";
+     };
+     return ((int)TakeoffAltitude).ToString(strFormat, formatProvider);
     case "landingdescription": // NVarChar
      if (LandingDescription == null)
      {
@@ -90,6 +102,36 @@ namespace Albatros.Balises.Core.Models.Flights
      return LandingLatitude.ToString(strFormat, formatProvider);
     case "landinglongitude": // Float
      return LandingLongitude.ToString(strFormat, formatProvider);
+    case "landingaltitude": // Int
+     if (LandingAltitude == null)
+     {
+         return "";
+     };
+     return ((int)LandingAltitude).ToString(strFormat, formatProvider);
+    case "maxheight": // Int
+     if (MaxHeight == null)
+     {
+         return "";
+     };
+     return ((int)MaxHeight).ToString(strFormat, formatProvider);
+    case "maxvario": // Float
+     if (MaxVario == null)
+     {
+         return "";
+     };
+     return ((double)MaxVario).ToString(strFormat, formatProvider);
+    case "maxspeed": // Float
+     if (MaxSpeed == null)
+     {
+         return "";
+     };
+     return ((double)MaxSpeed).ToString(strFormat, formatProvider);
+    case "averagespeed": // Float
+     if (AverageSpeed == null)
+     {
+         return "";
+     };
+     return ((double)AverageSpeed).ToString(strFormat, formatProvider);
     case "durationmins": // Int
      return DurationMins.ToString(strFormat, formatProvider);
     case "distance": // Int

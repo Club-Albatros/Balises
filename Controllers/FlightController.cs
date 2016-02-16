@@ -63,7 +63,9 @@ namespace Albatros.DNN.Modules.Balises.Controllers
                     TakeoffTime = flight.TakeoffTime,
                     LandingDescription = flight.LandingDescription,
                     LandingTime = flight.LandingTime,
-                    Summary = flight.Summary
+                    Summary = flight.Summary,
+                    TakeoffAltitude = flight.TakeoffAltitude,
+                    LandingAltitude = flight.LandingAltitude
                 };
                 newFlight.ReadTakeoffCoordinates(flight.TakeoffCoords);
                 newFlight.ReadLandingCoordinates(flight.LandingCoords);
@@ -88,12 +90,14 @@ namespace Albatros.DNN.Modules.Balises.Controllers
                 {
                     existingFlight.ReadTakeoffCoordinates(flight.TakeoffCoords);
                 }
+                existingFlight.TakeoffAltitude = flight.TakeoffAltitude;
                 existingFlight.TakeoffDescription = flight.TakeoffDescription;
                 existingFlight.TakeoffTime = flight.TakeoffTime;
                 if (existingFlight.LandingCoords != flight.LandingCoords)
                 {
                     existingFlight.ReadLandingCoordinates(flight.LandingCoords);
                 }
+                existingFlight.LandingAltitude = flight.LandingAltitude;
                 existingFlight.LandingDescription = flight.LandingDescription;
                 existingFlight.LandingTime = flight.LandingTime;
                 existingFlight.Summary = flight.Summary;
