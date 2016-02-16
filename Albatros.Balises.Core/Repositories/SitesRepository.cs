@@ -34,7 +34,7 @@ namespace Albatros.Balises.Core.Repositories
         {
             using (var context = DataContext.Instance())
             {
-                Dictionary<string, Site> res = context.ExecuteQuery<Site>(System.Data.CommandType.Text, "SELECT f.TakeoffDescription Name, AVG(f.TakeoffLatitude) Latitude, AVG(f.TakeoffLongitude) Longitude FROM {databaseOwner}{objectQualifier}Albatros_Balises_Flights f GROUP BY f.TakeoffDescription, f.PortalId HAVING f.TakeoffDescription <> '' AND f.PortalId=@0", portalId).ToDictionary(s => s.Name, s => s);
+                Dictionary<string, Site> res = context.ExecuteQuery<Site>(System.Data.CommandType.Text, "SELECT f.TakeoffDescription Name, AVG(f.TakeoffLatitude) Latitude, AVG(f.TakeoffLongitude) Longitude, AVG(f.TakeoffAltitude) Altitude FROM {databaseOwner}{objectQualifier}Albatros_Balises_Flights f GROUP BY f.TakeoffDescription, f.PortalId HAVING f.TakeoffDescription <> '' AND f.PortalId=@0", portalId).ToDictionary(s => s.Name, s => s);
                 var beacons = GetBeaconTakeoffs(portalId);
                 foreach (var b in beacons)
                 {
@@ -51,7 +51,7 @@ namespace Albatros.Balises.Core.Repositories
         {
             using (var context = DataContext.Instance())
             {
-                Dictionary<string, Site> res = context.ExecuteQuery<Site>(System.Data.CommandType.Text, "SELECT f.LandingDescription Name, AVG(f.LandingLatitude) Latitude, AVG(f.LandingLongitude) Longitude FROM {databaseOwner}{objectQualifier}Albatros_Balises_Flights f GROUP BY f.LandingDescription, f.PortalId HAVING f.LandingDescription <> '' AND f.PortalId=@0", portalId).ToDictionary(s => s.Name, s => s);
+                Dictionary<string, Site> res = context.ExecuteQuery<Site>(System.Data.CommandType.Text, "SELECT f.LandingDescription Name, AVG(f.LandingLatitude) Latitude, AVG(f.LandingLongitude) Longitude, AVG(f.LandingAltitude) Altitude FROM {databaseOwner}{objectQualifier}Albatros_Balises_Flights f GROUP BY f.LandingDescription, f.PortalId HAVING f.LandingDescription <> '' AND f.PortalId=@0", portalId).ToDictionary(s => s.Name, s => s);
                 var beacons = GetBeaconLandings(portalId);
                 foreach (var b in beacons)
                 {

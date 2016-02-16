@@ -158,6 +158,7 @@ else
     },
     select: function(event, ui) {
      $('#TakeoffCoords').val(ui.item.coords);
+     $('#TakeoffAltitude').val(ui.item.alt);
     }
    });
    $('#LandingDescription').autocomplete({
@@ -168,6 +169,7 @@ else
     },
     select: function(event, ui) {
      $('#LandingCoords').val(ui.item.coords);
+     $('#LandingAltitude').val(ui.item.alt);
     }
    });
 

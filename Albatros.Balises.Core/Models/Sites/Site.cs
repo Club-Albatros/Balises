@@ -14,6 +14,8 @@ namespace Albatros.Balises.Core.Models.Sites
         [DataMember]
         public double Longitude { get; set; }
         [DataMember]
+        public int Altitude { get; set; }
+        [DataMember]
         [IgnoreColumn]
         public string Coords
         {
