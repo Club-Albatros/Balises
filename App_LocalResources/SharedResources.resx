@@ -249,4 +249,7 @@
   <data name="mps.Text" xml:space="preserve">
     <value>m/s</value>
   </data>
+  <data name="SubmittedFlights.Text" xml:space="preserve">
+    <value>Submitted Flights</value>
+  </data>
 </root>

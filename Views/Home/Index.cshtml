@@ -21,4 +21,9 @@
 
 <div>
  <a href="@Url.Action("MyFlights", "Pilot")" class="btn btn-default">@Dnn.LocalizeString("MyFlights")</a>
+  @if (BalisesModuleContext.Security.IsVerifier)
+ {
+  <a href="@Url.Action("FlightList", "Verifier")" class="btn btn-primary">@Dnn.LocalizeString("SubmittedFlights")</a>
+ }
+
 </div>

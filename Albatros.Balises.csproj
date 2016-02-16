@@ -144,6 +144,7 @@
     <Compile Include="Common\Globals.cs" />
     <Compile Include="Common\ModuleSettings.cs" />
     <Compile Include="Api\RouteMapper.cs" />
+    <Compile Include="Controllers\VerifierController.cs" />
     <Compile Include="Controllers\PilotController.cs" />
     <Compile Include="Controllers\FlightController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -191,6 +192,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Flight\Edit.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Verifier\FlightList.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
