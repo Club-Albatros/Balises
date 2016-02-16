@@ -45,6 +45,10 @@ namespace Albatros.DNN.Modules.Balises.Controllers
                         throw new System.Exception("You don't have access to edit this");
                     }
                 }
+                if (flight.Status > 3)
+                {
+                    throw new System.Exception("This flight is locked");
+                }
             }
             return View(flight.GetFlightBase());
         }
@@ -85,6 +89,10 @@ namespace Albatros.DNN.Modules.Balises.Controllers
                     {
                         throw new System.Exception("You don't have access to edit this");
                     }
+                }
+                if (existingFlight.Status > 3)
+                {
+                    throw new System.Exception("This flight is locked");
                 }
                 if (existingFlight.TakeoffCoords != flight.TakeoffCoords)
                 {
