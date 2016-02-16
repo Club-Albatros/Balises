@@ -29,6 +29,8 @@ namespace Albatros.Balises.Core.Models.Flights
         [DataMember]
         public int UserId { get; set; }
         [DataMember]
+        public int Category { get; set; }
+        [DataMember]
         public string TakeoffDescription { get; set; }
         [DataMember]
         public DateTime TakeoffTime { get; set; }
@@ -53,6 +55,8 @@ namespace Albatros.Balises.Core.Models.Flights
         [DataMember]
         public int? LandingAltitude { get; set; }
         [DataMember]
+        public int? LandingBeaconId { get; set; }
+        [DataMember]
         public int? MaxHeight { get; set; }
         [DataMember]
         public double? MaxVario { get; set; }
@@ -66,6 +70,8 @@ namespace Albatros.Balises.Core.Models.Flights
         public int Distance { get; set; }
         [DataMember]
         public int Status { get; set; }
+        [DataMember]
+        public int TotalPoints { get; set; }
         [DataMember]
         public int EntryMethod { get; set; }
         [DataMember]
@@ -87,6 +93,9 @@ namespace Albatros.Balises.Core.Models.Flights
 
             if (flight.UserId > -1)
                 UserId = flight.UserId;
+
+            if (flight.Category > -1)
+                Category = flight.Category;
 
             if (!String.IsNullOrEmpty(flight.TakeoffDescription))
                 TakeoffDescription = flight.TakeoffDescription;
@@ -118,6 +127,9 @@ namespace Albatros.Balises.Core.Models.Flights
             if (flight.LandingAltitude > -1)
                 LandingAltitude = flight.LandingAltitude;
 
+            if (flight.LandingBeaconId > -1)
+                LandingBeaconId = flight.LandingBeaconId;
+
             if (flight.MaxHeight > -1)
                 MaxHeight = flight.MaxHeight;
 
@@ -138,6 +150,9 @@ namespace Albatros.Balises.Core.Models.Flights
 
             if (flight.Status > -1)
                 Status = flight.Status;
+
+            if (flight.TotalPoints > -1)
+                TotalPoints = flight.TotalPoints;
 
             if (flight.EntryMethod > -1)
                 EntryMethod = flight.EntryMethod;

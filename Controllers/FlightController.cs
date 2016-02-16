@@ -34,7 +34,7 @@ namespace Albatros.DNN.Modules.Balises.Controllers
             var flight = FlightRepository.Instance.GetFlight(PortalSettings.PortalId, FlightId);
             if (flight == null)
             {
-                flight = new Flight() { TakeoffTime = System.DateTime.Now, LandingTime = System.DateTime.Now, EntryMethod = 0 };
+                flight = new Flight() { TakeoffTime = System.DateTime.Now, LandingTime = System.DateTime.Now, EntryMethod = 0, Category = 0 };
             }
             else
             {
@@ -71,13 +71,15 @@ namespace Albatros.DNN.Modules.Balises.Controllers
                     LandingTime = flight.LandingTime,
                     Summary = flight.Summary,
                     TakeoffAltitude = flight.TakeoffAltitude,
-                    LandingAltitude = flight.LandingAltitude
+                    LandingAltitude = flight.LandingAltitude,
+                    Category = flight.Category
                 };
                 newFlight.ReadTakeoffCoordinates(flight.TakeoffCoords);
                 newFlight.ReadLandingCoordinates(flight.LandingCoords);
                 var newId = FlightRepository.Instance.AddFlight(ref newFlight, User.UserID);
                 FlightBeaconRepository.Instance.ProcessFlightBeacons(newId, newFlight.TakeoffTime, Newtonsoft.Json.JsonConvert.DeserializeObject<List<PathBeacon>>(flight.BeaconList));
-                newFlight.RecalculateDistanceAndTime();
+                newFlight.RecalculateTotals();
+                newFlight.CheckLandingBeacon(BalisesModuleContext.Settings.BeaconPassDistanceMeters);
                 FlightRepository.Instance.UpdateFlight(newFlight, User.UserID);
                 return ReturnRoute(flight.FlightId, View("View", _repository.GetFlight(PortalSettings.PortalId, newId)));
             }
@@ -109,7 +111,9 @@ namespace Albatros.DNN.Modules.Balises.Controllers
                 existingFlight.LandingDescription = flight.LandingDescription;
                 existingFlight.LandingTime = flight.LandingTime;
                 existingFlight.Summary = flight.Summary;
-                existingFlight.RecalculateDistanceAndTime();
+                existingFlight.Category = flight.Category;
+                existingFlight.RecalculateTotals();
+                existingFlight.CheckLandingBeacon(BalisesModuleContext.Settings.BeaconPassDistanceMeters);
                 FlightRepository.Instance.UpdateFlight(existingFlight.GetFlightBase(), User.UserID);
                 if (existingFlight.EntryMethod == 0)
                 {

@@ -12,8 +12,8 @@ using Albatros.Balises.Core.Models.Beacons;
 namespace Albatros.Balises.Core.Repositories
 {
 
-	public class BeaconRepository : ServiceLocator<IBeaconRepository, BeaconRepository>, IBeaconRepository
- {
+    public class BeaconRepository : ServiceLocator<IBeaconRepository, BeaconRepository>, IBeaconRepository
+    {
         protected override Func<IBeaconRepository> GetFactory()
         {
             return () => new BeaconRepository();
@@ -78,8 +78,16 @@ namespace Albatros.Balises.Core.Repositories
                 var rep = context.GetRepository<BeaconBase>();
                 rep.Update(beacon);
             }
-        } 
- }
+        }
+        public IEnumerable<Beacon> GetClosestBeacon(int portalId, double latitude, double longitude, int maxDistance)
+        {
+            using (var context = DataContext.Instance())
+            {
+                return context.ExecuteQuery<Beacon>(System.Data.CommandType.Text,
+                "SELECT TOP 1 * FROM (SELECT b.*, {databaseOwner}{objectQualifier}Albatros_Balises_CalculateDistance(@1, @2, b.Latitude, b.Longitude) Dist FROM {databaseOwner}{objectQualifier}vw_Albatros_Balises_Beacons b WHERE b.PortalId=@0) x WHERE x.Dist < @3 ORDER BY x.Dist DESC", portalId, latitude, longitude, maxDistance);
+            }
+        }
+    }
 
     public interface IBeaconRepository
     {
@@ -89,6 +97,7 @@ namespace Albatros.Balises.Core.Repositories
         void DeleteBeacon(BeaconBase beacon);
         void DeleteBeacon(int portalId, int beaconId);
         void UpdateBeacon(BeaconBase beacon, int userId);
+        IEnumerable<Beacon> GetClosestBeacon(int portalId, double latitude, double longitude, int maxDistance);
     }
 }
 

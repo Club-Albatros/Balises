@@ -12,6 +12,11 @@
     BalisesModuleContext.AddCss("bootstrap-datetimepicker.min.css", "bootstrap-datetimepicker", "4.17.37");
     BalisesModuleContext.AddScript("bootstrap-clockpicker.min.js", "bootstrap-clockpicker", "0.0.7");
     BalisesModuleContext.AddCss("bootstrap-clockpicker.min.css", "bootstrap-clockpicker", "0.0.7");
+
+    var categories = new List<System.Web.Mvc.SelectListItem>();
+    categories.Add(new System.Web.Mvc.SelectListItem { Text = Dnn.LocalizeString("Paraglider"), Value = "0" });
+    categories.Add(new System.Web.Mvc.SelectListItem { Text = Dnn.LocalizeString("Hangglider"), Value = "1" });
+
 }
 
 <div class="albatrosBalises" data-moduleid="@Dnn.ModuleContext.ModuleId"
@@ -28,6 +33,12 @@
    </div>
    <input type="text" id="FlightDate" data-editor="date" data-value="@Model.TakeoffTime.ToString("yyyy-MM-dd")"
           value="@Model.TakeoffTime.ToString("d")" @((Model.EntryMethod != 0) ? "disabled" : "") />
+  </div>
+  <div class="dnnFormItem">
+   <div class="dnnLabel" style="position: relative;">
+    <label>@Dnn.LocalizeString("Category")</label>
+   </div>
+   @Html.DropDownListFor(m => m.Category, categories)
   </div>
  </fieldset>
 

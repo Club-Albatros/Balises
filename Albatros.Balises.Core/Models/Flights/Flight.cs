@@ -22,8 +22,6 @@ namespace Albatros.Balises.Core.Models.Flights
         [DataMember]
         public int? NrBeacons { get; set; }
         [DataMember]
-        public int TotalPoints { get; set; }
-        [DataMember]
         public int? NrComments { get; set; }
         [DataMember]
         public string Pilot { get; set; }
@@ -42,6 +40,7 @@ namespace Albatros.Balises.Core.Models.Flights
              res.FlightId = FlightId;
              res.PortalId = PortalId;
              res.UserId = UserId;
+             res.Category = Category;
              res.TakeoffDescription = TakeoffDescription;
              res.TakeoffTime = TakeoffTime;
              res.TakeoffCoords = TakeoffCoords;
@@ -54,6 +53,7 @@ namespace Albatros.Balises.Core.Models.Flights
              res.LandingLatitude = LandingLatitude;
              res.LandingLongitude = LandingLongitude;
              res.LandingAltitude = LandingAltitude;
+             res.LandingBeaconId = LandingBeaconId;
              res.MaxHeight = MaxHeight;
              res.MaxVario = MaxVario;
              res.MaxSpeed = MaxSpeed;
@@ -61,6 +61,7 @@ namespace Albatros.Balises.Core.Models.Flights
              res.DurationMins = DurationMins;
              res.Distance = Distance;
              res.Status = Status;
+             res.TotalPoints = TotalPoints;
              res.EntryMethod = EntryMethod;
              res.Summary = Summary;
              res.ValidatedByUserID = ValidatedByUserID;

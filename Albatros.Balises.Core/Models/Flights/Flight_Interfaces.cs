@@ -18,7 +18,6 @@ namespace Albatros.Balises.Core.Models.Flights
   {
    base.Fill(dr);
    NrBeacons = Convert.ToInt32(Null.SetNull(dr["NrBeacons"], NrBeacons));
-   TotalPoints = Convert.ToInt32(Null.SetNull(dr["TotalPoints"], TotalPoints));
    NrComments = Convert.ToInt32(Null.SetNull(dr["NrComments"], NrComments));
    Pilot = Convert.ToString(Null.SetNull(dr["Pilot"], Pilot));
    CreatedByUser = Convert.ToString(Null.SetNull(dr["CreatedByUser"], CreatedByUser));
@@ -37,8 +36,6 @@ namespace Albatros.Balises.Core.Models.Flights
          return "";
      };
      return ((int)NrBeacons).ToString(strFormat, formatProvider);
-    case "totalpoints": // Int
-     return TotalPoints.ToString(strFormat, formatProvider);
     case "nrcomments": // Int
      if (NrComments == null)
      {

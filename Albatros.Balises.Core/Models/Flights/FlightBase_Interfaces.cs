@@ -20,6 +20,7 @@ namespace Albatros.Balises.Core.Models.Flights
    FlightId = Convert.ToInt32(Null.SetNull(dr["FlightId"], FlightId));
    PortalId = Convert.ToInt32(Null.SetNull(dr["PortalId"], PortalId));
    UserId = Convert.ToInt32(Null.SetNull(dr["UserId"], UserId));
+   Category = Convert.ToInt32(Null.SetNull(dr["Category"], Category));
    TakeoffDescription = Convert.ToString(Null.SetNull(dr["TakeoffDescription"], TakeoffDescription));
    TakeoffTime = (DateTime)(Null.SetNull(dr["TakeoffTime"], TakeoffTime));
    TakeoffCoords = Convert.ToString(Null.SetNull(dr["TakeoffCoords"], TakeoffCoords));
@@ -32,6 +33,7 @@ namespace Albatros.Balises.Core.Models.Flights
    LandingLatitude = Convert.ToDouble(Null.SetNull(dr["LandingLatitude"], LandingLatitude));
    LandingLongitude = Convert.ToDouble(Null.SetNull(dr["LandingLongitude"], LandingLongitude));
    LandingAltitude = Convert.ToInt32(Null.SetNull(dr["LandingAltitude"], LandingAltitude));
+   LandingBeaconId = Convert.ToInt32(Null.SetNull(dr["LandingBeaconId"], LandingBeaconId));
    MaxHeight = Convert.ToInt32(Null.SetNull(dr["MaxHeight"], MaxHeight));
    MaxVario = Convert.ToDouble(Null.SetNull(dr["MaxVario"], MaxVario));
    MaxSpeed = Convert.ToDouble(Null.SetNull(dr["MaxSpeed"], MaxSpeed));
@@ -39,6 +41,7 @@ namespace Albatros.Balises.Core.Models.Flights
    DurationMins = Convert.ToInt32(Null.SetNull(dr["DurationMins"], DurationMins));
    Distance = Convert.ToInt32(Null.SetNull(dr["Distance"], Distance));
    Status = Convert.ToInt32(Null.SetNull(dr["Status"], Status));
+   TotalPoints = Convert.ToInt32(Null.SetNull(dr["TotalPoints"], TotalPoints));
    EntryMethod = Convert.ToInt32(Null.SetNull(dr["EntryMethod"], EntryMethod));
    Summary = Convert.ToString(Null.SetNull(dr["Summary"], Summary));
    ValidatedByUserID = Convert.ToInt32(Null.SetNull(dr["ValidatedByUserID"], ValidatedByUserID));
@@ -64,6 +67,8 @@ namespace Albatros.Balises.Core.Models.Flights
      return PortalId.ToString(strFormat, formatProvider);
     case "userid": // Int
      return UserId.ToString(strFormat, formatProvider);
+    case "category": // Int
+     return Category.ToString(strFormat, formatProvider);
     case "takeoffdescription": // NVarChar
      return PropertyAccess.FormatString(TakeoffDescription, strFormat);
     case "takeofftime": // DateTime
@@ -108,6 +113,12 @@ namespace Albatros.Balises.Core.Models.Flights
          return "";
      };
      return ((int)LandingAltitude).ToString(strFormat, formatProvider);
+    case "landingbeaconid": // Int
+     if (LandingBeaconId == null)
+     {
+         return "";
+     };
+     return ((int)LandingBeaconId).ToString(strFormat, formatProvider);
     case "maxheight": // Int
      if (MaxHeight == null)
      {
@@ -138,6 +149,8 @@ namespace Albatros.Balises.Core.Models.Flights
      return Distance.ToString(strFormat, formatProvider);
     case "status": // Int
      return Status.ToString(strFormat, formatProvider);
+    case "totalpoints": // Int
+     return TotalPoints.ToString(strFormat, formatProvider);
     case "entrymethod": // Int
      return EntryMethod.ToString(strFormat, formatProvider);
     case "summary": // NVarChar

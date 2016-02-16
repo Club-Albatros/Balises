@@ -252,4 +252,13 @@
   <data name="SubmittedFlights.Text" xml:space="preserve">
     <value>Submitted Flights</value>
   </data>
+  <data name="Hangglider.Text" xml:space="preserve">
+    <value>Hangglider</value>
+  </data>
+  <data name="Paraglider.Text" xml:space="preserve">
+    <value>Paraglider</value>
+  </data>
+  <data name="Category.Text" xml:space="preserve">
+    <value>Category</value>
+  </data>
 </root>

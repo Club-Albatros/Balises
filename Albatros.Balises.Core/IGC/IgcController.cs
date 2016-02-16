@@ -10,7 +10,7 @@ namespace Albatros.Balises.Core.IGC
     {
         public static Flight AddFlightToUser(int portalId, int userId, string igcText, int beaconPassDistanceMeters)
         {
-            var path = new BalisesPath(userId, new IgcFile(igcText), beaconPassDistanceMeters);
+            var path = new BalisesPath(portalId, userId, new IgcFile(igcText), beaconPassDistanceMeters);
             var flight = FlightRepository.Instance.FindFlight(portalId, userId, path.Igc.DetectedStart);
             if (flight == null)
             {
@@ -30,6 +30,7 @@ namespace Albatros.Balises.Core.IGC
                     LandingLongitude = path.Igc.Landing.Longitude,
                     LandingAltitude = path.Igc.Landing.Altitude,
                     LandingTime = path.Igc.DetectedLandingTime,
+                    LandingBeaconId = (path.Landing.Code.Contains("ATT") ? path.Landing.BeaconId : -1),
                     PortalId = portalId,
                     UserId = userId,
                     TakeoffCoords = path.Igc.Takeoff.ToSwissCoordinates(),
@@ -39,8 +40,11 @@ namespace Albatros.Balises.Core.IGC
                     TakeoffAltitude = path.Igc.Takeoff.Altitude,
                     Summary = path.Igc.Report(),
                     Status = (path.PassedBeacons.Count == 0 ? 3 : 0),
-                    ValidatedOnDate = new System.DateTime(1900, 1, 1)
+                    ValidatedOnDate = new System.DateTime(1900, 1, 1),
+                    Category = (path.Igc.GliderType.ToUpper() == "PARA" ? 0 : 1),
+                    TotalPoints = 0
                 };
+                f.RecalculateTotals(path.PassedBeacons);
                 FlightRepository.Instance.AddFlight(ref f, userId);
                 foreach (var pt in path.PassedBeacons)
                 {

@@ -22,7 +22,7 @@ namespace Albatros.Balises.Core.Common
         public int MaxDistance { get; set; }
         public int OfficialDistance { get; set; } = 0;
 
-        public BalisesPath(int userId, string filePath, int maxDistance)
+        public BalisesPath(int portalId, int userId, string filePath, int maxDistance)
         {
             MaxDistance = maxDistance;
             var fullPath = string.Format("{0}\\Albatros\\Balises\\{1}\\{2}", PortalSettings.Current.HomeDirectoryMapPath, userId, filePath);
@@ -30,18 +30,18 @@ namespace Albatros.Balises.Core.Common
             {
                 Igc = new IgcFile(sr.ReadToEnd());
             }
-            process();
+            process(portalId);
         }
-        public BalisesPath(int userId, IgcFile file, int maxDistance)
+        public BalisesPath(int portalId, int userId, IgcFile file, int maxDistance)
         {
             Igc = file;
             MaxDistance = maxDistance;
-            process();
+            process(portalId);
         }
-        private void process()
+        private void process(int portalId)
         {
             PassedBeacons = new List<FlightBeacon>();
-            var beacons = BeaconRepository.Instance.GetBeacons(PortalSettings.Current.PortalId);
+            var beacons = BeaconRepository.Instance.GetBeacons(portalId);
 
             // detect all flight beacons
             foreach (var flightPoint in Igc.BRecords.Values)
@@ -71,24 +71,22 @@ namespace Albatros.Balises.Core.Common
             }
 
             // detect closest beacons for take off and landing
-            TakeOff = new FlightBeacon() { BeaconId = -1, PassedDistance = 3 * MaxDistance, Description = "", Latitude = Igc.Takeoff.Latitude, Longitude = Igc.Takeoff.Longitude, Altitude = Igc.Takeoff.Altitude };
-            Landing = new FlightBeacon() { BeaconId = -1, PassedDistance = 3 * MaxDistance, Description = "", Latitude = Igc.Landing.Latitude, Longitude = Igc.Landing.Longitude, Altitude = Igc.Landing.Altitude };
-            foreach (var beacon in beacons)
+            TakeOff = new FlightBeacon() { BeaconId = -1, Code = "", PassedDistance = 3 * MaxDistance, Description = "", Latitude = Igc.Takeoff.Latitude, Longitude = Igc.Takeoff.Longitude, Altitude = Igc.Takeoff.Altitude };
+            Landing = new FlightBeacon() { BeaconId = -1, Code = "", PassedDistance = 3 * MaxDistance, Description = "", Latitude = Igc.Landing.Latitude, Longitude = Igc.Landing.Longitude, Altitude = Igc.Landing.Altitude };
+
+            var to = BeaconRepository.Instance.GetClosestBeacon(portalId, Igc.Takeoff.Latitude, Igc.Takeoff.Longitude, MaxDistance * 3).FirstOrDefault();
+            if (to != null)
             {
-                var passedDistance = EarthCalculations.DistanceInMeters(Igc.Takeoff.Latitude, Igc.Takeoff.Longitude, beacon.Latitude, beacon.Longitude);
-                if (passedDistance <= TakeOff.PassedDistance)
-                {
-                    TakeOff.BeaconId = beacon.BeaconId;
-                    TakeOff.PassedDistance = passedDistance;
-                    TakeOff.Description = beacon.Name;
-                }
-                passedDistance = EarthCalculations.DistanceInMeters(Igc.Landing.Latitude, Igc.Landing.Longitude, beacon.Latitude, beacon.Longitude);
-                if (passedDistance <= Landing.PassedDistance)
-                {
-                    Landing.BeaconId = beacon.BeaconId;
-                    Landing.PassedDistance = passedDistance;
-                    Landing.Description = beacon.Name;
-                }
+                TakeOff.BeaconId = to.BeaconId;
+                TakeOff.Description = to.Name;
+            }
+
+            var ldg = BeaconRepository.Instance.GetClosestBeacon(portalId, Igc.Landing.Latitude, Igc.Landing.Longitude, MaxDistance).FirstOrDefault();
+            if (ldg != null)
+            {
+                Landing.BeaconId = ldg.BeaconId;
+                Landing.Description = ldg.Name;
+                Landing.Code = ldg.Code.ToUpper(); // needed to check if official landing
             }
 
             // calculate distance
