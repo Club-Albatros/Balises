@@ -4,12 +4,13 @@ using DotNetNuke.Common;
 using DotNetNuke.Data;
 using DotNetNuke.Framework;
 using Albatros.Balises.Core.Models.FlightBeacons;
+using Albatros.Balises.Core.Common;
 
 namespace Albatros.Balises.Core.Repositories
 {
 
-	public class FlightBeaconRepository : ServiceLocator<IFlightBeaconRepository, FlightBeaconRepository>, IFlightBeaconRepository
- {
+    public class FlightBeaconRepository : ServiceLocator<IFlightBeaconRepository, FlightBeaconRepository>, IFlightBeaconRepository
+    {
         protected override Func<IFlightBeaconRepository> GetFactory()
         {
             return () => new FlightBeaconRepository();
@@ -29,7 +30,7 @@ namespace Albatros.Balises.Core.Repositories
             {
                 return context.ExecuteSingleOrDefault<FlightBeacon>(System.Data.CommandType.Text,
                     "SELECT * FROM {databaseOwner}{objectQualifier}vw_Albatros_Balises_FlightBeacons WHERE FlightId=@0 AND BeaconId=@1",
-                    flightId,beaconId);
+                    flightId, beaconId);
             }
         }
         public void AddFlightBeacon(FlightBeaconBase flightBeacon)
@@ -51,12 +52,12 @@ namespace Albatros.Balises.Core.Repositories
         }
         public void DeleteFlightBeacon(int flightId, int beaconId)
         {
-             Requires.NotNull(flightId);
+            Requires.NotNull(flightId);
             using (var context = DataContext.Instance())
             {
                 context.Execute(System.Data.CommandType.Text,
-                    "DELETE FROM {databaseOwner}{objectQualifier}vw_Albatros_Balises_FlightBeacons WHERE FlightId=@0 AND BeaconId=@1",
-                    flightId,beaconId);
+                    "DELETE FROM {databaseOwner}{objectQualifier}Albatros_Balises_FlightBeacons WHERE FlightId=@0 AND BeaconId=@1",
+                    flightId, beaconId);
             }
         }
         public void DeleteFlightBeaconsByFlight(int flightId)
@@ -64,7 +65,7 @@ namespace Albatros.Balises.Core.Repositories
             using (var context = DataContext.Instance())
             {
                 context.Execute(System.Data.CommandType.Text,
-                    "DELETE FROM {databaseOwner}{objectQualifier}vw_Albatros_Balises_FlightBeacons WHERE FlightId=@0",
+                    "DELETE FROM {databaseOwner}{objectQualifier}Albatros_Balises_FlightBeacons WHERE FlightId=@0",
                     flightId);
             }
         }
@@ -76,10 +77,29 @@ namespace Albatros.Balises.Core.Repositories
             {
                 var rep = context.GetRepository<FlightBeaconBase>();
                 rep.Update("SET PassageTime=@0, PassedDistance=@1 WHERE FlightId=@2 AND BeaconId=@3",
-                          flightBeacon.PassageTime,flightBeacon.PassedDistance, flightBeacon.FlightId,flightBeacon.BeaconId);
+                          flightBeacon.PassageTime, flightBeacon.PassedDistance, flightBeacon.FlightId, flightBeacon.BeaconId);
             }
-        } 
- }
+        }
+
+        public void ProcessFlightBeacons(int flightId, DateTime flightStart, IEnumerable<PathBeacon> path)
+        {
+            DeleteFlightBeaconsByFlight(flightId);
+            foreach (var b in path)
+            {
+                var t = b.PassageTime.Split(':');
+                var hrs = int.Parse(t[0]);
+                var mins = int.Parse(t[1]);
+                var newBeacon = new FlightBeaconBase()
+                {
+                    FlightId = flightId,
+                    BeaconId = b.BeaconId,
+                    PassedDistance = 0,
+                    PassageTime = flightStart.Date.AddHours(hrs).AddMinutes(mins)
+                };
+                AddFlightBeacon(newBeacon);
+            }
+        }
+    }
 
     public interface IFlightBeaconRepository
     {
@@ -90,6 +110,7 @@ namespace Albatros.Balises.Core.Repositories
         void DeleteFlightBeacon(int flightId, int beaconId);
         void DeleteFlightBeaconsByFlight(int flightId);
         void UpdateFlightBeacon(FlightBeaconBase flightBeacon);
+        void ProcessFlightBeacons(int flightId, DateTime flightStart, IEnumerable<PathBeacon> path);
     }
 }
 

@@ -3,6 +3,8 @@ using DotNetNuke.Common;
 using Albatros.DNN.Modules.Balises.Common;
 using Albatros.Balises.Core.Repositories;
 using Albatros.Balises.Core.Models.Flights;
+using Albatros.Balises.Core.Common;
+using System.Collections.Generic;
 
 namespace Albatros.DNN.Modules.Balises.Controllers
 {
@@ -70,9 +72,7 @@ namespace Albatros.DNN.Modules.Balises.Controllers
                 newFlight.ReadTakeoffCoordinates(flight.TakeoffCoords);
                 newFlight.ReadLandingCoordinates(flight.LandingCoords);
                 var newId = FlightRepository.Instance.AddFlight(ref newFlight, User.UserID);
-                // add points
-
-                // recalculate stuff
+                FlightBeaconRepository.Instance.ProcessFlightBeacons(newId, newFlight.TakeoffTime, Newtonsoft.Json.JsonConvert.DeserializeObject<List<PathBeacon>>(flight.BeaconList));
                 newFlight.RecalculateDistanceAndTime();
                 FlightRepository.Instance.UpdateFlight(newFlight, User.UserID);
                 return ReturnRoute(flight.FlightId, View("View", _repository.GetFlight(PortalSettings.PortalId, newId)));
@@ -103,7 +103,10 @@ namespace Albatros.DNN.Modules.Balises.Controllers
                 existingFlight.Summary = flight.Summary;
                 existingFlight.RecalculateDistanceAndTime();
                 FlightRepository.Instance.UpdateFlight(existingFlight.GetFlightBase(), User.UserID);
-
+                if (existingFlight.EntryMethod == 0)
+                {
+                    FlightBeaconRepository.Instance.ProcessFlightBeacons(existingFlight.FlightId, existingFlight.TakeoffTime, Newtonsoft.Json.JsonConvert.DeserializeObject<List<PathBeacon>>(flight.BeaconList));
+                }
                 if (!string.IsNullOrEmpty(existingFlight.TakeoffDescription))
                 {
                     SitesRepository.Instance.SetNewSite(existingFlight.TakeoffLatitude, existingFlight.TakeoffLongitude, existingFlight.TakeoffDescription, BalisesModuleContext.Settings.BeaconPassDistanceMeters);

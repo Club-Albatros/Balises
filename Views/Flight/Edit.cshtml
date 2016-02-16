@@ -116,7 +116,7 @@ else
      data-moduleid="@Dnn.ModuleContext.ModuleId"
      data-apikey="@BalisesModuleContext.Settings.GoogleMapApiKey"
      data-flight="@(Newtonsoft.Json.JsonConvert.SerializeObject(FlightRepository.Instance.GetFlight(Dnn.PortalSettings.PortalId, Model.FlightId)))"
-     data-track="@(Newtonsoft.Json.JsonConvert.SerializeObject(FlightBeaconRepository.Instance.GetFlightBeaconsByFlight(Model.FlightId)))"
+     data-track="@(Newtonsoft.Json.JsonConvert.SerializeObject(FlightBeaconRepository.Instance.GetFlightBeaconsByFlight(Model.FlightId).OrderBy(fb => fb.PassageTime)))"
      style="width:100%;height:500px;">
 </div>
 }

@@ -54,6 +54,7 @@
     <Compile Include="Common\Fix.cs" />
     <Compile Include="Common\FlightStatus.cs" />
     <Compile Include="Common\Globals.cs" />
+    <Compile Include="Common\PathBeacon.cs" />
     <Compile Include="Common\Point.cs" />
     <Compile Include="Common\SwissProjection.cs" />
     <Compile Include="Data\AuditableEntity.cs" />

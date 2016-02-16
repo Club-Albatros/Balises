@@ -1,10 +1,14 @@
 using Albatros.Balises.Core.Common;
 using Albatros.Balises.Core.Repositories;
+using DotNetNuke.ComponentModel.DataAnnotations;
 
 namespace Albatros.Balises.Core.Models.Flights
 {
     public partial class FlightBase
     {
+
+        [IgnoreColumn]
+        public string BeaconList { get; set; }
 
         public void ReadLandingCoordinates(string coordinates)
         {

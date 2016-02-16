@@ -29,12 +29,15 @@
   <dd>@((int)(0.5 + Model.Distance / 100.0) / 10.0) km</dd>
   <dt>@Dnn.LocalizeString("Duration")</dt>
   <dd>@((new System.TimeSpan(0, Model.DurationMins, 0)).ToString("h\\:mm"))</dd>
+  @if (Model.EntryMethod != 0)
+  {
   <dt>@Dnn.LocalizeString("MaxVario")</dt>
   <dd>@Model.MaxVario @Dnn.LocalizeString("mps")</dd>
   <dt>@Dnn.LocalizeString("MaxSpeed")</dt>
   <dd>@Model.MaxSpeed.ToKmPerHour() @Dnn.LocalizeString("kph")</dd>
   <dt>@Dnn.LocalizeString("AverageSpeed")</dt>
   <dd>@Model.AverageSpeed.ToKmPerHour() @Dnn.LocalizeString("kph")</dd>
+  }
   <dt>@Dnn.LocalizeString("Points")</dt>
   <dd>@Model.TotalPoints</dd>
   <dt>@Dnn.LocalizeString("Status")</dt>
@@ -68,7 +71,7 @@
      data-moduleid="@Dnn.ModuleContext.ModuleId"
      data-apikey="@BalisesModuleContext.Settings.GoogleMapApiKey"
      data-flight="@(Newtonsoft.Json.JsonConvert.SerializeObject(Model))"
-     data-track="@(Newtonsoft.Json.JsonConvert.SerializeObject(FlightBeaconRepository.Instance.GetFlightBeaconsByFlight(Model.FlightId)))"
+     data-track="@(Newtonsoft.Json.JsonConvert.SerializeObject(FlightBeaconRepository.Instance.GetFlightBeaconsByFlight(Model.FlightId).OrderBy(fb => fb.PassageTime)))"
      style="width:100%;height:500px;">
 </div>
 

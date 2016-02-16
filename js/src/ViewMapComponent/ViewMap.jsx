@@ -66,7 +66,7 @@ var ViewMap = React.createClass({
       position: new google.maps.LatLng(point.Latitude, point.Longitude),
       map: this._map,
       label: label,
-      title: point.Name
+      title: point.Name + ' ' + point.PassageTime.substr(11,5)
     });
   },
 

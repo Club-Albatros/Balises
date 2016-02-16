@@ -5,8 +5,16 @@ var EditMap = React.createClass({
   getInitialState: function() {
     this.resources = AlbatrosBalises.modules[this.props.moduleId].resources;
     this.service = AlbatrosBalises.modules[this.props.moduleId].service;
+    var initialBeaconList = this.props.track.map(function(b) {
+      return {
+        BeaconId: b.BeaconId,
+        Name: b.Name,
+        PassageTime: b.PassageTime.substr(11,5)
+      }
+    });
+    initialBeaconList.sort(this.compareBeaconPassageTimes);
     return {
-      passedBeacons: this.props.track
+      passedBeacons: initialBeaconList
     }
   },
 
@@ -40,6 +48,7 @@ var EditMap = React.createClass({
           {beaconList}
          </tbody>
         </table>
+        <input type="hidden" id="BeaconList" name="BeaconList" value={JSON.stringify(this.state.passedBeacons)} />
        </div>
       </div>
     );
@@ -93,7 +102,7 @@ var EditMap = React.createClass({
     console.log(this.state.passedBeacons);
     var newBeaconList = this.state.passedBeacons;
     newBeaconList.push(beacon);
-    console.log(newBeaconList);
+    newBeaconList.sort(this.compareBeaconPassageTimes);
     this.setState({
       passedBeacons: newBeaconList
      });
@@ -129,7 +138,6 @@ var EditMap = React.createClass({
   },
 
   changeBeaconTime: function(beacon, e) {
-    console.log('changeBeaconTime');
     beacon.PassageTime = e.target.value;
     var newBeaconList = this.state.passedBeacons.map(function(item) {
       if (item.BeaconId == beacon.BeaconId) {
@@ -138,7 +146,7 @@ var EditMap = React.createClass({
         return item;
       }
     });
-    console.log(newBeaconList);
+    newBeaconList.sort(this.compareBeaconPassageTimes);
     this.setState({
       passedBeacons: newBeaconList
      });
@@ -152,10 +160,21 @@ var EditMap = React.createClass({
         newBeaconList.push(this.state.passedBeacons[i]);
       }
     }
+    newBeaconList.sort(this.compareBeaconPassageTimes);
     this.setState({
       passedBeacons: newBeaconList
      });
+  },
+
+  compareBeaconPassageTimes: function(a,b) {
+    if (a.PassageTime < b.PassageTime)
+      return -1;
+    else if (a.PassageTime > b.PassageTime)
+      return 1;
+    else 
+      return 0;
   }
+
 
 });
 
