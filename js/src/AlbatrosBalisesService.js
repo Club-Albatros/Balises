@@ -39,20 +39,24 @@ window.AlbatrosBalisesService = function($, mid) {
         this.ajaxCall('POST', 'Flights', 'Delete', id, null, success);
     }
 
-    this.listTakeoffs = function (searchString, success) {
+    this.listTakeoffs = function(searchString, success) {
         this.ajaxCall('GET', 'Sites', 'Takeoffs', null, { SearchString: searchString }, success);
     }
 
-    this.listLandings = function (searchString, success) {
+    this.listLandings = function(searchString, success) {
         this.ajaxCall('GET', 'Sites', 'Landings', null, { SearchString: searchString }, success);
     }
 
-    this.searchClosestTakeoff = function (coords, success) {
+    this.searchClosestTakeoff = function(coords, success) {
         this.ajaxCall('GET', 'Sites', 'ClosestTakeoff', null, { Coords: coords }, success);
     }
 
-    this.searchClosestLanding = function (coords, success) {
+    this.searchClosestLanding = function(coords, success) {
         this.ajaxCall('GET', 'Sites', 'ClosestLanding', null, { Coords: coords }, success);
+    }
+
+    this.changeFlightStatus = function(flightId, newStatus, success) {
+        this.ajaxCall('POST', 'Flights', 'ChangeStatus', flightId, { NewStatus: newStatus }, success);
     }
 
 }

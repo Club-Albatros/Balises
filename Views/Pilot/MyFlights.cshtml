@@ -82,7 +82,11 @@
      },
      "viewer": function(column, row)
      {
-      return '<a href="@Url.Action("View", "Flight")?FlightId=' + row.FlightId + '" class="btn btn-sm btn-default"><span class="glyphicon glyphicon-eye-open"></span></a>';
+      var color = 'btn-default';
+      if (row.Status == 1) { color = 'btn-info';}
+      if (row.Status == 2) { color = 'btn-danger';}
+      if (row.Status == 4) { color = 'btn-success';}
+      return '<a href="@Url.Action("View", "Flight")?FlightId=' + row.FlightId + '" class="btn btn-sm ' + color + '"><span class="glyphicon glyphicon-eye-open"></span></a>';
      }
     },
     rowCount: 20,

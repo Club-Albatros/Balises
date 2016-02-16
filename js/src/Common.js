@@ -12,7 +12,6 @@ function formatString(format) {
 }
 
 function loadScript(src, callback) {
-    console.log('loading ' + src);
     var s,
         r,
         t;
@@ -33,7 +32,6 @@ function loadScript(src, callback) {
 }
 
 function CheckFloatInput(e, decSeparator) {
-    console.log(e);
     if ($.inArray(e.keyCode, [8, 9, 27, 13, 110]) !== -1 ||
         // Allow: Decimal Period
         (e.key == decSeparator) ||

@@ -78,8 +78,8 @@ namespace Albatros.DNN.Modules.Balises.Api
                 {
                     foreach (var entry in zip.Entries)
                     {
-                    if (entry.Name.ToLower().EndsWith(".igc") & entry.Length > 0)
-                    {
+                        if (entry.Name.ToLower().EndsWith(".igc") & entry.Length > 0)
+                        {
                             using (var stream = entry.Open())
                             {
                                 var igcText = "";
@@ -103,6 +103,37 @@ namespace Albatros.DNN.Modules.Balises.Api
                 return Request.CreateResponse(HttpStatusCode.BadRequest, "Bad file");
             }
         }
+
+        public class ChangeStatusDTO
+        {
+            public int NewStatus { get; set; }
+        }
+
+        [HttpPost]
+        [BalisesAuthorize(SecurityLevel = SecurityAccessLevel.Pilot)]
+        [ValidateAntiForgeryToken]
+        public HttpResponseMessage ChangeStatus(int id, [FromBody]ChangeStatusDTO data)
+        {
+            var flight = FlightRepository.Instance.GetFlight(PortalSettings.PortalId, id);
+            if (flight == null) { return ServiceError("Flight doesn't exist"); }
+            if (BalisesModuleContext.Security.IsVerifier)
+            {
+                flight.Status = data.NewStatus;
+                FlightRepository.Instance.UpdateFlight(flight.GetFlightBase(), UserInfo.UserID);
+                return Request.CreateResponse(HttpStatusCode.OK, data.NewStatus);
+            }
+            else if (BalisesModuleContext.Security.IsPilot && UserInfo.UserID == flight.UserId)
+            {
+                if (data.NewStatus == 0 | data.NewStatus == 1 | data.NewStatus == 3)
+                {
+                    flight.Status = data.NewStatus;
+                    FlightRepository.Instance.UpdateFlight(flight.GetFlightBase(), UserInfo.UserID);
+                    return Request.CreateResponse(HttpStatusCode.OK, data.NewStatus);
+                }
+            }
+            return Request.CreateResponse(HttpStatusCode.BadRequest, "Not allowed");
+        }
+
     }
 }
 

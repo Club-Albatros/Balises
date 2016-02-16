@@ -38,7 +38,7 @@ namespace Albatros.Balises.Core.IGC
                     TakeoffLongitude = path.Igc.Takeoff.Longitude,
                     TakeoffAltitude = path.Igc.Takeoff.Altitude,
                     Summary = path.Igc.Report(),
-                    Status = 0, //todo
+                    Status = (path.PassedBeacons.Count == 0 ? 3 : 0),
                     ValidatedOnDate = new System.DateTime(1900, 1, 1)
                 };
                 FlightRepository.Instance.AddFlight(ref f, userId);

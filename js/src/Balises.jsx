@@ -1,6 +1,7 @@
 var Upload = require('./UploadComponent/Upload.jsx'),
     ViewMap = require('./ViewMapComponent/ViewMap.jsx'),
-    EditMap = require('./EditMapComponent/EditMap.jsx');
+    EditMap = require('./EditMapComponent/EditMap.jsx'),
+    StatusButton = require('./StatusButton.jsx');
 
 (function($, window, document, undefined) {
 
@@ -44,6 +45,14 @@ var Upload = require('./UploadComponent/Upload.jsx'),
         var beacons = $(el).data('beacons');
         React.render(<EditMap apiKey={apiKey} moduleId={moduleId} track={track}
                  flight={flight} beacons={beacons} />, el);
+      });
+      $('.btnStatus').each(function(i, el) {
+        var moduleId = $(el).data('moduleid');
+        var status = $(el).data('status');
+        var flightId = $(el).data('flightid');
+        var pilotId = $(el).data('pilotid');
+        var type = $(el).data('type');
+        React.render(<StatusButton moduleId={moduleId} status={status} flightId={flightId} pilotId={pilotId} type={type} />, el);
       });
     }
 

@@ -41,8 +41,7 @@
   <dt>@Dnn.LocalizeString("Points")</dt>
   <dd>@Model.TotalPoints</dd>
   <dt>@Dnn.LocalizeString("Status")</dt>
-  <dd>
-   @(Model.Status)
+  <dd class="btnStatus" data-moduleid="@Dnn.ModuleContext.ModuleId" data-status="@Model.Status" data-flightid="@Model.FlightId" data-type="buttonandtext" data-pilotid="@Model.UserId">
   </dd>
  </dl>
  <h3>@Dnn.LocalizeString("History")</h3>

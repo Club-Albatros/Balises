@@ -117,11 +117,38 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="Accept" xml:space="preserve">
+    <value>Accept</value>
+  </data>
   <data name="Beacon" xml:space="preserve">
     <value>Beacon</value>
   </data>
+  <data name="Reject" xml:space="preserve">
+    <value>Reject</value>
+  </data>
   <data name="Remove" xml:space="preserve">
     <value>Remove</value>
+  </data>
+  <data name="Retract" xml:space="preserve">
+    <value>Retract</value>
+  </data>
+  <data name="Status0" xml:space="preserve">
+    <value>Unknown</value>
+  </data>
+  <data name="Status1" xml:space="preserve">
+    <value>Submitted</value>
+  </data>
+  <data name="Status2" xml:space="preserve">
+    <value>Rejected</value>
+  </data>
+  <data name="Status3" xml:space="preserve">
+    <value>Not Eligible</value>
+  </data>
+  <data name="Status4" xml:space="preserve">
+    <value>Accepted</value>
+  </data>
+  <data name="Submit" xml:space="preserve">
+    <value>Submit</value>
   </data>
   <data name="Time" xml:space="preserve">
     <value>Time</value>
