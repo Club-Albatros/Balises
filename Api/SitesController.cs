@@ -26,7 +26,7 @@ namespace Albatros.DNN.Modules.Balises.Api
         [BalisesAuthorize(SecurityLevel = SecurityAccessLevel.Pilot)]
         public HttpResponseMessage Takeoffs(string SearchString)
         {
-            var res = SitesRepository.Instance.GetTakeoffSiteList(PortalSettings.PortalId).Values.Where(s => s.Name.ToLowerInvariant().Contains(SearchString.ToLowerInvariant())).Select(s => new Site() { label = s.Name, value = s.Name, coords = s.Coords, alt = s.Altitude });
+            var res = SitesRepository.Instance.SearchTakeoffSiteList(PortalSettings.PortalId, SearchString).Values.Select(s => new Site() { label = s.Name, value = s.Name, coords = s.Coords, alt = s.Altitude });
             return Request.CreateResponse(HttpStatusCode.OK, res);
         }
 
@@ -34,7 +34,8 @@ namespace Albatros.DNN.Modules.Balises.Api
         [BalisesAuthorize(SecurityLevel = SecurityAccessLevel.Pilot)]
         public HttpResponseMessage Landings(string SearchString)
         {
-            var res = SitesRepository.Instance.GetLandingSiteList(PortalSettings.PortalId).Values.Where(s => s.Name.ToLowerInvariant().Contains(SearchString.ToLowerInvariant())).Select(s => new Site() { label = s.Name, value = s.Name, coords = s.Coords, alt = s.Altitude });
+            SearchString = SearchString.Normalize();
+            var res = SitesRepository.Instance.GetLandingSiteList(PortalSettings.PortalId, SearchString).Values.Select(s => new Site() { label = s.Name, value = s.Name, coords = s.Coords, alt = s.Altitude });
             return Request.CreateResponse(HttpStatusCode.OK, res);
         }
 
