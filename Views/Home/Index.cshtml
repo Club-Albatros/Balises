@@ -9,11 +9,6 @@
     var year = DateTime.Now.Year;
 }
 
-<div class="albatrosBalises" data-moduleid="@Dnn.ModuleContext.ModuleId"
-     data-resources="@SerializedResources()"
-     data-security="@(Newtonsoft.Json.JsonConvert.SerializeObject(BalisesModuleContext.Security))">
-</div>
-
 <h3>@Dnn.LocalizeString("Results") @year</h3>
 
 <table class="table table-condensed">
@@ -55,7 +50,7 @@
    lastPilot = fr.UserId;
   <td>@fr.PilotRanking</td>
   <td>
-   <a href="@Url.Action("Log", "Pilot", new { UserId = fr.UserId, ret = "home" })" title="@Dnn.LocalizeString("View")">
+   <a href="@Url.Action("View", "Pilot", new { UserId = fr.UserId, ret = "home" })" title="@Dnn.LocalizeString("View")">
     @fr.Pilot
    </a>      
   </td>
@@ -147,18 +142,15 @@
  </tbody>
 </table>
 
-<div class="row">
- <div class="col-xs-12">
-  <div class="uploadComponent" data-moduleid="@Dnn.ModuleContext.ModuleId" data-tabid="@Dnn.ModuleContext.TabId">
-  </div>
- </div>
-</div>
-
 <div>
- <a href="@Url.Action("Log", "Pilot")" class="btn btn-default">@Dnn.LocalizeString("Log")</a>
+ @if (BalisesModuleContext.Security.IsPilot)
+ {
+ <a href="@Url.Action("Edit", "Flight", new { FlightId = -1, ret = "home" })" class="btn btn-default">@Dnn.LocalizeString("AddFlight")</a>
+ <a href="@Url.Action("View", "Pilot", new { UserId = Dnn.User.UserID })" class="btn btn-default">@Dnn.LocalizeString("MyFlights")</a>
+ }
  @if (BalisesModuleContext.Security.IsVerifier)
  {
- <a href="@Url.Action("FlightList", "Verifier")" class="btn btn-primary">@Dnn.LocalizeString("SubmittedFlights")</a>
+ <a href="@Url.Action("FlightList", "Verifier")" class="btn btn-default">@Dnn.LocalizeString("SubmittedFlights")</a>
  }
 
 </div>

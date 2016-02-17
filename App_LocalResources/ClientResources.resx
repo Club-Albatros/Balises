@@ -135,6 +135,9 @@
   <data name="Delete" xml:space="preserve">
     <value>Delete</value>
   </data>
+  <data name="DropHere" xml:space="preserve">
+    <value>Drop igc or zip file here</value>
+  </data>
   <data name="More" xml:space="preserve">
     <value>More</value>
   </data>
@@ -170,5 +173,8 @@
   </data>
   <data name="Upload" xml:space="preserve">
     <value>Upload</value>
+  </data>
+  <data name="Uploading" xml:space="preserve">
+    <value>Uploading ...</value>
   </data>
 </root>

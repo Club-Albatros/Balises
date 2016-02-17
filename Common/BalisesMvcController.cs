@@ -31,9 +31,10 @@ namespace Albatros.DNN.Modules.Balises.Common
             RouteValueDictionary routeValues = new RouteValueDictionary();
             switch (GetRouteParameter())
             {
-                case "p-l":
+                case "p-v":
                     routeValues["controller"] = "Pilot";
-                    routeValues["action"] = "Log";
+                    routeValues["action"] = "View";
+                    routeValues.Add("UserId", id);
                     return Redirect(ModuleRoutingProvider.Instance().GenerateUrl(routeValues, ModuleContext));
                 case "home":
                     return RedirectToDefaultRoute();

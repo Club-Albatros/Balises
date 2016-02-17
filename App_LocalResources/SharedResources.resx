@@ -288,4 +288,7 @@
   <data name="OtherYears.Text" xml:space="preserve">
     <value>Other Years</value>
   </data>
+  <data name="MyFlights.Text" xml:space="preserve">
+    <value>My Flights</value>
+  </data>
 </root>

@@ -52,7 +52,7 @@
    lastPilot = fr.UserId;
   <td>@fr.PilotRanking</td>
   <td>
-   <a href="@Url.Action("Log", "Pilot", new { UserId = fr.UserId, ret = "home" })" title="@Dnn.LocalizeString("View")">
+   <a href="@Url.Action("View", "Pilot", new { UserId = fr.UserId, ret = "home" })" title="@Dnn.LocalizeString("View")">
     @fr.Pilot
    </a>      
   </td>

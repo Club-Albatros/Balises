@@ -1,2 +1,114 @@
 ﻿@inherits BalisesWebPage
 @using Albatros.DNN.Modules.Balises.Common
+@{
+    BalisesModuleContext.AddCss("bootstrap.min.css", "bootstrap", "3.3.6");
+    BalisesModuleContext.AddCss("jquery.bootgrid.min.css", "bootgrid", "1.3.1");
+    BalisesModuleContext.AddScript("jquery.bootgrid.min.js", "bootgrid", "1.3.1");
+    BalisesModuleContext.AddScript("moment-with-locales.min.js", "moment", "2.11.2");
+    BalisesModuleContext.AddModuleScript();
+    BalisesModuleContext.AddScript("SimpleAjaxUploader.min.js", "SimpleAjaxUploader", "2.4");
+
+    var userId = Dnn.User.UserID;
+    if (Request.Params["UserId"] != null)
+    {
+     userId = int.Parse(Request.Params["UserId"]);
+    }
+}
+
+<h3>@Dnn.LocalizeString("Log")</h3>
+
+<table id="flightsGrid" class="table table-condensed table-hover table-striped">
+ <thead>
+  <tr>
+   <th data-column-id="FlightId" data-type="numeric" data-identifier="true" data-visible="false">ID</th>
+   <th data-column-id="TakeoffTime" data-header-css-class="bg_medcol" data-order="desc" data-formatter="datime">@Dnn.LocalizeString("Takeoff")</th>
+   <th data-column-id="TakeoffDescription">@Dnn.LocalizeString("Takeoff")</th>
+   <th data-column-id="LandingDescription">@Dnn.LocalizeString("Landing")</th>
+   <th data-column-id="DurationMins" data-header-css-class="bg_smallcol colTime" data-formatter="duration"></th>
+   <th data-column-id="Distance" data-header-css-class="bg_smallcol colDistance" data-formatter="distance"></th>
+   <th data-column-id="NrBeacons" data-header-css-class="bg_iconcol colNrBeacons"></th>
+   <th data-column-id="TotalPoints" data-header-css-class="bg_iconcol colTotalPoints"></th>
+   <th data-column-id="NrComments" data-header-css-class="bg_iconcol colNrComments"></th>
+   <th data-formatter="editor" data-header-css-class="bg_iconcol"></th>
+   <th data-formatter="viewer" data-header-css-class="bg_iconcol"></th>
+  </tr>
+ </thead>
+</table>
+
+<div class="albatrosBalises" data-moduleid="@Dnn.ModuleContext.ModuleId"
+     data-resources="@SerializedResources()"
+     data-security="@(Newtonsoft.Json.JsonConvert.SerializeObject(BalisesModuleContext.Security))">
+</div>
+
+<div class="row">
+ <div class="col-xs-12">
+  <div class="uploadComponent" data-moduleid="@Dnn.ModuleContext.ModuleId" data-tabid="@Dnn.ModuleContext.TabId">
+  </div>
+ </div>
+</div>
+
+<div class="rightbutton">
+ @if (BalisesModuleContext.Security.IsPilot & userId == Dnn.User.UserID)
+ {
+ <a href="@Url.Action("Edit", "Flight", new { FlightId = -1, ret = "p-v" })" class="btn btn-default">@Dnn.LocalizeString("AddFlight")</a>
+ }
+ <a href="@Url.Action("Index", "Home")" class="btn btn-primary">@Dnn.LocalizeString("Return")</a>
+</div>
+
+<script type="text/javascript">
+ (function($, Sys) {
+  $(document).ready(function () {
+   moment.locale('@System.Threading.Thread.CurrentThread.CurrentCulture.TwoLetterISOLanguageName');
+   $('#flightsGrid').bootgrid({
+    ajax: true,
+    url: '@GetModuleUrl("API/Flights/List/")@userId',
+    requestHandler: function (request) {
+     request["moduleId"] = @Dnn.ActiveModule.ModuleID;
+     request["tabId"] = @Dnn.ActiveModule.TabID;
+     return request;
+    },
+    formatters: {
+     "datime": function(column, row)
+     {
+      var m = moment(row.TakeoffTime);
+      return m.format('lll');
+     },
+     "duration": function(column, row)
+     {
+      var d = moment.duration(row.DurationMins, 'minutes');
+      return d.hours() + ':' + d.minutes();
+     },
+     "distance": function(column, row)
+     {
+      var d = Math.round(row.Distance/100)/10;
+      return d + ' km';
+     },
+     "editor": function(column, row)
+     {
+      if (row.Status < 4) {
+       return '<a href="@Url.Action("Edit", "Flight")?FlightId=' + row.FlightId + '&ret=p-mf" class="btn btn-sm btn-default"><span class="glyphicon glyphicon-pencil"></span></a>';
+      }
+     },
+     "viewer": function(column, row)
+     {
+      var color = 'btn-default';
+      if (row.Status == 1) { color = 'btn-info';}
+      if (row.Status == 2) { color = 'btn-danger';}
+      if (row.Status == 4) { color = 'btn-success';}
+      return '<a href="@Url.Action("View", "Flight")?FlightId=' + row.FlightId + '" class="btn btn-sm ' + color + '"><span class="glyphicon glyphicon-eye-open"></span></a>';
+     }
+    },
+    rowCount: 10,
+    columnSelection: false
+   })
+    .on("loaded.rs.jquery.bootgrid", function (e)
+    {
+     $('th.colTime a span.text').html('<span class="glyphicon glyphicon-time"></span>').attr('title', '@Dnn.LocalizeString("Duration")');
+     $('th.colDistance a span.text').html('<span class="glyphicon glyphicon-resize-horizontal"></span>').attr('title', '@Dnn.LocalizeString("Distance")');
+     $('th.colNrBeacons a span.text').html('<span class="glyphicon glyphicon-map-marker"></span>').attr('title', '@Dnn.LocalizeString("NrBeacons")');
+     $('th.colTotalPoints a span.text').html('<span class="glyphicon glyphicon-dashboard"></span>').attr('title', '@Dnn.LocalizeString("TotalPoints")');
+     $('th.colNrComments a span.text').html('<span class="glyphicon glyphicon-comment"></span>').attr('title', '@Dnn.LocalizeString("NrComments")');
+    });
+  });
+ }(jQuery, window.Sys));
+</script>

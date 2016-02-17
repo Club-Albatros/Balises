@@ -184,9 +184,6 @@
     <Content Include="Views\Home\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\Pilot\Log.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
     <Content Include="Views\Pilot\View.cshtml" />
   </ItemGroup>
   <ItemGroup>

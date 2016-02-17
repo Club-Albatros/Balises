@@ -81,7 +81,7 @@ namespace Albatros.DNN.Modules.Balises.Controllers
                 newFlight.RecalculateTotals();
                 newFlight.CheckLandingBeacon(BalisesModuleContext.Settings.BeaconPassDistanceMeters);
                 FlightRepository.Instance.UpdateFlight(newFlight, User.UserID);
-                return ReturnRoute(flight.FlightId, View("View", _repository.GetFlight(PortalSettings.PortalId, newId)));
+                return ReturnRoute(flight.UserId, View("View", _repository.GetFlight(PortalSettings.PortalId, newId)));
             }
             else
             {
@@ -127,7 +127,7 @@ namespace Albatros.DNN.Modules.Balises.Controllers
                 {
                     SitesRepository.Instance.SetNewSite(existingFlight.LandingLatitude, existingFlight.LandingLongitude, existingFlight.LandingDescription, BalisesModuleContext.Settings.BeaconPassDistanceMeters);
                 }
-                return ReturnRoute(flight.FlightId, View("View", _repository.GetFlight(PortalSettings.PortalId, flight.FlightId)));
+                return ReturnRoute(flight.UserId, View("View", _repository.GetFlight(PortalSettings.PortalId, flight.FlightId)));
             }
         }
     }
