@@ -125,6 +125,13 @@ namespace Albatros.Balises.Core.Repositories
                 return context.ExecuteQuery<FlightRanking>(System.Data.CommandType.StoredProcedure, "{databaseOwner}{objectQualifier}Albatros_Balises_GetRankings", portalId, year);
             }
         }
+        public IEnumerable<int> GetFlightYears(int portalId)
+        {
+            using (var context = DataContext.Instance())
+            {
+                return context.ExecuteQuery<int>(System.Data.CommandType.Text, "SELECT DISTINCT YEAR(f.TakeoffTime) Yr FROM {databaseOwner}{objectQualifier}Albatros_Balises_Flights f WHERE f.PortalId=@0 ORDER BY Yr", portalId);
+            }
+        }
     }
 
     public interface IFlightRepository
@@ -141,6 +148,7 @@ namespace Albatros.Balises.Core.Repositories
         void DeleteFlight(int portalId, int flightId);
         void UpdateFlight(FlightBase flight, int userId);
         IEnumerable<FlightRanking> GetRankings(int portalId, int year);
+        IEnumerable<int> GetFlightYears(int portalId);
     }
 }
 

@@ -282,4 +282,10 @@
   <data name="LatestFlights.Text" xml:space="preserve">
     <value>Latest Flights</value>
   </data>
+  <data name="PreviousYears.Text" xml:space="preserve">
+    <value>Previous Years</value>
+  </data>
+  <data name="OtherYears.Text" xml:space="preserve">
+    <value>Other Years</value>
+  </data>
 </root>

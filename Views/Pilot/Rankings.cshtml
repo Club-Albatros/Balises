@@ -1,0 +1,97 @@
+﻿@inherits BalisesWebPage
+@using System.Linq;
+@using Albatros.DNN.Modules.Balises.Common;
+@using Albatros.Balises.Core.Repositories;
+@{
+    var lastPilot = -1;
+    var year = DateTime.Now.Year;
+    if (Request.Params["year"] != null)
+    {
+     year = int.Parse(Request.Params["year"]);
+    }
+}
+
+<h3>@Dnn.LocalizeString("Results") @year</h3>
+
+<table class="table table-condensed">
+ <thead>
+  <tr>
+   <th style="width:24px" title="@Dnn.LocalizeString("Rank")">
+    <span class="glyphicon glyphicon-stats"></span>
+   </th>
+   <th style="width:200px">@Dnn.LocalizeString("Pilot")</th>
+   <th style="width:40px">@Dnn.LocalizeString("Total")</th>
+   <th style="width:70px" title="@Dnn.LocalizeString("Date")">
+    <span class="glyphicon glyphicon-calendar"></span>
+   </th>
+   <th>@Dnn.LocalizeString("Flight")</th>
+   <th style="width:24px" title="@Dnn.LocalizeString("NrBeacons")">
+    <span class="glyphicon glyphicon-map-marker"></span>
+   </th>
+   <th style="width:40px" title="@Dnn.LocalizeString("Points")">
+    <span class="glyphicon glyphicon-dashboard"></span>
+   </th>
+   <th style="width:40px" title="@Dnn.LocalizeString("Duration")">
+    <span class="glyphicon glyphicon-time"></span>
+   </th>
+   <th style="width:40px" title="@Dnn.LocalizeString("Distance")">
+    <span class="glyphicon glyphicon-resize-horizontal"></span>
+   </th>
+   <th style="width:40px" title="@Dnn.LocalizeString("Comments")">
+    <span class="glyphicon glyphicon-comment"></span>
+   </th>
+   <th style="width:32px">&nbsp;</th>
+  </tr>
+ </thead>
+ <tbody>
+@foreach (var fr in FlightRepository.Instance.GetRankings(Dnn.PortalSettings.PortalId, year))
+{
+ <tr>
+  @if (fr.UserId != lastPilot)
+  {
+   lastPilot = fr.UserId;
+  <td>@fr.PilotRanking</td>
+  <td>
+   <a href="@Url.Action("Log", "Pilot", new { UserId = fr.UserId, ret = "home" })" title="@Dnn.LocalizeString("View")">
+    @fr.Pilot
+   </a>      
+  </td>
+  <td>@fr.AggregatePoints</td>
+  }
+  else
+  {
+  <td colspan="3"></td>
+  }
+  <td>@fr.TakeoffTime.ToString("d MMM")</td>
+  <td>
+   @fr.TakeoffDescription - @string.Join(" - ", fr.PassedBeacons.Select(f => f.Name)) - @fr.LandingDescription
+  </td>
+  <td>@fr.NrBeacons</td>
+  <td>@fr.TotalPoints</td>
+  <td>@fr.DurationMins.ToTime()</td>
+  <td>@fr.Distance.ToKm()</td>
+  <td>@fr.NrComments</td>
+  <td>
+   <a href="@Url.Action("View", "Flight", new { FlightId = fr.FlightId, ret = "home" })" class="btn btn-sm btn-default" title="@Dnn.LocalizeString("View")">
+    <span class="glyphicon glyphicon-eye-open"></span>
+   </a>   
+  </td>
+ </tr>
+}
+
+ </tbody>
+</table>
+
+<div class="prev-yrs">
+ <span><strong>@Dnn.LocalizeString("OtherYears")</strong></span>
+ @foreach (var yr in FlightRepository.Instance.GetFlightYears(Dnn.PortalSettings.PortalId).Where(i => i != year))
+ {
+ <span>
+  <a href="@Url.Action("Rankings", "Pilot", new { year = yr })" class="btn btn-xs btn-info">@yr</a>
+ </span>
+ }
+</div>
+
+<div class="rightbutton">
+ <a href="@Url.Action("Index", "Home")" class="btn btn-primary">@Dnn.LocalizeString("Return")</a>
+</div>

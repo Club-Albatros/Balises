@@ -24,5 +24,12 @@ namespace Albatros.DNN.Modules.Balises.Controllers
             return View();
         }
 
+        [HttpGet]
+        [BalisesAuthorize(SecurityLevel = SecurityAccessLevel.View)]
+        public ActionResult Rankings()
+        {
+            return View();
+        }
+
     }
 }

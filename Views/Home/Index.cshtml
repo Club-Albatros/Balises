@@ -1,17 +1,12 @@
 ﻿@inherits BalisesWebPage
 @using System.Linq;
 @using Albatros.DNN.Modules.Balises.Common;
-@using Albatros.Balises.Core.Common;
 @using Albatros.Balises.Core.Repositories;
 @{
     BalisesModuleContext.AddModuleScript();
     BalisesModuleContext.AddScript("SimpleAjaxUploader.min.js", "SimpleAjaxUploader", "2.4");
     var lastPilot = -1;
     var year = DateTime.Now.Year;
-    if (Request.Params["year"] != null)
-    {
-     year = int.Parse(Request.Params["year"]);
-    }
 }
 
 <div class="albatrosBalises" data-moduleid="@Dnn.ModuleContext.ModuleId"
@@ -89,6 +84,16 @@
 
  </tbody>
 </table>
+
+<div class="prev-yrs">
+ <span><strong>@Dnn.LocalizeString("PreviousYears")</strong></span>
+ @foreach (var yr in FlightRepository.Instance.GetFlightYears(Dnn.PortalSettings.PortalId).Where(i => i != DateTime.Now.Year))
+ {
+ <span>
+  <a href="@Url.Action("Rankings", "Pilot", new { year = yr })" class="btn btn-xs btn-info">@yr</a>
+ </span>
+ }
+</div>
 
 <h3>@Dnn.LocalizeString("LatestFlights")</h3>
 
