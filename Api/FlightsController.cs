@@ -119,6 +119,8 @@ namespace Albatros.DNN.Modules.Balises.Api
             if (BalisesModuleContext.Security.IsVerifier)
             {
                 flight.Status = data.NewStatus;
+                flight.ValidatedByUserID = UserInfo.UserID;
+                flight.ValidatedOnDate = System.DateTime.Now;
                 FlightRepository.Instance.UpdateFlight(flight.GetFlightBase(), UserInfo.UserID);
                 return Request.CreateResponse(HttpStatusCode.OK, data.NewStatus);
             }
