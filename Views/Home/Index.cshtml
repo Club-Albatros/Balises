@@ -21,7 +21,7 @@
 
 <h3>@Dnn.LocalizeString("Results") @year</h3>
 
-<table class="table">
+<table class="table table-condensed">
  <thead>
   <tr>
    <th style="width:24px" title="@Dnn.LocalizeString("Rank")">
@@ -87,6 +87,58 @@
  </tr>
 }
 
+ </tbody>
+</table>
+
+<h3>@Dnn.LocalizeString("LatestFlights")</h3>
+
+<table class="table table-condensed">
+ <thead>
+  <tr>
+   <th style="width:200px">@Dnn.LocalizeString("Pilot")</th>
+   <th style="width:70px" title="@Dnn.LocalizeString("Date")">
+    <span class="glyphicon glyphicon-calendar"></span>
+   </th>
+   <th>@Dnn.LocalizeString("Flight")</th>
+   <th style="width:24px" title="@Dnn.LocalizeString("NrBeacons")">
+    <span class="glyphicon glyphicon-map-marker"></span>
+   </th>
+   <th style="width:40px" title="@Dnn.LocalizeString("Points")">
+    <span class="glyphicon glyphicon-dashboard"></span>
+   </th>
+   <th style="width:40px" title="@Dnn.LocalizeString("Duration")">
+    <span class="glyphicon glyphicon-time"></span>
+   </th>
+   <th style="width:40px" title="@Dnn.LocalizeString("Distance")">
+    <span class="glyphicon glyphicon-resize-horizontal"></span>
+   </th>
+   <th style="width:40px" title="@Dnn.LocalizeString("Comments")">
+    <span class="glyphicon glyphicon-comment"></span>
+   </th>
+   <th style="width:32px">&nbsp;</th>
+  </tr>
+ </thead>
+ <tbody>
+@foreach (var f in FlightRepository.Instance.GetLatestFlights(Dnn.PortalSettings.PortalId))
+{
+<tr>
+  <td>@f.Pilot</td>
+  <td>@f.TakeoffTime.ToString("d MMM")</td>
+  <td>
+   @f.TakeoffDescription - @string.Join(" - ", f.PassedBeacons.Select(fb => fb.Name)) - @f.LandingDescription
+  </td>
+  <td>@f.NrBeacons</td>
+  <td>@f.TotalPoints</td>
+  <td>@f.DurationMins.ToTime()</td>
+  <td>@f.Distance.ToKm()</td>
+  <td>@f.NrComments</td>
+  <td>
+   <a href="@Url.Action("View", "Flight", new { FlightId = f.FlightId, ret = "home" })" class="btn btn-sm btn-default" title="@Dnn.LocalizeString("View")">
+    <span class="glyphicon glyphicon-eye-open"></span>
+   </a>   
+  </td>
+</tr>
+}
  </tbody>
 </table>
 

@@ -279,4 +279,7 @@
   <data name="View.Text" xml:space="preserve">
     <value>View</value>
   </data>
+  <data name="LatestFlights.Text" xml:space="preserve">
+    <value>Latest Flights</value>
+  </data>
 </root>

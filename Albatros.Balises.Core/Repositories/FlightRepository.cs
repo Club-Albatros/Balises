@@ -42,6 +42,13 @@ namespace Albatros.Balises.Core.Repositories
                 return rep.Get(portalId);
             }
         }
+        public IEnumerable<Flight> GetLatestFlights(int portalId)
+        {
+            using (var context = DataContext.Instance())
+            {
+                return context.ExecuteQuery<Flight>(System.Data.CommandType.Text, "SELECT TOP 10 * FROM {databaseOwner}{objectQualifier}vw_Albatros_Balises_Flights WHERE PortalId=@0 ORDER BY CreatedOnDate DESC", portalId);
+            }
+        }
         public IEnumerable<Flight> GetFlightsByStatus(int portalId, int status)
         {
             using (var context = DataContext.Instance())
@@ -125,6 +132,7 @@ namespace Albatros.Balises.Core.Repositories
         IEnumerable<Flight> GetFlightsByPilot(int portalId, int userId);
         IPagedList<Flight> GetFlightsByPilot(int portalId, int userId, string searchField, string searchText, string orderByField, string sortOrder, int pageIndex, int pageSize);
         IEnumerable<Flight> GetFlights(int portalId);
+        IEnumerable<Flight> GetLatestFlights(int portalId);
         IEnumerable<Flight> GetFlightsByStatus(int portalId, int status);
         Flight FindFlight(int portalId, int userId, DateTime takeoffTime);
         Flight GetFlight(int portalId, int flightId);
