@@ -18,12 +18,12 @@ namespace Albatros.Balises.Core.Repositories
         {
             return () => new CommentRepository();
         }
-        public IEnumerable<Comment> GetComments(int flightId)
+        public IPagedList<Comment> GetComments(int flightId, int pageIndex, int pageSize)
         {
             using (var context = DataContext.Instance())
             {
                 var rep = context.GetRepository<Comment>();
-                return rep.Get(flightId);
+                return rep.Find(pageIndex, pageSize, "WHERE FlightId=@0 ORDER BY Datime DESC", flightId);
             }
         }
         public Comment GetComment(int flightId, int commentId)
@@ -77,7 +77,7 @@ namespace Albatros.Balises.Core.Repositories
 
     public interface ICommentRepository
     {
-        IEnumerable<Comment> GetComments(int flightId);
+        IPagedList<Comment> GetComments(int flightId, int pageIndex, int pageSize);
         Comment GetComment(int flightId, int commentId);
         int AddComment(ref CommentBase comment);
         void DeleteComment(CommentBase comment);

@@ -1,7 +1,8 @@
 var Upload = require('./UploadComponent/Upload.jsx'),
     ViewMap = require('./ViewMapComponent/ViewMap.jsx'),
     EditMap = require('./EditMapComponent/EditMap.jsx'),
-    StatusButton = require('./StatusButton.jsx');
+    StatusButton = require('./StatusButton.jsx'),
+    Comments = require('./CommentsComponent/Comments.jsx');
 
 (function($, window, document, undefined) {
 
@@ -53,6 +54,19 @@ var Upload = require('./UploadComponent/Upload.jsx'),
         var pilotId = $(el).data('pilotid');
         var type = $(el).data('type');
         React.render(<StatusButton moduleId={moduleId} status={status} flightId={flightId} pilotId={pilotId} type={type} />, el);
+      });
+      $('.commentsComponent').each(function(i, el) {
+        var moduleId = $(el).data('moduleid');
+        var flightId = $(el).data('flight');
+        var pageSize = $(el).data('pagesize');
+        var comments = $(el).data('comments');
+        var appPath = $(el).data('apppath');
+        var totalComments = $(el).data('totalcomments');
+        var loggedIn = $(el).data('loggedin');
+        React.render(<Comments moduleId={moduleId} 
+           appPath={appPath} flightId={flightId}
+           totalComments={totalComments} loggedIn={loggedIn}
+           pageSize={pageSize} comments={comments} />, el);
       });
     }
 

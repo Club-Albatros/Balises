@@ -59,4 +59,21 @@ window.AlbatrosBalisesService = function($, mid) {
         this.ajaxCall('POST', 'Flights', 'ChangeStatus', flightId, { NewStatus: newStatus }, success);
     }
 
+    this.addComment = function(flightId, comment, success, fail) {
+        this.ajaxCall('POST', 'Comments', 'Add', flightId, {
+            Remarks: comment
+        }, success, fail);
+    }
+
+    this.loadComments = function(flightId, pageIndex, pageSize, success, fail) {
+        this.ajaxCall('GET', 'Comments', 'List', flightId, {
+            PageIndex: pageIndex,
+            PageSize: pageSize
+        }, success, fail);
+    }
+
+    this.deleteComment = function(flightId, commentId, success, fail) {
+        this.ajaxCall('POST', 'Comments', 'Delete', flightId, { CommentId: commentId }, success, fail);
+    }
+
 }
