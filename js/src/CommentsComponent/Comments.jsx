@@ -36,7 +36,7 @@ var Comments = React.createClass({
         <div className="col-xs-12">
           <div className="panel panel-default widget">
            <div className="panel-heading">
-            <span className="glyphicon glyphicon-comment"></span>
+            <span className="fa fa-comments"></span>
             <h3 className="panel-title">{this.resources.Comments}</h3>
             <span className="label label-info">{this.state.commentCount}</span>
            </div>
@@ -47,7 +47,7 @@ var Comments = React.createClass({
             </ul>
             <a href="#" className="btn btn-primary btn-sm btn-block" role="button" 
                onClick={this.loadMoreComments} ref="cmdMore" disabled={!this.state.canLoadMore}>
-               <span className="glyphicon glyphicon-refresh"></span> {this.resources.More}
+               <span className="fa fa-repeat"></span> {this.resources.More}
             </a>
            </div>
           </div>

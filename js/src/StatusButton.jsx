@@ -23,23 +23,23 @@ var StatusButton = React.createClass({
           case 1:
             buttons.push(<a href="#" onClick={this.changeStatus.bind(null, 2)} className="btn btn-xs btn-danger"
                             title={this.resources.Reject}>
-                           <span className="glyphicon glyphicon-thumbs-down"></span> {this.resources.Reject}
+                           <span className="fa fa-thumbs-down"></span> {this.resources.Reject}
                          </a>);
             buttons.push(<a href="#" onClick={this.changeStatus.bind(null, 4)} className="btn btn-xs btn-success"
                             title={this.resources.Accept}>
-                           <span className="glyphicon glyphicon-thumbs-up"></span> {this.resources.Accept}
+                           <span className="fa fa-thumbs-up"></span> {this.resources.Accept}
                          </a>);
             break;
           case 2:
             buttons.push(<a href="#" onClick={this.changeStatus.bind(null, 4)} className="btn btn-xs btn-success"
                             title={this.resources.Accept}>
-                           <span className="glyphicon glyphicon-thumbs-up"></span> {this.resources.Accept}
+                           <span className="fa fa-thumbs-up"></span> {this.resources.Accept}
                          </a>);
             break;
           case 4:
             buttons.push(<a href="#" onClick={this.changeStatus.bind(null, 2)} className="btn btn-xs btn-danger"
                             title={this.resources.Reject}>
-                           <span className="glyphicon glyphicon-thumbs-down"></span> {this.resources.Reject}
+                           <span className="fa fa-thumbs-down"></span> {this.resources.Reject}
                          </a>);
             break;
         }
@@ -50,13 +50,13 @@ var StatusButton = React.createClass({
           case 0:
             buttons.push(<a href="#" onClick={this.changeStatus.bind(null, 1)} className="btn btn-xs btn-primary"
                             title={this.resources.Submit}>
-                           <span className="glyphicon glyphicon-check"></span> {this.resources.Submit}
+                           <span className="fa fa-check"></span> {this.resources.Submit}
                          </a>);
             break;
           case 1:
             buttons.push(<a href="#" onClick={this.changeStatus.bind(null, 0)} className="btn btn-xs btn-warning"
                             title={this.resources.Retract}>
-                           <span className="glyphicon glyphicon-remove"></span> {this.resources.Retract}
+                           <span className="fa fa-remove"></span> {this.resources.Retract}
                          </a>);
             break;
         }

@@ -73,7 +73,7 @@
      },
      "viewer": function(column, row)
      {
-      return '<a href="@Url.Action("View", "Flight")?FlightId=' + row.FlightId + '&ret=v-sf" class="btn btn-sm btn-default"><span class="glyphicon glyphicon-eye-open"></span></a>';
+      return '<a href="@Url.Action("View", "Flight")?FlightId=' + row.FlightId + '&ret=v-sf" class="btn btn-sm btn-default"><span class="fa fa-eye"></span></a>';
      }
     },
     rowCount: 10,
@@ -81,11 +81,11 @@
    })
     .on("loaded.rs.jquery.bootgrid", function (e)
     {
-     $('th.colTime a span.text').html('<span class="glyphicon glyphicon-time"></span>').attr('title', '@Dnn.LocalizeString("Duration")');
-     $('th.colDistance a span.text').html('<span class="glyphicon glyphicon-resize-horizontal"></span>').attr('title', '@Dnn.LocalizeString("Distance")');
-     $('th.colNrBeacons a span.text').html('<span class="glyphicon glyphicon-map-marker"></span>').attr('title', '@Dnn.LocalizeString("NrBeacons")');
-     $('th.colTotalPoints a span.text').html('<span class="glyphicon glyphicon-dashboard"></span>').attr('title', '@Dnn.LocalizeString("TotalPoints")');
-     $('th.colNrComments a span.text').html('<span class="glyphicon glyphicon-comment"></span>').attr('title', '@Dnn.LocalizeString("NrComments")');
+     $('th.colTime a span.text').html('<span class="fa fa-clock-o"></span>').attr('title', '@Dnn.LocalizeString("Duration")');
+     $('th.colDistance a span.text').html('<span class="fa fa-arrows-h"></span>').attr('title', '@Dnn.LocalizeString("Distance")');
+     $('th.colNrBeacons a span.text').html('<span class="fa fa-map-marker"></span>').attr('title', '@Dnn.LocalizeString("NrBeacons")');
+     $('th.colTotalPoints a span.text').html('<span class="fa fa-hashtag"></span>').attr('title', '@Dnn.LocalizeString("TotalPoints")');
+     $('th.colNrComments a span.text').html('<span class="fa fa-comments"></span>').attr('title', '@Dnn.LocalizeString("NrComments")');
     });
   });
  }(jQuery, window.Sys));

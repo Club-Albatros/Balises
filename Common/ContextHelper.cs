@@ -66,9 +66,13 @@ namespace Albatros.DNN.Modules.Balises.Common
         
         public void AddBootstrapCss()
         {
-            AddCss("bootstrap.min.css", "bootstrap", "todo");
+            AddCss("bootstrap.min.css", "bootstrap", "3.3.6");
         }
-        
+        public void AddFontAwesome()
+        {
+            AddCss("font-awesome.min.css", "bootstrap", "4.5.0");
+        }
+
         #endregion
 
         #region Js Files

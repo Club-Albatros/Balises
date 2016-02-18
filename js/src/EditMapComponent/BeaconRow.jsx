@@ -16,14 +16,14 @@ var BeaconRow = React.createClass({
              <input type="text" className="form-control" value={this.props.beacon.PassageTime} 
                     ref="txtTime" />
              <span className="input-group-addon clickable">
-              <span className="glyphicon glyphicon-time"></span>
+              <span className="fa fa-clock-o"></span>
              </span>
            </div>
          </td>
          <td>
           <a href="#" className="btn btn-sm btn-danger" title={this.resources.Remove}
              onClick={this.props.deleteBeacon.bind(null, this.props.beacon)}>
-           <span className="glyphicon glyphicon-remove"></span>
+           <span className="fa fa-remove"></span>
           </a>
          </td>
         </tr>

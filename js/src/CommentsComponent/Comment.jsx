@@ -16,7 +16,7 @@ var Comment = React.createClass({
                       <button type="button" className="btn btn-danger btn-xs" 
                               title={this.resources.Delete} onClick={this.props.onDelete.bind(null, this.props.comment.CommentId)}
                               data-id={this.props.comment.CommentId}>
-                          <span className="glyphicon glyphicon-trash"></span>
+                          <span className="fa fa-trash"></span>
                       </button>
                   </div>
         );
