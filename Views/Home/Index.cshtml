@@ -11,11 +11,11 @@
 
 <h3>@Dnn.LocalizeString("Results") @year</h3>
 
-<table class="table table-condensed">
+<table class="rankings">
  <thead>
   <tr>
    <th style="width:24px" title="@Dnn.LocalizeString("Rank")">
-    <span class="fa fa-certificate"></span>
+    <span class="fa fa-stats"></span>
    </th>
    <th style="width:200px">@Dnn.LocalizeString("Pilot")</th>
    <th style="width:40px">@Dnn.LocalizeString("Total")</th>
@@ -35,50 +35,46 @@
    <th style="width:40px" title="@Dnn.LocalizeString("Distance")">
     <span class="fa fa-arrows-h"></span>
    </th>
-   <th style="width:40px" title="@Dnn.LocalizeString("Comments")">
+   <th style="width:40px" title="@Dnn.LocalizeString("NrComments")">
     <span class="fa fa-comments"></span>
    </th>
-   <th style="width:32px">&nbsp;</th>
   </tr>
  </thead>
  <tbody>
-@foreach (var fr in FlightRepository.Instance.GetRankings(Dnn.PortalSettings.PortalId, year))
-{
- <tr>
-  @if (fr.UserId != lastPilot)
+  @foreach (var fr in FlightRepository.Instance.GetRankings(Dnn.PortalSettings.PortalId, year))
   {
-   lastPilot = fr.UserId;
-  <td>@fr.PilotRanking</td>
-  <td>
-   <a href="@Url.Action("View", "Pilot", new { UserId = fr.UserId, ret = "home" })" title="@Dnn.LocalizeString("View")">
-    @fr.Pilot
-   </a>      
-  </td>
-  <td>@fr.AggregatePoints</td>
+  <tr class="@(fr.UserId != lastPilot ? "firstrow" : "")">
+   @if (fr.UserId != lastPilot)
+   {
+    lastPilot = fr.UserId;
+    <td>@fr.PilotRanking</td>
+    <td>
+     <a href="@Url.Action("View", "Pilot", new { UserId = fr.UserId, ret = "home" })" title="@Dnn.LocalizeString("View")">
+      @fr.Pilot
+     </a>
+    </td>
+    <td>@fr.AggregatePoints</td>
+   }
+   else
+   {
+   <td colspan="3"></td>
+   }
+   <td>@fr.TakeoffTime.ToString("dd.MM")</td>
+   <td>
+    <a href="@Url.Action("View", "Flight", new { FlightId = fr.FlightId, ret = "home" })" title="@Dnn.LocalizeString("View")">
+     @fr.TakeoffDescription - @string.Join(" - ", fr.PassedBeacons.Select(f => f.Name)) - @fr.LandingDescription
+    </a>
+   </td>
+   <td>@fr.NrBeacons</td>
+   <td>@fr.TotalPoints</td>
+   <td>@fr.DurationMins.ToTime()</td>
+   <td>@fr.Distance.ToKm()</td>
+   <td>@fr.NrComments</td>
+  </tr>
   }
-  else
-  {
-  <td colspan="3"></td>
-  }
-  <td>@fr.TakeoffTime.ToString("d MMM")</td>
-  <td>
-   @fr.TakeoffDescription - @string.Join(" - ", fr.PassedBeacons.Select(f => f.Name)) - @fr.LandingDescription
-  </td>
-  <td>@fr.NrBeacons</td>
-  <td>@fr.TotalPoints</td>
-  <td>@fr.DurationMins.ToTime()</td>
-  <td>@fr.Distance.ToKm()</td>
-  <td>@fr.NrComments</td>
-  <td>
-   <a href="@Url.Action("View", "Flight", new { FlightId = fr.FlightId, ret = "home" })" class="btn btn-sm btn-default" title="@Dnn.LocalizeString("View")">
-    <span class="fa fa-eye"></span>
-   </a>   
-  </td>
- </tr>
-}
-
  </tbody>
 </table>
+
 
 <div class="prev-yrs">
  <span><strong>@Dnn.LocalizeString("PreviousYears")</strong></span>
@@ -112,7 +108,7 @@
    <th style="width:40px" title="@Dnn.LocalizeString("Distance")">
     <span class="fa fa-arrows-h"></span>
    </th>
-   <th style="width:40px" title="@Dnn.LocalizeString("Comments")">
+   <th style="width:40px" title="@Dnn.LocalizeString("NrComments")">
     <span class="fa fa-comments"></span>
    </th>
    <th style="width:32px">&nbsp;</th>
@@ -123,7 +119,7 @@
 {
 <tr>
   <td>@f.Pilot</td>
-  <td>@f.TakeoffTime.ToString("d MMM")</td>
+  <td>@f.TakeoffTime.ToString("dd.MM")</td>
   <td>
    @f.TakeoffDescription - @string.Join(" - ", f.PassedBeacons.Select(fb => fb.Name)) - @f.LandingDescription
   </td>
@@ -142,7 +138,7 @@
  </tbody>
 </table>
 
-<div>
+<div class="rightbutton">
  @if (BalisesModuleContext.Security.IsPilot)
  {
  <a href="@Url.Action("Edit", "Flight", new { FlightId = -1, ret = "home" })" class="btn btn-default">@Dnn.LocalizeString("AddFlight")</a>
