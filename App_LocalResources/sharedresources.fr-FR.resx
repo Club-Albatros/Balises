@@ -1,0 +1,162 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="AddFlight.Text" lastModified="2016-03-14 10:42:04">
+    <value xml:space="preserve">Ajoute un vol</value>
+  </data>
+  <data name="AverageSpeed.Text" lastModified="2016-03-14 10:42:04">
+    <value xml:space="preserve">Vitesse moyenne</value>
+  </data>
+  <data name="Category.Text" lastModified="2016-03-14 10:42:04">
+    <value xml:space="preserve">Catégorie</value>
+  </data>
+  <data name="Coordinates.Text" lastModified="2016-03-14 10:42:04">
+    <value xml:space="preserve">Coordonnées</value>
+  </data>
+  <data name="Duration.Text" lastModified="2016-03-14 10:42:04">
+    <value xml:space="preserve">Durée</value>
+  </data>
+  <data name="Flight.Text" lastModified="2016-03-14 10:42:04">
+    <value xml:space="preserve">Vol</value>
+  </data>
+  <data name="FlightDate.Text" lastModified="2016-03-14 10:42:04">
+    <value xml:space="preserve">Date du vol</value>
+  </data>
+  <data name="FlightTitle.Text" lastModified="2016-03-14 10:42:04">
+    <value xml:space="preserve">Vol depuis {0} le {1:g}</value>
+  </data>
+  <data name="Hangglider.Text" lastModified="2016-03-14 10:42:04">
+    <value xml:space="preserve">Deltaplane</value>
+  </data>
+  <data name="History.Text" lastModified="2016-03-14 10:42:04">
+    <value xml:space="preserve">Histoire</value>
+  </data>
+  <data name="Landing.Text" lastModified="2016-03-14 10:42:04">
+    <value xml:space="preserve">Atterrissage</value>
+  </data>
+  <data name="LandingCoords.Text" lastModified="2016-03-14 10:42:04">
+    <value xml:space="preserve">Coordonnées de l'atterrissage (SG)</value>
+  </data>
+  <data name="LandingDescription.Text" lastModified="2016-03-14 10:42:04">
+    <value xml:space="preserve">Description de l'atterrissage</value>
+  </data>
+  <data name="LandingLatitude.Text" lastModified="2016-03-14 10:42:04">
+    <value xml:space="preserve">Latitude de l'atterrissage</value>
+  </data>
+  <data name="LandingLongitude.Text" lastModified="2016-03-14 10:42:04">
+    <value xml:space="preserve">Longitude de l'atterrissage</value>
+  </data>
+  <data name="LandingTime.Text" lastModified="2016-03-14 10:42:04">
+    <value xml:space="preserve">Heure d'atterrissage</value>
+  </data>
+  <data name="LastModifiedByString.Text" lastModified="2016-03-14 10:42:04">
+    <value xml:space="preserve">Dernière modification par {0} le {1:d}</value>
+  </data>
+  <data name="LatestFlights.Text" lastModified="2016-03-14 10:42:04">
+    <value xml:space="preserve">Derniers vols</value>
+  </data>
+  <data name="Log.Text" lastModified="2016-03-14 10:42:04">
+    <value xml:space="preserve">Journal</value>
+  </data>
+  <data name="MaxSpeed.Text" lastModified="2016-03-14 10:42:04">
+    <value xml:space="preserve">Max vitesse</value>
+  </data>
+  <data name="MyFlights.Text" lastModified="2016-03-14 10:42:04">
+    <value xml:space="preserve">Mes vols</value>
+  </data>
+  <data name="NotValidated.Text" lastModified="2016-03-14 10:42:04">
+    <value xml:space="preserve">Non validé</value>
+  </data>
+  <data name="NrBeacons.Text" lastModified="2016-03-14 10:42:04">
+    <value xml:space="preserve">Nb Balises</value>
+  </data>
+  <data name="NrComments.Text" lastModified="2016-03-14 10:42:04">
+    <value xml:space="preserve">Nb Commentaires</value>
+  </data>
+  <data name="OtherYears.Text" lastModified="2016-03-14 10:42:04">
+    <value xml:space="preserve">Autres années</value>
+  </data>
+  <data name="Paraglider.Text" lastModified="2016-03-14 10:42:04">
+    <value xml:space="preserve">Parapente</value>
+  </data>
+  <data name="Pilot.Text" lastModified="2016-03-14 10:42:04">
+    <value xml:space="preserve">Pilote</value>
+  </data>
+  <data name="PreviousYears.Text" lastModified="2016-03-14 10:42:04">
+    <value xml:space="preserve">Années précédentes</value>
+  </data>
+  <data name="Rank.Text" lastModified="2016-03-14 10:42:04">
+    <value xml:space="preserve">Rang</value>
+  </data>
+  <data name="RejectedByString.Text" lastModified="2016-03-14 10:42:04">
+    <value xml:space="preserve">Rejetée par {0} le {1:d}</value>
+  </data>
+  <data name="Results.Text" lastModified="2016-03-14 10:42:04">
+    <value xml:space="preserve">Résultats</value>
+  </data>
+  <data name="Return.Text" lastModified="2016-03-14 10:42:04">
+    <value xml:space="preserve">Retour</value>
+  </data>
+  <data name="Start.Text" lastModified="2016-03-14 10:42:04">
+    <value xml:space="preserve">Décollage</value>
+  </data>
+  <data name="Status.Text" lastModified="2016-03-14 10:42:04">
+    <value xml:space="preserve">Statut</value>
+  </data>
+  <data name="SubmittedByString.Text" lastModified="2016-03-14 10:42:04">
+    <value xml:space="preserve">Soumis par {0} le {1:d}</value>
+  </data>
+  <data name="SubmittedFlights.Text" lastModified="2016-03-14 10:42:04">
+    <value xml:space="preserve">Vols soumis</value>
+  </data>
+  <data name="Summary.Text" lastModified="2016-03-14 10:42:04">
+    <value xml:space="preserve">Résumé</value>
+  </data>
+  <data name="Takeoff.Text" lastModified="2016-03-14 10:42:04">
+    <value xml:space="preserve">Décollage</value>
+  </data>
+  <data name="TakeoffCoords.Text" lastModified="2016-03-14 10:42:04">
+    <value xml:space="preserve">Coordonnées de décollage (SG)</value>
+  </data>
+  <data name="TakeoffDescription.Text" lastModified="2016-03-14 10:42:04">
+    <value xml:space="preserve">Description de décollage</value>
+  </data>
+  <data name="TakeoffLatitude.Text" lastModified="2016-03-14 10:42:04">
+    <value xml:space="preserve">Latitude de décollage</value>
+  </data>
+  <data name="TakeoffLongitude.Text" lastModified="2016-03-14 10:42:04">
+    <value xml:space="preserve">Longitude de décollage</value>
+  </data>
+  <data name="TakeoffTime.Text" lastModified="2016-03-14 10:42:04">
+    <value xml:space="preserve">Heure de décollage</value>
+  </data>
+  <data name="Time.Text" lastModified="2016-03-14 10:42:04">
+    <value xml:space="preserve">Temps</value>
+  </data>
+  <data name="TotalPoints.Text" lastModified="2016-03-14 10:42:04">
+    <value xml:space="preserve">Total des points</value>
+  </data>
+  <data name="Track.Text" lastModified="2016-03-14 10:42:04">
+    <value xml:space="preserve">Trace</value>
+  </data>
+  <data name="Validated.Text" lastModified="2016-03-14 10:42:04">
+    <value xml:space="preserve">Validé</value>
+  </data>
+  <data name="ValidatedByString.Text" lastModified="2016-03-14 10:42:04">
+    <value xml:space="preserve">Validés par {0} le {1:d}</value>
+  </data>
+  <data name="View.Text" lastModified="2016-03-14 10:42:04">
+    <value xml:space="preserve">Vue</value>
+  </data>
+</root>

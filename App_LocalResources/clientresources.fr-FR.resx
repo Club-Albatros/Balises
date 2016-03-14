@@ -1,0 +1,75 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="Accept" lastModified="2016-03-14 10:32:12">
+    <value xml:space="preserve">Accepter</value>
+  </data>
+  <data name="AddComment" lastModified="2016-03-14 10:32:12">
+    <value xml:space="preserve">Ajoute commentaire</value>
+  </data>
+  <data name="Beacon" lastModified="2016-03-14 10:32:12">
+    <value xml:space="preserve">Balise</value>
+  </data>
+  <data name="CommentDeleteConfirm" lastModified="2016-03-14 10:32:12">
+    <value xml:space="preserve">Voulez-vous vraiment supprimer ce commentaire ?</value>
+  </data>
+  <data name="Comments" lastModified="2016-03-14 10:32:12">
+    <value xml:space="preserve">Commentaires</value>
+  </data>
+  <data name="Delete" lastModified="2016-03-14 10:32:12">
+    <value xml:space="preserve">Supprimer</value>
+  </data>
+  <data name="DropHere" lastModified="2016-03-14 10:32:12">
+    <value xml:space="preserve">Dépose votre fichier igc ou zip ici</value>
+  </data>
+  <data name="More" lastModified="2016-03-14 10:32:12">
+    <value xml:space="preserve">Plus</value>
+  </data>
+  <data name="Reject" lastModified="2016-03-14 10:32:12">
+    <value xml:space="preserve">Rejeter</value>
+  </data>
+  <data name="Remove" lastModified="2016-03-14 10:32:12">
+    <value xml:space="preserve">Supprimer</value>
+  </data>
+  <data name="Retract" lastModified="2016-03-14 10:32:12">
+    <value xml:space="preserve">Rétracter</value>
+  </data>
+  <data name="Status0" lastModified="2016-03-14 10:32:12">
+    <value xml:space="preserve">Inconnu</value>
+  </data>
+  <data name="Status1" lastModified="2016-03-14 10:32:12">
+    <value xml:space="preserve">Soumis</value>
+  </data>
+  <data name="Status2" lastModified="2016-03-14 10:32:12">
+    <value xml:space="preserve">Rejeté</value>
+  </data>
+  <data name="Status3" lastModified="2016-03-14 10:32:12">
+    <value xml:space="preserve">Non admissible</value>
+  </data>
+  <data name="Status4" lastModified="2016-03-14 10:32:12">
+    <value xml:space="preserve">Accepté</value>
+  </data>
+  <data name="Submit" lastModified="2016-03-14 10:32:12">
+    <value xml:space="preserve">Envoyer</value>
+  </data>
+  <data name="Time" lastModified="2016-03-14 10:32:12">
+    <value xml:space="preserve">Temps</value>
+  </data>
+  <data name="Upload" lastModified="2016-03-14 10:32:12">
+    <value xml:space="preserve">Télécharger</value>
+  </data>
+  <data name="Uploading" lastModified="2016-03-14 10:32:12">
+    <value xml:space="preserve">Téléchargement en cours ...</value>
+  </data>
+</root>
