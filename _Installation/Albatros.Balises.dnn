@@ -14,7 +14,7 @@
         <moduleControls>
          <moduleControl>
           <controlKey />
-          <controlSrc>Home/Index.mvc</controlSrc>
+          <controlSrc>Albatros.DNN.Modules.Balises.Controllers/Home/Index.mvc</controlSrc>
           <supportsPartialRendering>False</supportsPartialRendering>
           <controlTitle />
           <controlType>View</controlType>
