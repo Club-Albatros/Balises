@@ -55,6 +55,7 @@ namespace Albatros.DNN.Modules.Balises.Controllers
 
         [HttpPost]
         [BalisesAuthorize(SecurityLevel = SecurityAccessLevel.Pilot)]
+        [PostButton(Name = "action", Argument = "save")]
         public ActionResult Edit(FlightBase flight)
         {
 
@@ -129,6 +130,26 @@ namespace Albatros.DNN.Modules.Balises.Controllers
                 }
                 return ReturnRoute(flight.UserId, View("View", _repository.GetFlight(PortalSettings.PortalId, flight.FlightId)));
             }
+        }
+
+        [HttpPost]
+        [BalisesAuthorize(SecurityLevel = SecurityAccessLevel.Pilot)]
+        [PostButton(Name = "action", Argument = "delete")]
+        public ActionResult Delete(FlightBase flight)
+        {
+            var existingFlight = FlightRepository.Instance.GetFlight(PortalSettings.PortalId, flight.FlightId);
+            if (existingFlight != null)
+            {
+                if (existingFlight.UserId != User.UserID)
+                {
+                    if (!BalisesModuleContext.Security.IsVerifier)
+                    {
+                        throw new System.Exception("You don't have access to edit this");
+                    }
+                }
+                FlightRepository.Instance.DeleteFlight(PortalSettings.PortalId, flight.FlightId);
+            }
+            return ReturnRoute(flight.UserId, View("Index", "Home"));
         }
     }
 }

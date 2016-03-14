@@ -291,4 +291,7 @@
   <data name="MyFlights.Text" xml:space="preserve">
     <value>My Flights</value>
   </data>
+  <data name="DeleteFlight.Confirm" xml:space="preserve">
+    <value>Do you wish to delete this flight?</value>
+  </data>
 </root>

@@ -143,10 +143,10 @@ else
 <div class="right">
  @if (Model.FlightId > 0)
  {
- @Html.ActionLink(Dnn.LocalizeString("Delete"), "Delete", "Flight", new { FlightId = Model.FlightId }, new { @class = "btn btn-default cmdDelete" })
+  <button type="submit" class="btn btn-default" id="cmdDelete" name="action:delete">@Dnn.LocalizeString("Delete")</button>
  }
  <a href="@Request.UrlReferrer.PathAndQuery" class="btn btn-default">@Dnn.LocalizeString("Cancel")</a>
- <button type="submit" class="btn btn-primary" id="cmdSave">@Dnn.LocalizeString("Save")</button>
+ <button type="submit" class="btn btn-primary" id="cmdSave" name="action:save">@Dnn.LocalizeString("Save")</button>
 </div>
 
 <script type="text/javascript">
