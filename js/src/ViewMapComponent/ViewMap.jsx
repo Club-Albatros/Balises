@@ -16,8 +16,8 @@ var ViewMap = React.createClass({
 
   componentDidMount: function() {
     var googleScript = 'http://maps.googleapis.com/maps/api/js';
-    if (this.props.apiKey && this.props.apiKey !== '') {
-      googleScript += '&key=' + apiKey;
+    if (this.props.apiKey != undefined && this.props.apiKey !== '') {
+      googleScript += '?key=' + this.props.apiKey;
     }
     window.loadScript(googleScript, function() {
       var mapDiv = $(this.refs.mapDiv.getDOMNode());

@@ -14,9 +14,9 @@
     },
     "module": {
       "packageName": "Albatros_Balises",
-      "folderName": "Albatros/Balises",
+      "folderName": "Mvc/Albatros/Balises",
       "azureCompatible": "true",
-      "iconFile": "DesktopModules\\Albatros\\Balises\\balises.png"
+      "iconFile": "DesktopModules\\Mvc\\Albatros\\Balises\\balises.png"
     },
     "tempPath": "./package",
     "packagesPath": "./_Packages",
@@ -24,9 +24,13 @@
     "pathToScripts": "./_Installation/SQL",
     "pathToSupplementaryFiles": "./_Installation",
     "excludeFilter": [
+      "_Development",
+      "bower_components",
       "node_modules",
       "bin",
-      "obj"
+      "obj",
+      "_Packages",
+      "_Installation"
     ]
   },
   "main": "index.js",

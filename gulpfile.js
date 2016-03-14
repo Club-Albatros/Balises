@@ -88,7 +88,7 @@ gulp.task('assemblyInfo', function() {
 });
 
 gulp.task('build', ['assemblyInfo'], function() {
-  return gulp.src('./Connect.Balises.csproj')
+  return gulp.src('./Albatros.Balises.csproj')
     .pipe(msbuild({
       toolsVersion: 14.0,
       targets: ['Clean', 'Build'],

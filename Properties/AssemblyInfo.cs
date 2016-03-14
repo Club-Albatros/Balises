@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 [assembly: AssemblyTitle("Balises Module")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyDescription("Albatros Balises Concours module")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Albatros")]
 [assembly: AssemblyProduct("Balises")]
-[assembly: AssemblyCopyright("Copyright 2015 by Albatros")]
+[assembly: AssemblyCopyright("Copyright 2016 by Albatros")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
@@ -30,5 +30,5 @@ using System.Runtime.InteropServices;
 //
 // You can specify all the values or you can default the Revision and Build Numbers 
 // by using the '*' as shown below:
-[assembly: AssemblyVersion("01.00.00")]
-[assembly: AssemblyFileVersion("01.00.00")]
+[assembly: AssemblyVersion("1.0.0")]
+[assembly: AssemblyFileVersion("1.0.0")]

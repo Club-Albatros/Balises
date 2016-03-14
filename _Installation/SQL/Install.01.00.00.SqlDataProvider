@@ -1,0 +1,359 @@
+/******* TABLES *******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}{objectQualifier}Albatros_Balises_Beacons') AND type in (N'U'))
+BEGIN
+CREATE TABLE {databaseOwner}{objectQualifier}Albatros_Balises_Beacons(
+ [BeaconId] [int] IDENTITY(1,1) NOT NULL,
+ [PortalId] [int] NOT NULL,
+ [Code] [nvarchar](10) NOT NULL,
+ [Name] [nvarchar](100) NOT NULL,
+ [Description] [nvarchar](4000) NULL,
+ [Coords] [varchar](15) NOT NULL,
+ [Latitude] [float] NOT NULL,
+ [Longitude] [float] NOT NULL,
+ [Altitude] [int] NOT NULL,
+ [Region] [int] NOT NULL,
+ [Points] [int] NOT NULL,
+ [CreatedByUserID] [int] NOT NULL,
+ [CreatedOnDate] [datetime] NOT NULL,
+ [LastModifiedByUserID] [int] NOT NULL,
+ [LastModifiedOnDate] [datetime] NOT NULL,
+ CONSTRAINT PK_{objectQualifier}Albatros_Balises_Beacons PRIMARY KEY CLUSTERED 
+(
+ [BeaconId] ASC
+)WITH (STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF)
+)
+END
+GO
+
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}{objectQualifier}Albatros_Balises_Comments') AND type in (N'U'))
+BEGIN
+CREATE TABLE {databaseOwner}{objectQualifier}Albatros_Balises_Comments(
+ [CommentId] [int] IDENTITY(1,1) NOT NULL,
+ [UserId] [int] NOT NULL,
+ [FlightId] [int] NOT NULL,
+ [Datime] [datetime] NOT NULL,
+ [Remarks] [nvarchar](max) NOT NULL,
+ CONSTRAINT PK_{objectQualifier}Albatros_Balises_Comments PRIMARY KEY CLUSTERED 
+(
+ [CommentId] ASC
+)WITH (STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF)
+)
+END
+GO
+
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}{objectQualifier}Albatros_Balises_FlightBeacons') AND type in (N'U'))
+BEGIN
+CREATE TABLE {databaseOwner}{objectQualifier}Albatros_Balises_FlightBeacons(
+ [FlightId] [int] NOT NULL,
+ [BeaconId] [int] NOT NULL,
+ [PassageTime] [datetime] NOT NULL,
+ [PassedDistance] [int] NULL,
+ CONSTRAINT PK_{objectQualifier}Albatros_Balises_FlightBeacons PRIMARY KEY CLUSTERED 
+(
+ [FlightId] ASC,
+ [BeaconId] ASC
+)WITH (STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF)
+)
+END
+GO
+
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}{objectQualifier}Albatros_Balises_Flights') AND type in (N'U'))
+BEGIN
+CREATE TABLE {databaseOwner}{objectQualifier}Albatros_Balises_Flights(
+ [FlightId] [int] IDENTITY(1,1) NOT NULL,
+ [PortalId] [int] NOT NULL,
+ [UserId] [int] NOT NULL,
+ [Category] [int] NOT NULL,
+ [TakeoffDescription] [nvarchar](200) NOT NULL,
+ [TakeoffTime] [datetime] NOT NULL,
+ [TakeoffCoords] [nvarchar](50) NULL,
+ [TakeoffLatitude] [float] NOT NULL,
+ [TakeoffLongitude] [float] NOT NULL,
+ [TakeoffAltitude] [int] NULL,
+ [LandingDescription] [nvarchar](200) NULL,
+ [LandingTime] [datetime] NOT NULL,
+ [LandingCoords] [nvarchar](50) NULL,
+ [LandingLatitude] [float] NOT NULL,
+ [LandingLongitude] [float] NOT NULL,
+ [LandingAltitude] [int] NULL,
+ [LandingBeaconId] [int] NULL,
+ [MaxHeight] [int] NULL,
+ [MaxVario] [float] NULL,
+ [MaxSpeed] [float] NULL,
+ [AverageSpeed] [float] NULL,
+ [DurationMins] [int] NOT NULL,
+ [Distance] [int] NOT NULL,
+ [Status] [int] NOT NULL,
+ [TotalPoints] [int] NOT NULL,
+ [EntryMethod] [int] NOT NULL,
+ [Summary] [nvarchar](2000) NULL,
+ [ValidatedByUserID] [int] NULL,
+ [ValidatedOnDate] [datetime] NULL,
+ [CreatedByUserID] [int] NOT NULL,
+ [CreatedOnDate] [datetime] NOT NULL,
+ [LastModifiedByUserID] [int] NOT NULL,
+ [LastModifiedOnDate] [datetime] NOT NULL,
+ CONSTRAINT PK_{objectQualifier}Albatros_Balises_Flights PRIMARY KEY CLUSTERED 
+(
+ [FlightId] ASC
+)WITH (STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF)
+)
+END
+GO
+
+/******* STRUCTURE *******/
+IF NOT EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'{databaseOwner}FK_{objectQualifier}Albatros_Balises_Beacons_Portals') AND parent_object_id = OBJECT_ID(N'{databaseOwner}{objectQualifier}Albatros_Balises_Beacons'))
+ALTER TABLE {databaseOwner}{objectQualifier}Albatros_Balises_Beacons  WITH CHECK ADD  CONSTRAINT FK_{objectQualifier}Albatros_Balises_Beacons_Portals FOREIGN KEY([PortalId])
+REFERENCES {databaseOwner}{objectQualifier}Portals ([PortalID])
+ON DELETE CASCADE
+IF  EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'{databaseOwner}FK_{objectQualifier}Albatros_Balises_Beacons_Portals') AND parent_object_id = OBJECT_ID(N'{databaseOwner}{objectQualifier}Albatros_Balises_Beacons'))
+ALTER TABLE {databaseOwner}{objectQualifier}Albatros_Balises_Beacons CHECK CONSTRAINT FK_{objectQualifier}Albatros_Balises_Beacons_Portals
+GO
+
+IF NOT EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'{databaseOwner}FK_{objectQualifier}Albatros_Balises_Comments_Flights') AND parent_object_id = OBJECT_ID(N'{databaseOwner}{objectQualifier}Albatros_Balises_Comments'))
+ALTER TABLE {databaseOwner}{objectQualifier}Albatros_Balises_Comments  WITH CHECK ADD  CONSTRAINT FK_{objectQualifier}Albatros_Balises_Comments_Flights FOREIGN KEY([FlightId])
+REFERENCES {databaseOwner}{objectQualifier}Albatros_Balises_Flights ([FlightId])
+ON DELETE CASCADE
+IF  EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'{databaseOwner}FK_{objectQualifier}Albatros_Balises_Comments_Flights') AND parent_object_id = OBJECT_ID(N'{databaseOwner}{objectQualifier}Albatros_Balises_Comments'))
+ALTER TABLE {databaseOwner}{objectQualifier}Albatros_Balises_Comments CHECK CONSTRAINT FK_{objectQualifier}Albatros_Balises_Comments_Flights
+GO
+
+IF NOT EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'{databaseOwner}FK_{objectQualifier}Albatros_Balises_FlightBeacons_Flights') AND parent_object_id = OBJECT_ID(N'{databaseOwner}{objectQualifier}Albatros_Balises_FlightBeacons'))
+ALTER TABLE {databaseOwner}{objectQualifier}Albatros_Balises_FlightBeacons  WITH CHECK ADD  CONSTRAINT FK_{objectQualifier}Albatros_Balises_FlightBeacons_Flights FOREIGN KEY([FlightId])
+REFERENCES {databaseOwner}{objectQualifier}Albatros_Balises_Flights ([FlightId])
+ON DELETE CASCADE
+IF  EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'{databaseOwner}FK_{objectQualifier}Albatros_Balises_FlightBeacons_Flights') AND parent_object_id = OBJECT_ID(N'{databaseOwner}{objectQualifier}Albatros_Balises_FlightBeacons'))
+ALTER TABLE {databaseOwner}{objectQualifier}Albatros_Balises_FlightBeacons CHECK CONSTRAINT FK_{objectQualifier}Albatros_Balises_FlightBeacons_Flights
+GO
+
+IF NOT EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'{databaseOwner}FK_{objectQualifier}Albatros_Balises_Flights_Portals') AND parent_object_id = OBJECT_ID(N'{databaseOwner}{objectQualifier}Albatros_Balises_Flights'))
+ALTER TABLE {databaseOwner}{objectQualifier}Albatros_Balises_Flights  WITH CHECK ADD  CONSTRAINT FK_{objectQualifier}Albatros_Balises_Flights_Portals FOREIGN KEY([PortalId])
+REFERENCES {databaseOwner}{objectQualifier}Portals ([PortalID])
+ON DELETE CASCADE
+IF  EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'{databaseOwner}FK_{objectQualifier}Albatros_Balises_Flights_Portals') AND parent_object_id = OBJECT_ID(N'{databaseOwner}{objectQualifier}Albatros_Balises_Flights'))
+ALTER TABLE {databaseOwner}{objectQualifier}Albatros_Balises_Flights CHECK CONSTRAINT FK_{objectQualifier}Albatros_Balises_Flights_Portals
+GO
+
+/******* TRIGGERS *******/
+/******* VIEWS *******/
+IF  EXISTS (SELECT * FROM sys.views WHERE object_id = OBJECT_ID(N'{databaseOwner}{objectQualifier}vw_Albatros_Balises_Beacons'))
+DROP VIEW {databaseOwner}{objectQualifier}vw_Albatros_Balises_Beacons
+GO
+
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE VIEW {databaseOwner}{objectQualifier}vw_Albatros_Balises_Beacons
+AS
+SELECT
+ b.*,
+ uc.DisplayName CreatedByUser,
+ um.DisplayName ModifiedByUser
+FROM {databaseOwner}{objectQualifier}Albatros_Balises_Beacons b
+ LEFT JOIN {databaseOwner}{objectQualifier}Users uc ON uc.UserID=b.CreatedByUserID
+ LEFT JOIN {databaseOwner}{objectQualifier}Users um ON um.UserID=b.LastModifiedByUserID
+GO
+
+IF  EXISTS (SELECT * FROM sys.views WHERE object_id = OBJECT_ID(N'{databaseOwner}{objectQualifier}vw_Albatros_Balises_Comments'))
+DROP VIEW {databaseOwner}{objectQualifier}vw_Albatros_Balises_Comments
+GO
+
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE VIEW {databaseOwner}{objectQualifier}vw_Albatros_Balises_Comments
+AS
+SELECT
+ c.*,
+ uc.DisplayName,
+ f.TakeoffTime,
+ f.TakeoffDescription
+FROM {databaseOwner}{objectQualifier}Albatros_Balises_Comments c
+ INNER JOIN {databaseOwner}{objectQualifier}Albatros_Balises_Flights f ON f.FlightId=c.FlightId
+ LEFT JOIN {databaseOwner}{objectQualifier}Users uc ON uc.UserID=c.UserId
+GO
+
+IF  EXISTS (SELECT * FROM sys.views WHERE object_id = OBJECT_ID(N'{databaseOwner}{objectQualifier}vw_Albatros_Balises_FlightBeacons'))
+DROP VIEW {databaseOwner}{objectQualifier}vw_Albatros_Balises_FlightBeacons
+GO
+
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE VIEW {databaseOwner}{objectQualifier}vw_Albatros_Balises_FlightBeacons
+AS
+SELECT
+ fb.*,
+ b.Code,
+ b.Name,
+ b.Description,
+ b.Points,
+ b.Coords,
+ b.Latitude,
+ b.Longitude,
+ b.Altitude,
+ b.Region
+FROM {databaseOwner}{objectQualifier}Albatros_Balises_FlightBeacons fb
+ INNER JOIN {databaseOwner}{objectQualifier}Albatros_Balises_Beacons b ON fb.BeaconId=b.BeaconId
+GO
+
+IF  EXISTS (SELECT * FROM sys.views WHERE object_id = OBJECT_ID(N'{databaseOwner}{objectQualifier}vw_Albatros_Balises_Flights'))
+DROP VIEW {databaseOwner}{objectQualifier}vw_Albatros_Balises_Flights
+GO
+
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE VIEW {databaseOwner}{objectQualifier}vw_Albatros_Balises_Flights
+AS
+SELECT
+ f.*,
+ (SELECT COUNT(*) FROM {databaseOwner}{objectQualifier}Albatros_Balises_FlightBeacons fb WHERE fb.FlightId=f.FlightId) NrBeacons,
+ (SELECT COUNT(*) FROM {databaseOwner}{objectQualifier}Albatros_Balises_Comments c WHERE c.FlightId=f.FlightId) NrComments,
+ up.DisplayName Pilot,
+ uc.DisplayName CreatedByUser,
+ um.DisplayName LastModifiedByUser,
+ uv.DisplayName ValidatedByUser
+FROM {databaseOwner}{objectQualifier}Albatros_Balises_Flights f
+ LEFT JOIN {databaseOwner}{objectQualifier}Users up ON up.UserID=f.UserId
+ LEFT JOIN {databaseOwner}{objectQualifier}Users uc ON uc.UserID=f.CreatedByUserID
+ LEFT JOIN {databaseOwner}{objectQualifier}Users um ON um.UserID=f.LastModifiedByUserID
+ LEFT JOIN {databaseOwner}{objectQualifier}Users uv ON uv.UserID=f.ValidatedByUserID
+GO
+
+/******* FUNCTIONS *******/
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}{objectQualifier}Albatros_Balises_CalculateDistance') AND type in (N'FN', N'IF', N'TF', N'FS', N'FT'))
+DROP FUNCTION {databaseOwner}{objectQualifier}Albatros_Balises_CalculateDistance
+GO
+
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE FUNCTION {databaseOwner}{objectQualifier}Albatros_Balises_CalculateDistance
+ (@Lat1 FLOAT,
+  @Lng1 FLOAT,
+  @Lat2 FLOAT,
+  @Lng2 FLOAT)
+RETURNS INT
+AS
+BEGIN
+ DECLARE @DLat FLOAT,
+  @DLng FLOAT,
+  @a FLOAT,
+  @c FLOAT;
+ SET @DLat = (@Lat2 - @Lat1) * PI() / 180;
+ SET @DLng = (@Lng2 - @Lng1) * PI() / 180;
+ SET @a = SIN(@DLat / 2) * SIN(@DLat / 2) + COS(@Lat1 * PI() / 180) * COS(@Lat2 * PI() / 180) * SIN(@DLng / 2)  * SIN(@DLng / 2);
+ SET @c = 2 * ATN2(SQRT(@a), SQRT(1 - @a));
+ RETURN ROUND(6371000 * @c, 0)
+END
+GO
+
+/******* SPROCS *******/
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}{objectQualifier}Albatros_Balises_GetRankings') AND type in (N'P', N'PC'))
+DROP PROCEDURE {databaseOwner}{objectQualifier}Albatros_Balises_GetRankings
+GO
+
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE PROCEDURE {databaseOwner}{objectQualifier}Albatros_Balises_GetRankings
+ @PortalId INT,
+ @Year INT
+AS
+SELECT
+ *
+FROM
+(SELECT
+ ROW_NUMBER() OVER (PARTITION BY d.UserId ORDER BY d.TotalPoints DESC) AS FlightRank,
+ d.*
+FROM 
+ {databaseOwner}{objectQualifier}vw_Albatros_Balises_Flights d
+WHERE
+ YEAR(d.TakeoffTime)=@Year
+ AND d.Status=4
+ AND d.PortalId=@PortalId) d1
+ INNER JOIN (
+SELECT
+ d2.UserId,
+ SUM(d2.TotalPoints) AggregatePoints,
+ ROW_NUMBER() OVER (ORDER BY SUM(d2.TotalPoints) DESC) PilotRanking
+FROM
+(SELECT
+ d1.FlightId,
+ d1.UserId,
+ d1.TotalPoints
+FROM
+(SELECT
+ ROW_NUMBER() OVER (PARTITION BY d.UserId ORDER BY d.TotalPoints DESC) AS FlightRank,
+ d.*
+FROM 
+ {databaseOwner}{objectQualifier}Albatros_Balises_Flights d
+WHERE
+ YEAR(d.TakeoffTime)=@Year
+ AND d.Status=4
+ AND d.PortalId=@PortalId) d1
+WHERE
+ d1.FlightRank<4) d2
+GROUP BY d2.UserId) d3 ON d3.UserId=d1.UserId
+WHERE
+ d1.FlightRank<4
+ORDER BY
+ d3.AggregatePoints DESC,
+ d1.FlightRank
+GO
+
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}{objectQualifier}Albatros_Balises_SetNewSite') AND type in (N'P', N'PC'))
+DROP PROCEDURE {databaseOwner}{objectQualifier}Albatros_Balises_SetNewSite
+GO
+
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE PROCEDURE {databaseOwner}{objectQualifier}Albatros_Balises_SetNewSite
+ @Latitude FLOAT,
+ @Longitude FLOAT,
+ @NewName NVARCHAR(500),
+ @MaxDistance INT
+AS
+UPDATE {databaseOwner}{objectQualifier}Albatros_Balises_Flights
+SET TakeoffDescription = @NewName
+FROM {databaseOwner}{objectQualifier}Albatros_Balises_Flights f
+INNER JOIN
+(SELECT
+ f.*,
+ {databaseOwner}{objectQualifier}Albatros_Balises_CalculateDistance(@Latitude, @Longitude, f.TakeoffLatitude, f.TakeoffLongitude) Dist
+FROM {databaseOwner}{objectQualifier}Albatros_Balises_Flights f
+WHERE f.TakeoffDescription = '') fl ON fl.FlightId=f.FlightId
+WHERE fl.Dist < @MaxDistance;
+UPDATE {databaseOwner}{objectQualifier}Albatros_Balises_Flights
+SET LandingDescription = @NewName
+FROM {databaseOwner}{objectQualifier}Albatros_Balises_Flights f
+INNER JOIN
+(SELECT
+ f.*,
+ {databaseOwner}{objectQualifier}Albatros_Balises_CalculateDistance(@Latitude, @Longitude, f.LandingLatitude, f.LandingLongitude) Dist
+FROM {databaseOwner}{objectQualifier}Albatros_Balises_Flights f
+WHERE f.LandingDescription = '') fl ON fl.FlightId=f.FlightId
+WHERE fl.Dist < @MaxDistance;
+GO
+
