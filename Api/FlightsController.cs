@@ -87,11 +87,17 @@ namespace Albatros.DNN.Modules.Balises.Api
                                 {
                                     igcText = s.ReadToEnd();
                                 }
-                                res.Add(IgcController.AddFlightToUser(
-                                    PortalSettings.PortalId,
-                                    UserInfo.UserID,
-                                    igcText,
-                                    BalisesModuleContext.Settings.BeaconPassDistanceMeters));
+                                try
+                                {
+                                    res.Add(IgcController.AddFlightToUser(
+                                        PortalSettings.PortalId,
+                                        UserInfo.UserID,
+                                        igcText,
+                                        BalisesModuleContext.Settings.BeaconPassDistanceMeters));
+                                }
+                                catch (System.Exception)
+                                {
+                                }
                             }
                         }
                     }
