@@ -41,6 +41,7 @@ var Upload = React.createClass({
         responseType: 'json',
         startXHR: function() {},
         onSubmit: function() {
+          console.log('uploading ...');
           this.refs.msgBox.getDOMNode().innerHtml = this.resources.Uploading;
         }.bind(this),
         onComplete: function(filename, response) {

@@ -12,19 +12,16 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="Default.Text" lastModified="2016-03-14 10:33:21">
+  <data name="Default.Text" lastModified="2016-03-14 09:33:21">
     <value xml:space="preserve">&lt; Défaut ... &gt;</value>
   </data>
-  <data name="lblGoogleMapApiKey.Help" lastModified="2016-03-14 10:33:21">
+  <data name="lblGoogleMapApiKey.Help" lastModified="2016-03-14 09:33:21">
     <value xml:space="preserve">Clé API pour l'utilisation de Google maps. Accédez à votre compte Google pour en créer un.</value>
   </data>
-  <data name="lblGoogleMapApiKey.Text" lastModified="2016-03-14 10:33:21">
-    <value xml:space="preserve">Google Map API Key</value>
-  </data>
-  <data name="lblView.Help" lastModified="2016-03-14 10:33:21">
+  <data name="lblView.Help" lastModified="2016-03-14 09:33:21">
     <value xml:space="preserve">Sélectionnez le view pour ce module</value>
   </data>
-  <data name="lblView.Text" lastModified="2016-03-14 10:33:21">
+  <data name="lblView.Text" lastModified="2016-03-14 09:33:21">
     <value xml:space="preserve">Vue</value>
   </data>
 </root>
