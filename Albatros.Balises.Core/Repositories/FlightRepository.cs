@@ -46,7 +46,7 @@ namespace Albatros.Balises.Core.Repositories
         {
             using (var context = DataContext.Instance())
             {
-                return context.ExecuteQuery<Flight>(System.Data.CommandType.Text, "SELECT TOP 10 * FROM {databaseOwner}{objectQualifier}vw_Albatros_Balises_Flights WHERE PortalId=@0 ORDER BY CreatedOnDate DESC", portalId);
+                return context.ExecuteQuery<Flight>(System.Data.CommandType.Text, "SELECT TOP 10 * FROM {databaseOwner}{objectQualifier}vw_Albatros_Balises_Flights WHERE PortalId=@0 AND YEAR(TakeoffTime)=YEAR(GETDATE()) ORDER BY CreatedOnDate DESC", portalId);
             }
         }
         public IEnumerable<Flight> GetFlightsByStatus(int portalId, int status)
