@@ -1,6 +1,6 @@
 {
   "name": "balises",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "Albatros Balises Concours module",
   "dnnModule": {
     "fullName": "Albatros.Balises",
