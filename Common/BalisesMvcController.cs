@@ -1,5 +1,7 @@
 using DotNetNuke.Web.Mvc.Framework.Controllers;
 using DotNetNuke.Web.Mvc.Routing;
+using System.Collections.Generic;
+using System.Collections.Specialized;
 using System.Web.Mvc;
 using System.Web.Routing;
 
@@ -41,5 +43,18 @@ namespace Albatros.DNN.Modules.Balises.Common
             }
             return defaultRoute;
         }
+
+        public ActionResult RedirectToAction(string action, string controller, IDictionary<string,string> routeValues)
+        {
+            RouteValueDictionary newRouteValues = new RouteValueDictionary();
+            newRouteValues["controller"] = controller;
+            newRouteValues["action"] = action;
+            foreach(var p in routeValues)
+            {
+                newRouteValues[p.Key] = p.Value;
+            }
+            return Redirect(ModuleRoutingProvider.Instance().GenerateUrl(newRouteValues, ModuleContext));
+        }
+
     }
 }

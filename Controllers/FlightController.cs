@@ -59,7 +59,6 @@ namespace Albatros.DNN.Modules.Balises.Controllers
         public ActionResult Edit(FlightBase flight)
         {
 
-            var returnUserId = User.UserID;
             var existingFlight = FlightRepository.Instance.GetFlight(PortalSettings.PortalId, flight.FlightId);
             if (existingFlight == null)
             {
@@ -83,11 +82,13 @@ namespace Albatros.DNN.Modules.Balises.Controllers
                 newFlight.RecalculateTotals();
                 newFlight.CheckLandingBeacon(BalisesModuleContext.Settings.BeaconPassDistanceMeters);
                 FlightRepository.Instance.UpdateFlight(newFlight, User.UserID);
-                return ReturnRoute(User.UserID, View("View", _repository.GetFlight(PortalSettings.PortalId, newId)));
+                var retValues = new Dictionary<string, string>();
+                retValues.Add("FlightId", newId.ToString());
+                retValues.Add("ret", ControllerContext.HttpContext.Request.Params["ret"]);
+                return RedirectToAction("View", "Flight", retValues);
             }
             else
             {
-                returnUserId = existingFlight.UserId;
                 if (existingFlight.UserId != User.UserID)
                 {
                     if (!BalisesModuleContext.Security.IsVerifier)
@@ -130,7 +131,10 @@ namespace Albatros.DNN.Modules.Balises.Controllers
                 {
                     SitesRepository.Instance.SetNewSite(existingFlight.LandingLatitude, existingFlight.LandingLongitude, existingFlight.LandingDescription, BalisesModuleContext.Settings.BeaconPassDistanceMeters);
                 }
-                return ReturnRoute(returnUserId, View("View", _repository.GetFlight(PortalSettings.PortalId, flight.FlightId)));
+                var retValues = new Dictionary<string, string>();
+                retValues.Add("FlightId", flight.FlightId.ToString());
+                retValues.Add("ret", ControllerContext.HttpContext.Request.Params["ret"]);
+                return RedirectToAction("View", "Flight", retValues);
             }
         }
 

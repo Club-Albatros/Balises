@@ -98,5 +98,12 @@
  {
  <a href="@Url.Action("Edit", new { FlightId = Model.FlightId })" class="btn btn-default">@Dnn.LocalizeString("Edit")</a>
  }
- <a href="@Request.UrlReferrer.PathAndQuery" class="btn btn-primary">@Dnn.LocalizeString("Return")</a>
+ @if (Request.Params["ret"] == null || Request.Params["ret"] == "p-v")
+ {
+  <a href="@Url.Action("View", "Pilot", new { UserId = Model.UserId })" class="btn btn-primary">@Dnn.LocalizeString("Return")</a>
+ }
+ else
+ {
+  <a href="@Url.Action("Index", "Home")" class="btn btn-primary">@Dnn.LocalizeString("Return")</a>
+ }
 </div>
