@@ -59,6 +59,7 @@ namespace Albatros.DNN.Modules.Balises.Controllers
         public ActionResult Edit(FlightBase flight)
         {
 
+            var returnUserId = User.UserID;
             var existingFlight = FlightRepository.Instance.GetFlight(PortalSettings.PortalId, flight.FlightId);
             if (existingFlight == null)
             {
@@ -82,10 +83,11 @@ namespace Albatros.DNN.Modules.Balises.Controllers
                 newFlight.RecalculateTotals();
                 newFlight.CheckLandingBeacon(BalisesModuleContext.Settings.BeaconPassDistanceMeters);
                 FlightRepository.Instance.UpdateFlight(newFlight, User.UserID);
-                return ReturnRoute(flight.UserId, View("View", _repository.GetFlight(PortalSettings.PortalId, newId)));
+                return ReturnRoute(User.UserID, View("View", _repository.GetFlight(PortalSettings.PortalId, newId)));
             }
             else
             {
+                returnUserId = existingFlight.UserId;
                 if (existingFlight.UserId != User.UserID)
                 {
                     if (!BalisesModuleContext.Security.IsVerifier)
@@ -128,7 +130,7 @@ namespace Albatros.DNN.Modules.Balises.Controllers
                 {
                     SitesRepository.Instance.SetNewSite(existingFlight.LandingLatitude, existingFlight.LandingLongitude, existingFlight.LandingDescription, BalisesModuleContext.Settings.BeaconPassDistanceMeters);
                 }
-                return ReturnRoute(flight.UserId, View("View", _repository.GetFlight(PortalSettings.PortalId, flight.FlightId)));
+                return ReturnRoute(returnUserId, View("View", _repository.GetFlight(PortalSettings.PortalId, flight.FlightId)));
             }
         }
 
@@ -149,7 +151,7 @@ namespace Albatros.DNN.Modules.Balises.Controllers
                 }
                 FlightRepository.Instance.DeleteFlight(PortalSettings.PortalId, flight.FlightId);
             }
-            return ReturnRoute(flight.UserId, View("Index", "Home"));
+            return ReturnRoute(existingFlight.UserId, View("Index", "Home"));
         }
     }
 }
