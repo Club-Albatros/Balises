@@ -19,7 +19,7 @@
    </th>
    <th style="width:200px">@Dnn.LocalizeString("Pilot")</th>
    <th style="width:40px">@Dnn.LocalizeString("Total")</th>
-   <th style="width:70px" title="@Dnn.LocalizeString("Date")">
+   <th style="width:80px" title="@Dnn.LocalizeString("Date")">
     <span class="fa fa-calendar"></span>
    </th>
    <th>@Dnn.LocalizeString("Flight")</th>
@@ -59,7 +59,7 @@
    {
    <td colspan="3"></td>
    }
-   <td>@fr.TakeoffTime.ToString("dd.MM")</td>
+   <td>@fr.TakeoffTime.ToString("dd.MM.yy")</td>
    <td>
     <a href="@Url.Action("View", "Flight", new { FlightId = fr.FlightId, ret = "home" })" title="@Dnn.LocalizeString("View")">
      @fr.TakeoffDescription - @string.Join(" - ", fr.PassedBeacons.Select(f => f.Name)) - @fr.LandingDescription
@@ -92,7 +92,7 @@
  <thead>
   <tr>
    <th style="width:200px">@Dnn.LocalizeString("Pilot")</th>
-   <th style="width:70px" title="@Dnn.LocalizeString("Date")">
+   <th style="width:80px" title="@Dnn.LocalizeString("Date")">
     <span class="fa fa-calendar"></span>
    </th>
    <th>@Dnn.LocalizeString("Flight")</th>
@@ -119,7 +119,7 @@
 {
 <tr>
   <td>@f.Pilot</td>
-  <td>@f.TakeoffTime.ToString("dd.MM")</td>
+  <td>@f.TakeoffTime.ToString("dd.MM.yy")</td>
   <td>
    @f.TakeoffDescription - @string.Join(" - ", f.PassedBeacons.Select(fb => fb.Name)) - @f.LandingDescription
   </td>
@@ -141,7 +141,7 @@
 <div class="rightbutton">
  @if (BalisesModuleContext.Security.IsPilot)
  {
- <a href="@Url.Action("Edit", "Flight", new { FlightId = -1, ret = "home" })" class="btn btn-default">@Dnn.LocalizeString("AddFlight")</a>
+ <a href="@Url.Action("Edit", "Flight", new { FlightId = -1, ret = "p-v" })" class="btn btn-default">@Dnn.LocalizeString("AddFlight")</a>
  <a href="@Url.Action("View", "Pilot", new { UserId = Dnn.User.UserID })" class="btn btn-default">@Dnn.LocalizeString("MyFlights")</a>
  }
  @if (BalisesModuleContext.Security.IsVerifier)
