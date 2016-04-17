@@ -120,6 +120,12 @@
   <data name="Default.Text" xml:space="preserve">
     <value>&lt; Default ... &gt;</value>
   </data>
+  <data name="lblBeaconPassDistanceMeters.Help" xml:space="preserve">
+    <value>Maximum distance the trace can pass a beacon for beacon detection</value>
+  </data>
+  <data name="lblBeaconPassDistanceMeters.Text" xml:space="preserve">
+    <value>Beacon Pass Distance (m)</value>
+  </data>
   <data name="lblGoogleMapApiKey.Help" xml:space="preserve">
     <value>API key for using Google maps. Go to your Google account to create one.</value>
   </data>
