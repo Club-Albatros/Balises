@@ -47,5 +47,23 @@ namespace Albatros.DNN.Modules.Balises {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtGoogleMapApiKey;
+        
+        /// <summary>
+        /// lblBeaconPassDistanceMeters control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.UserControl lblBeaconPassDistanceMeters;
+        
+        /// <summary>
+        /// txtBeaconPassDistanceMeters control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtBeaconPassDistanceMeters;
     }
 }

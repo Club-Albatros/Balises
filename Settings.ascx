@@ -10,4 +10,8 @@
   <dnn:label id="lblGoogleMapApiKey" runat="server" controlname="txtGoogleMapApiKey" suffix=":" />
   <asp:TextBox ID="txtGoogleMapApiKey" runat="server" />
  </div>
+ <div class="dnnFormItem">
+  <dnn:label id="lblBeaconPassDistanceMeters" runat="server" controlname="txtBeaconPassDistanceMeters" suffix=":" />
+  <asp:TextBox ID="txtBeaconPassDistanceMeters" runat="server" />
+ </div>
 </fieldset>

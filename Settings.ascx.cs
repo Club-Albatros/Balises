@@ -40,6 +40,7 @@ namespace Albatros.DNN.Modules.Balises
                     }
                     catch { }
                     txtGoogleMapApiKey.Text = ModSettings.GoogleMapApiKey;
+                    txtBeaconPassDistanceMeters.Text = ModSettings.BeaconPassDistanceMeters.ToString();
                 }
             }
             catch (Exception exc) //Module failed to load
@@ -54,6 +55,7 @@ namespace Albatros.DNN.Modules.Balises
             {
                 ModSettings.View = ddView.SelectedValue;
                 ModSettings.GoogleMapApiKey = txtGoogleMapApiKey.Text.Trim();
+                ModSettings.BeaconPassDistanceMeters = int.Parse(txtBeaconPassDistanceMeters.Text.Trim());
                 ModSettings.SaveSettings(ModuleContext.Configuration);
             }
             catch (Exception exc) //Module failed to load
