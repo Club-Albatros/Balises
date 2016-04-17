@@ -31,7 +31,7 @@ gulp.task('browserify', function() {
   var service = gulp.src('js/src/AlbatrosBalisesService.js');
   var common = gulp.src('js/src/Common.js');
   return merge(react, service, common)
-    .pipe(concat('Balises.js'))
+    .pipe(concat('balises.js'))
     .pipe(gulp.dest('js/'));
 });
 

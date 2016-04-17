@@ -1,4 +1,5 @@
 var Upload = require('./UploadComponent/Upload.jsx'),
+    UploadButton = require('./UploadComponent/UploadButton.jsx'),
     ViewMap = require('./ViewMapComponent/ViewMap.jsx'),
     EditMap = require('./EditMapComponent/EditMap.jsx'),
     StatusButton = require('./StatusButton.jsx'),
@@ -30,13 +31,21 @@ var Upload = require('./UploadComponent/Upload.jsx'),
         var tabId = $(el).data('tabid');
         React.render(<Upload moduleId={moduleId} tabId={tabId} />, el);
       });
+      $('.uploadButton').each(function(i, el) {
+        var moduleId = $(el).data('moduleid');
+        var tabId = $(el).data('tabid');
+        React.render(<UploadButton moduleId={moduleId} tabId={tabId}
+                                   flightUrl={$(el).data('flighturl')}
+                                   pilotUrl={$(el).data('piloturl')} />, el);
+      });
       $('.viewMap').each(function(i, el) {
         var moduleId = $(el).data('moduleid');
         var apiKey = $(el).data('apikey');
         var track = $(el).data('track');
         var flight = $(el).data('flight');
         React.render(<ViewMap apiKey={apiKey} moduleId={moduleId} track={track}
-                 flight={flight} />, el);
+                 flight={flight}
+                 scheme={$(el).data('scheme')} />, el);
       });
       $('.editMap').each(function(i, el) {
         var moduleId = $(el).data('moduleid');
@@ -45,7 +54,8 @@ var Upload = require('./UploadComponent/Upload.jsx'),
         var flight = $(el).data('flight');
         var beacons = $(el).data('beacons');
         React.render(<EditMap apiKey={apiKey} moduleId={moduleId} track={track}
-                 flight={flight} beacons={beacons} />, el);
+                 flight={flight} beacons={beacons}
+                 scheme={$(el).data('scheme')} />, el);
       });
       $('.btnStatus').each(function(i, el) {
         var moduleId = $(el).data('moduleid');

@@ -55,7 +55,7 @@ var EditMap = React.createClass({
   },
 
   componentDidMount: function() {
-    var googleScript = 'https://maps.googleapis.com/maps/api/js';
+    var googleScript = this.props.scheme + '://maps.googleapis.com/maps/api/js';
     if (this.props.apiKey != undefined && this.props.apiKey !== '') {
       googleScript += '?key=' + this.props.apiKey;
     }

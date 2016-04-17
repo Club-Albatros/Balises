@@ -9,6 +9,11 @@
     var year = DateTime.Now.Year;
 }
 
+<div class="albatrosBalises" data-moduleid="@Dnn.ModuleContext.ModuleId"
+     data-resources="@SerializedResources()"
+     data-security="@(Newtonsoft.Json.JsonConvert.SerializeObject(BalisesModuleContext.Security))">
+</div>
+
 <h3>@Dnn.LocalizeString("Results") @year</h3>
 
 <table class="rankings">
@@ -141,7 +146,11 @@
 <div class="rightbutton">
  @if (BalisesModuleContext.Security.IsPilot)
  {
- <a href="@GetModuleUrl("API/Beacons/CompeGps")" class="btn btn-default">
+ <span class="uploadButton" data-moduleid="@Dnn.ModuleContext.ModuleId" data-tabid="@Dnn.ModuleContext.TabId"
+       data-flighturl="@Url.Action("View", "Flight", new { FlightId = -1, ret = "home" })"
+       data-piloturl="@Url.Action("View", "Pilot", new { UserId = Dnn.User.UserID })">
+ </span>
+ <a href="@GetModuleUrl("API/Beacons/CompeGps", true)" class="btn btn-default">
   <span class="glyphicon glyphicon-save"></span>
   @Dnn.LocalizeString("DownloadBeaconsCompeGps")
  </a>

@@ -45,7 +45,7 @@ namespace Albatros.DNN.Modules.Balises.Controllers
                         throw new System.Exception("You don't have access to edit this");
                     }
                 }
-                if (flight.Status > 3)
+                if (flight.Status == (int)FlightStatus.Accepted)
                 {
                     throw new System.Exception("This flight is locked");
                 }
