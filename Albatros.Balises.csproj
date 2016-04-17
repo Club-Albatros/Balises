@@ -139,6 +139,7 @@
     <Compile Include="Common\BalisesWebPageOfT.cs" />
     <Compile Include="Common\BootGridPostData.cs" />
     <Compile Include="Common\BootGridResponseDataOfT.cs" />
+    <Compile Include="Common\CompeGpsFile.cs" />
     <Compile Include="Common\ContextHelper.cs" />
     <Compile Include="Common\ContextSecurity.cs" />
     <Compile Include="Common\Globals.cs" />

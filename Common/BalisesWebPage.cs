@@ -38,6 +38,8 @@ namespace Albatros.DNN.Modules.Balises.Common
         {
             if (relativeUrl.StartsWith("API/"))
             {
+                relativeUrl += relativeUrl.Contains("?") ? "&" : "?";
+                relativeUrl += string.Format("moduleId={0}&tabId={1}", Dnn.ActiveModule.ModuleID, Dnn.ActiveModule.TabID);
                 return Dnn.PortalSettings.PortalAlias.ResolveUrl("~/DesktopModules/Albatros/Balises/" + relativeUrl);
             }
             else

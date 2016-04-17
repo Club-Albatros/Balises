@@ -141,6 +141,10 @@
 <div class="rightbutton">
  @if (BalisesModuleContext.Security.IsPilot)
  {
+ <a href="@GetModuleUrl("API/Beacons/CompeGps")" class="btn btn-default">
+  <span class="glyphicon glyphicon-save"></span>
+  @Dnn.LocalizeString("DownloadBeaconsCompeGps")
+ </a>
  <a href="@Url.Action("Edit", "Flight", new { FlightId = -1, ret = "p-v" })" class="btn btn-default">@Dnn.LocalizeString("AddFlight")</a>
  <a href="@Url.Action("View", "Pilot", new { UserId = Dnn.User.UserID })" class="btn btn-default">@Dnn.LocalizeString("MyFlights")</a>
  }

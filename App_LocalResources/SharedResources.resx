@@ -294,4 +294,7 @@
   <data name="DeleteFlight.Confirm" xml:space="preserve">
     <value>Do you wish to delete this flight?</value>
   </data>
+  <data name="DownloadBeaconsCompeGps.Text" xml:space="preserve">
+    <value>Compe GPS Beacons File</value>
+  </data>
 </root>

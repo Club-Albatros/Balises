@@ -1,26 +1,27 @@
-
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
-using DotNetNuke.Web.Api;
 using Albatros.DNN.Modules.Balises.Common;
-using Albatros.Balises.Core.Repositories;
+using System.Net.Http.Headers;
 
 namespace Albatros.DNN.Modules.Balises.Api
 {
 
-	public partial class BeaconsController : BalisesApiController
+    public partial class BeaconsController : BalisesApiController
 	{
 
-		#region " Service Methods "
 		[HttpGet()]
-		[DnnModuleAuthorize(AccessLevel = DotNetNuke.Security.SecurityAccessLevel.View)]
-		public HttpResponseMessage MyMethod(int id)
+		[BalisesAuthorize(SecurityLevel = SecurityAccessLevel.Pilot)]
+		public HttpResponseMessage CompeGps()
 		{
-			bool res = true;
-			return Request.CreateResponse(HttpStatusCode.OK, res);
+            var wptFile = new CompeGpsFile(ActiveModule.PortalID);
+            var res = new HttpResponseMessage(HttpStatusCode.OK);
+            res.Content = new StringContent(wptFile.Content);
+            res.Content.Headers.ContentType = new MediaTypeHeaderValue("application/octet-stream");
+            res.Content.Headers.ContentDisposition = new ContentDispositionHeaderValue("attachment");
+            res.Content.Headers.ContentDisposition.FileName = "Balises.wpt";
+            return res;
 		}
-		#endregion
 
 	}
 }
