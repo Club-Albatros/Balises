@@ -34,17 +34,22 @@ namespace Albatros.DNN.Modules.Balises.Common
             }
         }
 
-        public string GetModuleUrl(string component, string relativeUrl)
+        public string GetModuleUrl(string relativeUrl, bool addModTabIds)
         {
-            if (component.StartsWith("API/"))
+            if (addModTabIds)
             {
                 relativeUrl += relativeUrl.Contains("?") ? "&" : "?";
                 relativeUrl += string.Format("moduleId={0}&tabId={1}", Dnn.ActiveModule.ModuleID, Dnn.ActiveModule.TabID);
-                return Dnn.PortalSettings.PortalAlias.ResolveUrl("~/DesktopModules/FormaMed/" + component + "/" + relativeUrl);
+
+            }
+            if (relativeUrl.StartsWith("API/"))
+            {
+
+                return Dnn.PortalSettings.PortalAlias.ResolveUrl("~/DesktopModules/Albatros/Balises/" + relativeUrl);
             }
             else
             {
-                return DotNetNuke.Common.Globals.ResolveUrl("~/DesktopModules/FormaMed/" + component + "/" + relativeUrl);
+                return DotNetNuke.Common.Globals.ResolveUrl("~/DesktopModules/Albatros/Balises/" + relativeUrl);
             }
         }
 

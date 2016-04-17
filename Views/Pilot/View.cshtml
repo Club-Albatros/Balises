@@ -61,7 +61,7 @@
    moment.locale('@System.Threading.Thread.CurrentThread.CurrentCulture.TwoLetterISOLanguageName');
    $('#flightsGrid').bootgrid({
     ajax: true,
-    url: '@GetModuleUrl("API/Flights/List/")@userId',
+    url: '@GetModuleUrl("API/Flights/List/", false)@userId',
     requestHandler: function (request) {
      request["moduleId"] = @Dnn.ActiveModule.ModuleID;
      request["tabId"] = @Dnn.ActiveModule.TabID;
