@@ -23,9 +23,9 @@ namespace Albatros.Balises.Core.Models.FlightBeacons
         [DataMember]
         public int BeaconId { get; set; }
         [DataMember]
-        public DateTime PassageTime { get; set; }
-        [DataMember]
         public int? PassedDistance { get; set; }
+        [DataMember]
+        public int PassOrder { get; set; }
         #endregion
 
         #region Methods
@@ -37,10 +37,11 @@ namespace Albatros.Balises.Core.Models.FlightBeacons
             if (flightBeacon.BeaconId > -1)
                 BeaconId = flightBeacon.BeaconId;
 
-            PassageTime = flightBeacon.PassageTime;
-
             if (flightBeacon.PassedDistance > -1)
                 PassedDistance = flightBeacon.PassedDistance;
+
+            if (flightBeacon.PassOrder > -1)
+                PassOrder = flightBeacon.PassOrder;
 
         }
         #endregion

@@ -43,8 +43,8 @@ namespace Albatros.Balises.Core.Models.FlightBeacons
             FlightBeaconBase res = new FlightBeaconBase();
              res.FlightId = FlightId;
              res.BeaconId = BeaconId;
-             res.PassageTime = PassageTime;
              res.PassedDistance = PassedDistance;
+             res.PassOrder = PassOrder;
             return res;
         }
         #endregion

@@ -4,6 +4,6 @@
     {
         public int BeaconId { get; set; }
         public string Name { get; set; }
-        public string PassageTime { get; set; }
+        public int PassOrder { get; set; }
     }
 }

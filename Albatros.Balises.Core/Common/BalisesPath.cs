@@ -44,6 +44,7 @@ namespace Albatros.Balises.Core.Common
             var beacons = BeaconRepository.Instance.GetBeacons(portalId);
 
             // detect all flight beacons
+            var passOrder = 1;
             foreach (var flightPoint in Igc.BRecords.Values)
             {
                 foreach (var beacon in beacons)
@@ -55,16 +56,16 @@ namespace Albatros.Balises.Core.Common
                         {
                             if (PassedBeacons.Last().PassedDistance > passedDistance)
                             {
-                                PassedBeacons.Last().PassageTime = flightPoint.Time;
                                 PassedBeacons.Last().PassedDistance = passedDistance;
                             }
                         }
                         else
                         {
                             var b = FlightBeacon.FromBeacon(beacon);
-                            b.PassageTime = flightPoint.Time;
+                            b.PassOrder = passOrder;
                             b.PassedDistance = passedDistance;
                             PassedBeacons.Add(b);
+                            passOrder += 1;
                         }
                     }
                 }

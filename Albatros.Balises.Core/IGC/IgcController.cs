@@ -52,8 +52,8 @@ namespace Albatros.Balises.Core.IGC
                     {
                         FlightId = f.FlightId,
                         BeaconId = pt.BeaconId,
-                        PassageTime = pt.PassageTime,
-                        PassedDistance = pt.PassedDistance
+                        PassedDistance = pt.PassedDistance,
+                        PassOrder = pt.PassOrder
                     };
                     FlightBeaconRepository.Instance.AddFlightBeacon(fb);
                 }

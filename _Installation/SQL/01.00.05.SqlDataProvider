@@ -1,0 +1,48 @@
+ALTER TABLE {databaseOwner}{objectQualifier}Albatros_Balises_FlightBeacons
+ADD PassOrder INT
+GO
+
+UPDATE {databaseOwner}{objectQualifier}Albatros_Balises_FlightBeacons
+SET PassOrder = fb2.nr
+FROM {databaseOwner}{objectQualifier}Albatros_Balises_FlightBeacons fb1
+INNER JOIN
+(SELECT
+ *,
+ ROW_NUMBER() OVER(PARTITION BY FlightId ORDER BY PassageTime) nr
+FROM {databaseOwner}{objectQualifier}Albatros_Balises_FlightBeacons fb) fb2 ON fb1.FlightId=fb2.FlightId AND fb1.BeaconId=fb2.BeaconId AND fb1.PassageTime=fb2.PassageTime
+GO
+
+ALTER TABLE {databaseOwner}{objectQualifier}Albatros_Balises_FlightBeacons
+ALTER COLUMN PassOrder INT NOT NULL
+GO
+
+ALTER TABLE {databaseOwner}{objectQualifier}Albatros_Balises_FlightBeacons
+DROP COLUMN PassageTime
+GO
+
+IF  EXISTS (SELECT * FROM sys.views WHERE object_id = OBJECT_ID(N'{databaseOwner}{objectQualifier}vw_Albatros_Balises_FlightBeacons'))
+DROP VIEW {databaseOwner}{objectQualifier}vw_Albatros_Balises_FlightBeacons
+GO
+
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE VIEW {databaseOwner}{objectQualifier}vw_Albatros_Balises_FlightBeacons
+AS
+SELECT
+ fb.*,
+ b.Code,
+ b.Name,
+ b.Description,
+ b.Points,
+ b.Coords,
+ b.Latitude,
+ b.Longitude,
+ b.Altitude,
+ b.Region
+FROM {databaseOwner}{objectQualifier}Albatros_Balises_FlightBeacons fb
+ INNER JOIN {databaseOwner}{objectQualifier}Albatros_Balises_Beacons b ON fb.BeaconId=b.BeaconId
+GO
+
+

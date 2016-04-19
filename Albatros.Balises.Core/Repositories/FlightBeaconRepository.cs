@@ -20,7 +20,7 @@ namespace Albatros.Balises.Core.Repositories
             using (var context = DataContext.Instance())
             {
                 return context.ExecuteQuery<FlightBeacon>(System.Data.CommandType.Text,
-                    "SELECT * FROM {databaseOwner}{objectQualifier}vw_Albatros_Balises_FlightBeacons WHERE FlightId=@0",
+                    "SELECT * FROM {databaseOwner}{objectQualifier}vw_Albatros_Balises_FlightBeacons WHERE FlightId=@0 ORDER BY PassOrder",
                     flightId);
             }
         }
@@ -42,8 +42,8 @@ namespace Albatros.Balises.Core.Repositories
                 context.Execute(System.Data.CommandType.Text,
                     "IF NOT EXISTS (SELECT * FROM {databaseOwner}{objectQualifier}Albatros_Balises_FlightBeacons " +
                     "WHERE FlightId=@0 AND BeaconId=@1) " +
-                    "INSERT INTO {databaseOwner}{objectQualifier}Albatros_Balises_FlightBeacons (FlightId, BeaconId, PassageTime, PassedDistance) " +
-                    "SELECT @0, @1, @2, @3", flightBeacon.FlightId, flightBeacon.BeaconId, flightBeacon.PassageTime, flightBeacon.PassedDistance);
+                    "INSERT INTO {databaseOwner}{objectQualifier}Albatros_Balises_FlightBeacons (FlightId, BeaconId, PassOrder, PassedDistance) " +
+                    "SELECT @0, @1, @2, @3", flightBeacon.FlightId, flightBeacon.BeaconId, flightBeacon.PassOrder, flightBeacon.PassedDistance);
             }
         }
         public void DeleteFlightBeacon(FlightBeaconBase flightBeacon)
@@ -76,27 +76,26 @@ namespace Albatros.Balises.Core.Repositories
             using (var context = DataContext.Instance())
             {
                 var rep = context.GetRepository<FlightBeaconBase>();
-                rep.Update("SET PassageTime=@0, PassedDistance=@1 WHERE FlightId=@2 AND BeaconId=@3",
-                          flightBeacon.PassageTime, flightBeacon.PassedDistance, flightBeacon.FlightId, flightBeacon.BeaconId);
+                rep.Update("SET PassOrder=@0, PassedDistance=@1 WHERE FlightId=@2 AND BeaconId=@3",
+                          flightBeacon.PassOrder, flightBeacon.PassedDistance, flightBeacon.FlightId, flightBeacon.BeaconId);
             }
         }
 
         public void ProcessFlightBeacons(int flightId, DateTime flightStart, IEnumerable<PathBeacon> path)
         {
             DeleteFlightBeaconsByFlight(flightId);
+            var passOrder = 1;
             foreach (var b in path)
             {
-                var t = b.PassageTime.Split(':');
-                var hrs = int.Parse(t[0]);
-                var mins = int.Parse(t[1]);
                 var newBeacon = new FlightBeaconBase()
                 {
                     FlightId = flightId,
                     BeaconId = b.BeaconId,
                     PassedDistance = 0,
-                    PassageTime = flightStart.Date.AddHours(hrs).AddMinutes(mins)
+                    PassOrder = b.PassOrder
                 };
                 AddFlightBeacon(newBeacon);
+                passOrder += 1;
             }
         }
     }

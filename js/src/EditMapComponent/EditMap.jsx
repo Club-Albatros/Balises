@@ -1,28 +1,33 @@
 var BeaconRow = require('./BeaconRow.jsx');
 
-var EditMap = React.createClass({
+module.exports = React.createClass({
+
+  newId: 0,
 
   getInitialState: function() {
     this.resources = AlbatrosBalises.modules[this.props.moduleId].resources;
     this.service = AlbatrosBalises.modules[this.props.moduleId].service;
     var initialBeaconList = this.props.track.map(function(b) {
+      this.newId++;
       return {
+        Id: this.newId,
         BeaconId: b.BeaconId,
         Name: b.Name,
-        PassageTime: b.PassageTime.substr(11,5)
+        PassOrder: b.PassOrder
       }
-    });
-    initialBeaconList.sort(this.compareBeaconPassageTimes);
+    }.bind(this));
     return {
       passedBeacons: initialBeaconList
     }
   },
 
   render: function() {
+    console.log(this.state.passedBeacons);
     var beaconList = this.state.passedBeacons.map(function(elem) {
+      console.log(elem.Id);
       return <BeaconRow beacon={elem} moduleId={this.props.moduleId}
-                        changeBeaconTime={this.changeBeaconTime}
-                        deleteBeacon={this.deleteBeacon} />;
+                        deleteBeacon={this.deleteBeacon}
+                        key={elem.Id} />;
     }.bind(this));
     var iconCol = {
       width: '40px'
@@ -40,21 +45,21 @@ var EditMap = React.createClass({
          <thead>
            <tr>
             <th>{this.resources.Beacon}</th>
-            <th style={timeCol}>{this.resources.Time}</th>
             <th style={iconCol}></th>
            </tr>
          </thead>
-         <tbody>
+         <tbody ref="beaconList">
           {beaconList}
          </tbody>
         </table>
-        <input type="hidden" id="BeaconList" name="BeaconList" value={JSON.stringify(this.state.passedBeacons)} />
+        <input type="hidden" ref="BeaconList" id="BeaconList" name="BeaconList" value="" />
        </div>
       </div>
     );
   },
 
   componentDidMount: function() {
+    this.refs.BeaconList.getDOMNode().value = JSON.stringify(this.state.passedBeacons);
     var googleScript = this.props.scheme + '://maps.googleapis.com/maps/api/js';
     if (this.props.apiKey != undefined && this.props.apiKey !== '') {
       googleScript += '?key=' + this.props.apiKey;
@@ -73,6 +78,15 @@ var EditMap = React.createClass({
         this.addPointToMap(this.props.beacons[i]);
       }
     }.bind(this));
+    $(this.refs.beaconList.getDOMNode()).sortable({
+      update: function (event, ui) {
+        this.resortBeacons();
+      }.bind(this)
+    });
+  },
+
+  componentDidUpdate: function() {
+    this.refs.BeaconList.getDOMNode().value = JSON.stringify(this.state.passedBeacons);
   },
 
   expandDivToParent: function(div) {
@@ -94,18 +108,18 @@ var EditMap = React.createClass({
   },
 
   addBeaconToList: function(b) {
+    this.newId++;
     var beacon = {
+      Id: this.newId,
       BeaconId: b.beaconId,
       Name: b.name,
-      PassageTime: '0:00'
+      PassOrder: this.state.passedBeacons.length + 1
     };
-    console.log(this.state.passedBeacons);
     var newBeaconList = this.state.passedBeacons;
     newBeaconList.push(beacon);
-    newBeaconList.sort(this.compareBeaconPassageTimes);
     this.setState({
       passedBeacons: newBeaconList
-     });
+    });
   },
 
   getBounds: function() {
@@ -137,45 +151,39 @@ var EditMap = React.createClass({
     });
   },
 
-  changeBeaconTime: function(beacon, e) {
-    beacon.PassageTime = e.target.value;
-    var newBeaconList = this.state.passedBeacons.map(function(item) {
-      if (item.BeaconId == beacon.BeaconId) {
-        return beacon;
-      } else {
-        return item;
-      }
-    });
-    newBeaconList.sort(this.compareBeaconPassageTimes);
-    this.setState({
-      passedBeacons: newBeaconList
-     });
-  },
-
   deleteBeacon: function(beacon, e) {
     e.preventDefault();
     var newBeaconList = [];
+    var newOrder = 1;
     for (i=0;i<this.state.passedBeacons.length;i++) {
-      if (this.state.passedBeacons[i].BeaconId != beacon.BeaconId) {
-        newBeaconList.push(this.state.passedBeacons[i]);
+      var oldBeacon = this.state.passedBeacons[i];
+      if (oldBeacon.Id != beacon.Id) {
+        oldBeacon.PassOrder = newOrder;
+        newOrder++;
+        newBeaconList.push(oldBeacon);
       }
     }
-    newBeaconList.sort(this.compareBeaconPassageTimes);
     this.setState({
       passedBeacons: newBeaconList
-     });
+    });
   },
 
-  compareBeaconPassageTimes: function(a,b) {
-    if (a.PassageTime < b.PassageTime)
-      return -1;
-    else if (a.PassageTime > b.PassageTime)
-      return 1;
-    else 
-      return 0;
+  resortBeacons: function() {
+    var newList = [];
+    $(this.refs.beaconList.getDOMNode()).children().each(function(i, el) {
+      newList.push({
+        Id: parseInt(el.getAttribute("data-id")),
+        BeaconId: el.getAttribute("data-beaconid"),
+        Name: el.getAttribute("data-name"),
+        PassOrder: i + 1
+      })
+    });
+    console.log(newList);
+    return null;
+    this.setState({
+      passedBeacons: newList      
+    });
   }
 
 
 });
-
-module.exports = EditMap;

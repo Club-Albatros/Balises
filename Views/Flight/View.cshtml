@@ -81,7 +81,7 @@
      data-apikey="@BalisesModuleContext.Settings.GoogleMapApiKey"
      data-scheme="@Request.Url.Scheme"
      data-flight="@(Newtonsoft.Json.JsonConvert.SerializeObject(Model))"
-     data-track="@(Newtonsoft.Json.JsonConvert.SerializeObject(FlightBeaconRepository.Instance.GetFlightBeaconsByFlight(Model.FlightId).OrderBy(fb => fb.PassageTime)))"
+     data-track="@(Newtonsoft.Json.JsonConvert.SerializeObject(FlightBeaconRepository.Instance.GetFlightBeaconsByFlight(Model.FlightId).OrderBy(fb => fb.PassOrder)))"
      style="width:100%;height:500px;margin-bottom:30px;">
 </div>
 
