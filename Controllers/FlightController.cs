@@ -133,7 +133,10 @@ namespace Albatros.DNN.Modules.Balises.Controllers
                 }
                 var retValues = new Dictionary<string, string>();
                 retValues.Add("FlightId", flight.FlightId.ToString());
-                retValues.Add("ret", ControllerContext.HttpContext.Request.Params["ret"]);
+                if (!string.IsNullOrEmpty(ControllerContext.HttpContext.Request.Params["ret"]))
+                {
+                    retValues.Add("ret", ControllerContext.HttpContext.Request.Params["ret"]);
+                }
                 return RedirectToAction("View", "Flight", retValues);
             }
         }

@@ -22,11 +22,11 @@ module.exports = React.createClass({
   },
 
   render: function() {
-    console.log(this.state.passedBeacons);
     var beaconList = this.state.passedBeacons.map(function(elem) {
-      console.log(elem.Id);
       return <BeaconRow beacon={elem} moduleId={this.props.moduleId}
                         deleteBeacon={this.deleteBeacon}
+                        moveBeacon={this.moveBeacon}
+                        total={this.state.passedBeacons.length}
                         key={elem.Id} />;
     }.bind(this));
     var iconCol = {
@@ -45,6 +45,8 @@ module.exports = React.createClass({
          <thead>
            <tr>
             <th>{this.resources.Beacon}</th>
+            <th style={iconCol}></th>
+            <th style={iconCol}></th>
             <th style={iconCol}></th>
            </tr>
          </thead>
@@ -78,11 +80,6 @@ module.exports = React.createClass({
         this.addPointToMap(this.props.beacons[i]);
       }
     }.bind(this));
-    $(this.refs.beaconList.getDOMNode()).sortable({
-      update: function (event, ui) {
-        this.resortBeacons();
-      }.bind(this)
-    });
   },
 
   componentDidUpdate: function() {
@@ -168,22 +165,33 @@ module.exports = React.createClass({
     });
   },
 
-  resortBeacons: function() {
-    var newList = [];
-    $(this.refs.beaconList.getDOMNode()).children().each(function(i, el) {
-      newList.push({
-        Id: parseInt(el.getAttribute("data-id")),
-        BeaconId: el.getAttribute("data-beaconid"),
-        Name: el.getAttribute("data-name"),
-        PassOrder: i + 1
-      })
-    });
-    console.log(newList);
-    return null;
+  moveBeacon: function (beacon, dir, e) {
+    e.preventDefault();
+    var oldOrder = beacon.PassOrder;
+    var targetOrder = beacon.PassOrder + dir;
+    var newBeaconList = [];
+    for (i=0;i<this.state.passedBeacons.length;i++) {
+      var oldBeacon = this.state.passedBeacons[i];
+      if (oldBeacon.PassOrder == targetOrder) {
+        oldBeacon.PassOrder = oldOrder;
+      } else if (oldBeacon.PassOrder == oldOrder) {
+        oldBeacon.PassOrder = targetOrder;
+      }
+      newBeaconList.push(oldBeacon);
+    }
+    newBeaconList.sort(this.compareBeacons);
     this.setState({
-      passedBeacons: newList      
+      passedBeacons: newBeaconList
     });
-  }
+  },
 
+  compareBeacons: function(a,b) {
+    if (a.PassOrder < b.PassOrder)
+      return -1;
+    else if (a.PassOrder > b.PassOrder)
+      return 1;
+    else 
+      return 0;
+  }
 
 });
