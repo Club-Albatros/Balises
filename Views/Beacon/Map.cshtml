@@ -1,0 +1,90 @@
+﻿@inherits BalisesWebPage<IEnumerable<Beacon>>
+@using Albatros.DNN.Modules.Balises.Common;
+@using Albatros.Balises.Core.Models.Beacons;
+@using Albatros.Balises.Core.Repositories;
+@{
+    BalisesModuleContext.AddModuleScript();
+}
+
+<div class="container">
+ <div class="row">
+  <div class="col-xs-12">
+   <div id="mapDiv" style="width:100%;height:600px;"></div>
+  </div>
+ </div>
+</div>
+
+<div class="rightbutton">
+ <a href="@Url.Action("Index", "Home")" class="btn btn-primary">@Dnn.LocalizeString("Return")</a>
+ <a href="@GetModuleUrl("API/Beacons/CompeGps", true)" class="btn btn-default">
+  <span class="glyphicon glyphicon-save"></span>
+  @Dnn.LocalizeString("DownloadBeaconsCompeGps")
+ </a>
+</div>
+
+<script type="text/javascript">
+ (function ($, Sys) {
+
+  var beacons = @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(Model));
+  var apiKey = '@BalisesModuleContext.Settings.GoogleMapApiKey';
+  var scheme = '@Request.Url.Scheme';
+
+  $(document).ready(function () {
+   var googleScript = scheme + '://maps.googleapis.com/maps/api/js';
+   if (apiKey != undefined && apiKey !== '') {
+    googleScript += '?key=' + apiKey;
+   }
+   window.loadScript(googleScript, function () {
+    _map = new google.maps.Map(document.getElementById("mapDiv"), {
+     scrollwheel: false,
+     mapTypeId: google.maps.MapTypeId.TERRAIN
+    });
+    _map.fitBounds(getBounds());
+    for (var i = 0; i < beacons.length; i++) {
+     addPointToMap(beacons[i]);
+    }
+   });
+  });
+
+  function addPointToMap(point) {
+   var marker = new google.maps.Marker({
+    position: new google.maps.LatLng(point.Latitude, point.Longitude),
+    map: this._map,
+    label: point.Code,
+    title: point.Code + ' ' + point.Name + ' (' + point.Points + ' pts)',
+    beaconId: point.BeaconId,
+    name: point.Name
+   });
+  }
+
+  function getBounds() {
+   var minLat = beacons[0].Latitude, 
+       maxLat = beacons[0].Latitude, 
+       minLong = beacons[0].Longitude, 
+       maxLong = beacons[0].Longitude;
+   for (var i=1;i<beacons.length;i++)
+   {
+    if(beacons[i].Latitude < minLat) {
+     minLat = beacons[i].Latitude;
+    }
+    if(beacons[i].Latitude > maxLat) {
+     maxLat = beacons[i].Latitude;
+    }
+    if(beacons[i].Longitude < minLong) {
+     minLong = beacons[i].Longitude;
+    }
+    if(beacons[i].Longitude > maxLong) {
+     maxLong = beacons[i].Longitude;
+    }
+   }
+   return new google.maps.LatLngBounds({
+    lat: minLat,
+    lng: minLong
+   }, {
+    lat: maxLat,
+    lng: maxLong
+   });
+  }
+
+ }(jQuery, window.Sys));
+</script>

@@ -297,4 +297,7 @@
   <data name="DownloadBeaconsCompeGps.Text" xml:space="preserve">
     <value>Compe GPS Beacons File</value>
   </data>
+  <data name="Beacons.Text" xml:space="preserve">
+    <value>Beacons</value>
+  </data>
 </root>

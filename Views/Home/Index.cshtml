@@ -144,16 +144,13 @@
 </table>
 
 <div class="rightbutton">
+ <a href="@Url.Action("Map", "Beacon")" class="btn btn-default">@Dnn.LocalizeString("Beacons")</a>
  @if (BalisesModuleContext.Security.IsPilot)
  {
  <span class="uploadButton" data-moduleid="@Dnn.ModuleContext.ModuleId" data-tabid="@Dnn.ModuleContext.TabId"
        data-flighturl="@Url.Action("View", "Flight", new { FlightId = -1, ret = "home" })"
        data-piloturl="@Url.Action("View", "Pilot", new { UserId = Dnn.User.UserID })">
  </span>
- <a href="@GetModuleUrl("API/Beacons/CompeGps", true)" class="btn btn-default">
-  <span class="glyphicon glyphicon-save"></span>
-  @Dnn.LocalizeString("DownloadBeaconsCompeGps")
- </a>
  <a href="@Url.Action("Edit", "Flight", new { FlightId = -1, ret = "p-v" })" class="btn btn-default">@Dnn.LocalizeString("AddFlight")</a>
  <a href="@Url.Action("View", "Pilot", new { UserId = Dnn.User.UserID })" class="btn btn-default">@Dnn.LocalizeString("MyFlights")</a>
  }
